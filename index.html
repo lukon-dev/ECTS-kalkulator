@@ -3,22 +3,27 @@
   <head>
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>Kalkulator ects</title>
+    <title>Kalkulator ECTS</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link
+      href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;600;700&display=swap"
+      rel="stylesheet"
+    />
     <link rel="stylesheet" href="style.css" />
   </head>
   <body>
     <header>
-      <h1>Kalkulator ects</h1>
+      <h1>Kalkulator ECTS</h1>
     </header>
     <main>
       <form id="ects-form">
         <p>
           <label for="przedmiot">Podaj nazwę przedmiotu: </label>
-          <input type="text" name="przedmiot" id="przedmiot" required/>
+          <input type="text" name="przedmiot" id="przedmiot" required />
         </p>
         <p>
-          <label for="ocena">Wybierz ocenę*: </label>
-          <select name="ocena" id="ocena">
+          <label for="ocena">Wybierz ocenę: </label>
+          <select name="ocena" id="ocena" required>
             <option value="" disabled selected>--- Wybierz ocenę ---</option>
             <option value="2.0">2.0</option>
             <option value="3.0">3.0</option>
@@ -40,9 +45,9 @@
             required
           />
         </p>
-        <button id="btn">Dodaj przedmiot</button>
+        <button type="submit" id="btn">Dodaj przedmiot</button>
       </form>
-      <section type="submit" id="lista-przedmiotow" aria-live="polite">
+      <section id="lista-przedmiotow" aria-live="polite">
         <h2>Dodane przedmioty:</h2>
         <ul id="przedmioty-lista"></ul>
         <div id="podsumowanie">
