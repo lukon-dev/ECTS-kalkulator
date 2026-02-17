@@ -1,0 +1,48 @@
+* {
+  margin: 0;
+  padding: 0;
+}
+
+body {
+  color: white;
+  background: linear-gradient(to top left,rgb(19, 19, 20), rgb(91, 88, 89));
+  width: 100vw;
+  min-height: 100vh;
+  font-family: Helvetica, sans-serif;
+}
+
+h1{
+  display: flex;
+  justify-content: center;
+  padding: 20px;
+  border-bottom: 2px solid white;
+  font-size: 33px;
+  background: linear-gradient(rgb(47, 44, 47),rgb(66, 66, 106));
+  
+}
+
+main
+{
+    display: flex;
+    flex-direction: column;
+    padding: 20px;
+    gap: 10px;
+}
+
+#btn{
+    
+    padding: 10px 0;
+    width: 50%;
+    border-radius: 10px;
+    transition: 0.5s;
+    border: none;
+    cursor: pointer;
+    align-self: center;
+    
+}
+
+label{
+    background: linear-gradient(black,rgb(39, 37, 37));
+    border-radius: 15px;
+}
+
