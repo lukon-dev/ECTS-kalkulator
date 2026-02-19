@@ -3,23 +3,11 @@
   <head>
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>Kalkulator średniej ECTS | ECTScalc</title>
+    <title>ECTScalc | Kalkulator sredniej wazonej</title>
     <meta
       name="description"
-      content="Oblicz swoją średnią ważoną na podstawie ocen i punktów ECTS. Dane zapisują się lokalnie, działa bez logowania."
+      content="Oblicz swoja srednia wazona ECTS. Dane lokalne, bez konta."
     />
-    <meta
-      name="keywords"
-      content="kalkulator ECTS, średnia ważona, studia, oceny, średnia studenta, przelicznik ocen"
-    />
-    <meta name="author" content="ECTScalc" />
-    <meta property="og:title" content="Kalkulator średniej ECTS" />
-    <meta
-      property="og:description"
-      content="Wpisz oceny i punkty ECTS, aplikacja policzy średnią ważoną i pokaże rozkład ocen."
-    />
-    <meta property="og:type" content="website" />
-    <link rel="canonical" href="https://luqaszkl.github.io/ECTS-kalkulator/" />
     <link rel="preconnect" href="https://fonts.googleapis.com" />
     <link
       href="https://fonts.googleapis.com/css2?family=Outfit:wght@400;500;600;700;800&family=JetBrains+Mono:wght@500;700&display=swap"
@@ -30,251 +18,249 @@
   <body>
     <header>
       <div class="header-inner">
-        <h1>ECTS<span class="h1-accent">calc</span></h1>
-        <div class="header-controls">
-          <div id="semestr-bar">
-            <label for="semestr">Semestr</label>
-            <input
-              type="number"
-              id="semestr"
-              name="semestr"
-              min="1"
-              max="12"
-              step="1"
-              placeholder="nr"
-            />
-            <span id="semestr-display"></span>
-          </div>
-          <button id="btn-motyw" aria-label="Zmień motyw">☀️</button>
+        <h1>ECTS<span class="accent">calc</span></h1>
+        <div class="header-actions">
+          <button id="btn-info-show" class="hdr-btn" title="Jak to dziala">
+            ?
+          </button>
+          <button
+            id="btn-precise"
+            class="hdr-btn mono"
+            title="Pokaz dokladna wartosc"
+          >
+            &#8776;
+          </button>
+          <button id="btn-theme" class="hdr-btn" title="Zmien motyw">
+            &#9728;&#65039;
+          </button>
         </div>
       </div>
     </header>
 
-    <main>
-      <section id="hero-section">
-        <button id="btn-info-toggle" aria-label="Zwiń opis">✕</button>
-        <div id="hero-body">
-          <div id="hero-text">
-            <h2>Kalkulator średniej ważonej ECTS</h2>
+    <div id="hero">
+      <div class="hero-inner">
+        <button id="btn-hero-close" class="hero-close" title="Zamknij">
+          &#10005;
+        </button>
+        <div class="hero-grid">
+          <div class="hero-left">
+            <h2>Kalkulator sredniej wazonej ECTS</h2>
             <p>
-              ECTScalc liczy średnią tak samo jak dziekanat, czyli ważoną
-              punktami ECTS. Wszystko zapisuje się lokalnie w przeglądarce, bez
-              konta, bez serwera.
+              Liczy tak samo jak dziekanat. Dane siedza lokalnie w przegladarce,
+              zadnego konta, zadnego serwera.
             </p>
+            <div class="hero-note">
+              <span class="note-badge">Wazne</span>
+              Wpisuj tylko przedmioty z ocena wliczana do sredniej. Zaliczenia
+              "zal" i wpisy bez oceny calkowicie pomijaj.
+            </div>
           </div>
-          <ol id="how-it-works">
-            <li>
-              <span class="step-num">1</span
-              ><span
-                >Ustaw numer semestru w górnym pasku
-                <em>(opcjonalnie)</em></span
-              >
-            </li>
-            <li>
-              <span class="step-num">2</span
-              ><span
-                >Wpisz nazwę przedmiotu, wybierz ocenę i wpisz punkty ECTS</span
-              >
-            </li>
-            <li>
-              <span class="step-num">3</span
-              ><span>Kliknij „Dodaj przedmiot"</span>
-            </li>
-            <li>
-              <span class="step-num">4</span
-              ><span>Użyj symulatora i kalkulatora stypendialnego poniżej</span>
-            </li>
-          </ol>
+          <div class="hero-right">
+            <div class="wzor-box">
+              <span class="wzor-tag">wzor</span>
+              <div class="wzor-frac">
+                <span class="wzor-num"
+                  >&#x2211; (ocena<sub>i</sub> &times; ECTS<sub>i</sub>)</span
+                >
+                <span class="wzor-line"></span>
+                <span class="wzor-den">&#x2211; ECTS<sub>i</sub></span>
+              </div>
+            </div>
+            <ol class="steps">
+              <li>
+                <span class="step-n">1</span> Wybierz semestr w formularzu
+                (opcjonalnie)
+              </li>
+              <li>
+                <span class="step-n">2</span> Dodaj przedmiot, wyniki
+                aktualizuja sie na zywo
+              </li>
+              <li>
+                <span class="step-n">3</span> Kliknij kilka filtrow jednoczesnie
+                zeby porownac semestry
+              </li>
+            </ol>
+          </div>
         </div>
-      </section>
+      </div>
+    </div>
 
-      <form id="ects-form">
-        <div class="form-fields">
-          <p>
-            <label for="przedmiot">Nazwa przedmiotu</label>
-            <input
-              type="text"
-              name="przedmiot"
-              id="przedmiot"
-              required
-              placeholder="np. Analiza Matematyczna"
-            />
-          </p>
-          <div class="form-row">
-            <p>
-              <label for="ocena">Ocena</label>
-              <select name="ocena" id="ocena" required>
-                <option value="" disabled selected>wybierz</option>
-                <option value="2.0">2.0 ndst</option>
-                <option value="3.0">3.0 dst</option>
-                <option value="3.5">3.5 dst+</option>
-                <option value="4.0">4.0 db</option>
-                <option value="4.5">4.5 db+</option>
-                <option value="5.0">5.0 bdb</option>
-              </select>
-            </p>
-            <p>
-              <label for="ects">Punkty ECTS</label>
+    <div class="layout">
+      <aside class="sidebar">
+        <div class="card" id="card-form">
+          <h3 class="card-title">Dodaj przedmiot</h3>
+          <form id="form">
+            <div class="field">
+              <label for="f-nazwa">Nazwa</label>
               <input
-                type="number"
-                id="ects"
-                name="ects"
-                min="0"
-                max="30"
-                step="0.5"
+                id="f-nazwa"
+                type="text"
+                placeholder="np. Analiza Matematyczna"
+                autocomplete="off"
                 required
-                placeholder="np. 5"
               />
-            </p>
-          </div>
+            </div>
+            <div class="field-row">
+              <div class="field">
+                <label for="f-ocena">Ocena</label>
+                <select id="f-ocena" required>
+                  <option value="" disabled selected>wybierz</option>
+                  <option value="2">2.0 ndst</option>
+                  <option value="3">3.0 dst</option>
+                  <option value="3.5">3.5 dst+</option>
+                  <option value="4">4.0 db</option>
+                  <option value="4.5">4.5 db+</option>
+                  <option value="5">5.0 bdb</option>
+                </select>
+              </div>
+              <div class="field">
+                <label for="f-ects">ECTS</label>
+                <input
+                  id="f-ects"
+                  type="number"
+                  min="0.5"
+                  max="30"
+                  step="0.5"
+                  placeholder="5"
+                  required
+                />
+              </div>
+              <div class="field field--sm">
+                <label for="f-sem">Sem.</label>
+                <input
+                  id="f-sem"
+                  type="number"
+                  min="1"
+                  max="14"
+                  step="1"
+                  placeholder="nr"
+                />
+              </div>
+            </div>
+            <div id="form-preview" class="form-preview hidden"></div>
+            <button type="submit" class="btn-primary">Dodaj przedmiot</button>
+          </form>
         </div>
-        <button type="submit" id="btn">Dodaj przedmiot</button>
-      </form>
 
-      <section id="podsumowanie-section">
-        <div id="podsumowanie">
-          <div class="podsumowanie-item">
-            <span class="podsumowanie-label">Średnia ważona</span>
-            <strong id="srednia">—</strong>
+        <div class="card" id="card-lista">
+          <div class="lista-top">
+            <h3 class="card-title">
+              Przedmioty <span id="badge" class="badge hidden"></span>
+            </h3>
+            <button id="btn-clear" class="btn-danger hidden">wyczysc</button>
           </div>
-          <div class="podsumowanie-item">
-            <span class="podsumowanie-label">Suma ECTS</span>
-            <strong id="suma-ects">0</strong>
-          </div>
-          <div class="podsumowanie-item">
-            <span class="podsumowanie-label">Przedmioty</span>
-            <strong id="liczba-przedmiotow">0</strong>
-          </div>
-        </div>
-        <div id="wykres-wrapper">
-          <span class="wykres-tytul">Rozkład ocen</span>
-          <div id="wykres-ocen"></div>
-        </div>
-      </section>
 
-      <div id="semestr-srednie"></div>
+          <div id="filtry-wrap" class="filtry-wrap hidden">
+            <p class="filtry-label">Filtruj semestry</p>
+            <div id="filtry" class="filtry"></div>
+          </div>
 
-      <section id="lista-przedmiotow" aria-live="polite">
-        <div class="lista-header">
-          <h2>Przedmioty</h2>
-          <div class="lista-actions">
-            <div id="filtry"></div>
-            <button id="btn-wyczysc" style="display: none">
-              Wyczyść wszystko
-            </button>
+          <div id="empty" class="empty">
+            <span>&#127891;</span>
+            <p>Brak przedmiotow</p>
+            <small>Dodaj pierwszy przedmiot w formularzu powyzej.</small>
+          </div>
+
+          <ul id="lista" class="lista"></ul>
+        </div>
+      </aside>
+
+      <main class="content">
+        <div class="card card--stats" id="card-stats">
+          <div class="stats-left">
+            <div class="stat">
+              <span class="stat-label">Srednia wazona</span>
+              <strong id="stat-sr" class="stat-main">&#8212;</strong>
+              <span id="stat-precise" class="stat-precise hidden"></span>
+            </div>
+            <div class="stats-row">
+              <div class="stat">
+                <span class="stat-label">Suma ECTS</span>
+                <strong id="stat-ects" class="stat-val">0</strong>
+              </div>
+              <div class="stat">
+                <span class="stat-label">Przedmiotow</span>
+                <strong id="stat-count" class="stat-val">0</strong>
+              </div>
+            </div>
+          </div>
+          <div class="stats-right">
+            <span class="wykres-label">Rozklad ocen</span>
+            <div id="wykres" class="wykres"></div>
           </div>
         </div>
-        <div id="empty-state">
-          <div class="empty-icon">🎓</div>
-          <p>Brak przedmiotów</p>
-          <span
-            >Dodaj pierwszy przedmiot powyżej, żeby zobaczyć swoją
-            średnią.</span
-          >
-        </div>
-        <ul id="przedmioty-lista"></ul>
-      </section>
 
-      <section id="co-jesli-section" class="tool-section">
-        <div class="tool-header">
-          <div class="tool-title-wrap">
-            <span class="tool-icon">🔮</span>
+        <div id="sem-chips" class="sem-chips"></div>
+
+        <div class="card" id="card-cj">
+          <div class="tool-header">
             <div>
-              <h3>Co jeśli?</h3>
+              <h3 class="card-title">&#128302; Co jesli?</h3>
               <p class="tool-desc">
-                Symuluj wpływ przyszłych ocen na swoją średnią bez dodawania ich
-                na stałe.
+                Symuluj wplyw przyszlych ocen na srednia bez zapisywania. Mozna
+                dodac kilka naraz.
               </p>
             </div>
           </div>
-        </div>
-        <div class="tool-body">
-          <div class="tool-row">
-            <div class="tool-field">
-              <label for="cj-ocena">Ocena</label>
-              <select id="cj-ocena">
-                <option value="2.0">2.0</option>
-                <option value="3.0">3.0</option>
-                <option value="3.5">3.5</option>
-                <option value="4.0">4.0</option>
-                <option value="4.5" selected>4.5</option>
-                <option value="5.0">5.0</option>
-              </select>
+          <div id="cj-inputs" class="cj-inputs"></div>
+          <button id="cj-add" type="button" class="btn-ghost">
+            + kolejny przedmiot
+          </button>
+          <div id="cj-result" class="cj-result hidden">
+            <div class="cj-stat">
+              <span class="cj-label">Teraz</span>
+              <strong id="cj-now">&#8212;</strong>
             </div>
-            <div class="tool-field">
-              <label for="cj-ects">ECTS</label>
-              <input
-                type="number"
-                id="cj-ects"
-                min="0.5"
-                max="30"
-                step="0.5"
-                value="5"
-              />
+            <span class="cj-arrow">&#8594;</span>
+            <div class="cj-stat cj-stat--big">
+              <span class="cj-label">Po zmianach</span>
+              <strong id="cj-next">&#8212;</strong>
             </div>
+            <span id="cj-delta" class="cj-delta"></span>
           </div>
-          <div id="cj-wynik" class="tool-wynik hidden">
-            <div class="cj-row">
-              <span>Obecna średnia</span>
-              <strong id="cj-obecna">—</strong>
-            </div>
-            <div class="cj-arrow">→</div>
-            <div class="cj-row highlight">
-              <span>Po tej ocenie</span>
-              <strong id="cj-nowa">—</strong>
-            </div>
-            <div class="cj-delta-wrap">
-              <span id="cj-delta"></span>
-            </div>
-          </div>
-          <p id="cj-brak" class="tool-hint">
-            Dodaj najpierw przynajmniej jeden przedmiot.
+          <p id="cj-empty" class="tool-hint">
+            Najpierw dodaj jakis przedmiot do listy.
           </p>
         </div>
-      </section>
 
-      <section id="stypendium-section" class="tool-section">
-        <div class="tool-header">
-          <div class="tool-title-wrap">
-            <span class="tool-icon">🏆</span>
+        <div class="card" id="card-sty">
+          <div class="tool-header">
             <div>
-              <h3>Kalkulator stypendialny</h3>
+              <h3 class="card-title">&#127942; Kalkulator stypendialny</h3>
               <p class="tool-desc">
-                Oszacuj swoje szanse na stypendium rektora na podstawie progu i
-                liczby studentów na roku.
+                Szacunkowe obliczenia, ranking zalezy od wynikow calego
+                rocznika.
               </p>
             </div>
           </div>
-        </div>
-        <div class="tool-body">
-          <div class="tool-row">
-            <div class="tool-field">
-              <label for="st-prog">Próg średniej</label>
+          <div class="sty-inputs">
+            <div class="field">
+              <label for="sty-prog">Prog sredniej</label>
               <input
+                id="sty-prog"
                 type="number"
-                id="st-prog"
                 min="2"
                 max="5"
                 step="0.01"
-                placeholder="np. 4.20"
+                placeholder="np. 4.25"
               />
             </div>
-            <div class="tool-field">
-              <label for="st-osoby">Liczba osób na roku</label>
+            <div class="field">
+              <label for="sty-osoby">Osob na roku</label>
               <input
+                id="sty-osoby"
                 type="number"
-                id="st-osoby"
                 min="1"
-                max="1000"
+                max="2000"
                 step="1"
                 placeholder="np. 120"
               />
             </div>
-            <div class="tool-field">
-              <label for="st-procent">% dostaje stypendium</label>
+            <div class="field">
+              <label for="sty-proc">% ze stypendium</label>
               <input
+                id="sty-proc"
                 type="number"
-                id="st-procent"
                 min="1"
                 max="100"
                 step="1"
@@ -282,40 +268,71 @@
               />
             </div>
           </div>
-          <div id="st-wynik" class="hidden">
-            <div id="st-ranking-bar">
-              <div id="st-ranking-fill"></div>
-              <div id="st-ranking-prog-marker"></div>
-              <span id="st-ranking-ty">Ty</span>
-            </div>
-            <div id="st-stats">
-              <div class="st-stat">
-                <span class="st-label">Twoja średnia</span>
-                <strong id="st-twoja">—</strong>
-              </div>
-              <div class="st-stat">
-                <span class="st-label">Próg stypendium</span>
-                <strong id="st-prog-display">—</strong>
-              </div>
-              <div class="st-stat">
-                <span class="st-label">Różnica</span>
-                <strong id="st-roznica">—</strong>
-              </div>
-              <div class="st-stat">
-                <span class="st-label">Miejsce w rankingu</span>
-                <strong id="st-miejsce">—</strong>
+          <div id="sty-result" class="sty-result hidden">
+            <div class="sty-bar-wrap">
+              <div class="sty-bar" id="sty-bar">
+                <div id="sty-fill" class="sty-fill"></div>
+                <div id="sty-marker" class="sty-marker"></div>
+                <span id="sty-ty" class="sty-ty">Ty</span>
               </div>
             </div>
-            <div id="st-komunikat"></div>
+            <div class="sty-stats">
+              <div class="sty-stat">
+                <span class="sty-label">Twoja sr.</span>
+                <strong id="sty-twoja">&#8212;</strong>
+              </div>
+              <div class="sty-stat">
+                <span class="sty-label">Prog</span>
+                <strong id="sty-prog-val">&#8212;</strong>
+              </div>
+              <div class="sty-stat">
+                <span class="sty-label">Roznica</span>
+                <strong id="sty-diff">&#8212;</strong>
+              </div>
+              <div class="sty-stat">
+                <span class="sty-label">Miejsce ~</span>
+                <strong id="sty-place">&#8212;</strong>
+              </div>
+              <div class="sty-stat">
+                <span class="sty-label">Osob przed Toba</span>
+                <strong id="sty-before">&#8212;</strong>
+              </div>
+            </div>
+            <div id="sty-msg" class="sty-msg"></div>
           </div>
-          <p id="st-brak" class="tool-hint">
-            Wpisz próg, liczbę osób i procent, aby zobaczyć szacunek.
+          <p id="sty-empty" class="tool-hint">
+            Wpisz prog, liczbe osob i procent zeby zobaczyc szacunek.
           </p>
         </div>
-      </section>
-    </main>
+      </main>
+    </div>
 
-    <button id="btn-info-show" aria-label="Pokaż opis">?</button>
+    <footer class="footer">
+      <div class="footer-inner">
+        <code class="footer-wzor"
+          >srednia = &Sigma;(ocena &times; ECTS) / &Sigma;ECTS</code
+        >
+        <a
+          href="https://github.com/lukon-dev"
+          target="_blank"
+          rel="noopener"
+          class="footer-gh"
+        >
+          <svg
+            viewBox="0 0 16 16"
+            fill="currentColor"
+            width="14"
+            height="14"
+            aria-hidden="true"
+          >
+            <path
+              d="M8 0C3.58 0 0 3.58 0 8c0 3.54 2.29 6.53 5.47 7.59.4.07.55-.17.55-.38 0-.19-.01-.82-.01-1.49-2.01.37-2.53-.49-2.69-.94-.09-.23-.48-.94-.82-1.13-.28-.15-.68-.52-.01-.53.63-.01 1.08.58 1.23.82.72 1.21 1.87.87 2.33.66.07-.52.28-.87.51-1.07-1.78-.2-3.64-.89-3.64-3.95 0-.87.31-1.59.82-2.15-.08-.2-.36-1.02.08-2.12 0 0 .67-.21 2.2.82.64-.18 1.32-.27 2-.27.68 0 1.36.09 2 .27 1.53-1.04 2.2-.82 2.2-.82.44 1.1.16 1.92.08 2.12.51.56.82 1.27.82 2.15 0 3.07-1.87 3.75-3.65 3.95.29.25.54.73.54 1.48 0 1.07-.01 1.93-.01 2.2 0 .21.15.46.55.38A8.013 8.013 0 0016 8c0-4.42-3.58-8-8-8z"
+            />
+          </svg>
+          lukon-dev
+        </a>
+      </div>
+    </footer>
 
     <script src="app.js"></script>
   </body>
