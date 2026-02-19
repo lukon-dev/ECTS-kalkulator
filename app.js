@@ -456,7 +456,7 @@ function obliczStypendium() {
     ST_KOMUNIKAT.className = "st-msg st-ok";
     ST_KOMUNIKAT.innerHTML = `
       <strong>Twoja średnia jest powyżej progu.</strong> Zapas wynosi ${zapas.toFixed(3)} pkt.
-      Pamiętaj, że ranking zależy też od wyników innych studentów — próg może wzrosnąć.
+      Pamiętaj, że ranking zależy też od wyników innych studentów, próg może wzrosnąć.
     `;
   } else {
     const brakuje = Math.abs(roznica);
