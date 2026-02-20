@@ -2,17 +2,16 @@
 <html lang="pl" data-motyw="noc">
   <head>
     <meta charset="UTF-8" />
-    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover" />
     <title>ECTScalc | Kalkulator średniej ważonej</title>
-    <meta
-      name="description"
-      content="Oblicz swoją średnią ważoną ECTS. Dane lokalne, bez konta."
-    />
+    <meta name="description" content="Oblicz swoją średnią ważoną ECTS. Dane lokalne, bez konta." />
+    <meta name="theme-color" content="#00e5a0" />
+    <meta name="apple-mobile-web-app-capable" content="yes" />
+    <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent" />
+    <meta name="apple-mobile-web-app-title" content="ECTScalc" />
+    <link rel="manifest" href="manifest.json" />
     <link rel="preconnect" href="https://fonts.googleapis.com" />
-    <link
-      href="https://fonts.googleapis.com/css2?family=Outfit:wght@400;500;600;700;800&family=JetBrains+Mono:wght@500;700&display=swap"
-      rel="stylesheet"
-    />
+    <link href="https://fonts.googleapis.com/css2?family=Outfit:wght@400;500;600;700;800&family=JetBrains+Mono:wght@500;700&display=swap" rel="stylesheet" />
     <link rel="stylesheet" href="style.css" />
   </head>
   <body>
@@ -26,75 +25,35 @@
       <div class="naglowek-wewnatrz">
         <h1>ECTS<span class="akcent">calc</span></h1>
         <div class="naglowek-przyciski">
-          <button
-            id="btn-pokaz-info"
-            class="btn-naglowek"
-            title="Jak to działa?"
-          >
-            <svg
-              viewBox="0 0 20 20"
-              fill="none"
-              stroke="currentColor"
-              stroke-width="1.8"
-              width="16"
-              height="16"
-            >
+          <button id="btn-zainstaluj" class="btn-naglowek btn-naglowek--zainstaluj ukryty" title="Zainstaluj aplikację">
+            <svg viewBox="0 0 20 20" fill="none" stroke="currentColor" stroke-width="1.8" width="15" height="15">
+              <path d="M10 3v10M6 9l4 4 4-4" stroke-linecap="round" stroke-linejoin="round" />
+              <path d="M3 15h14" stroke-linecap="round" />
+            </svg>
+            Zainstaluj
+          </button>
+          <button id="btn-pokaz-info" class="btn-naglowek" title="Jak to działa?">
+            <svg viewBox="0 0 20 20" fill="none" stroke="currentColor" stroke-width="1.8" width="16" height="16">
               <circle cx="10" cy="10" r="8" />
               <path d="M10 9v5M10 6.5v.5" stroke-linecap="round" />
             </svg>
           </button>
-          <button
-            id="btn-motyw"
-            class="btn-naglowek btn-motyw"
-            title="Zmień motyw"
-          >
+          <button id="btn-motyw" class="btn-naglowek btn-motyw" title="Zmień motyw">
             <span class="ikona-slonce">
-              <svg
-                viewBox="0 0 20 20"
-                fill="none"
-                stroke="currentColor"
-                stroke-width="1.8"
-                width="16"
-                height="16"
-              >
+              <svg viewBox="0 0 20 20" fill="none" stroke="currentColor" stroke-width="1.8" width="16" height="16">
                 <circle cx="10" cy="10" r="3.5" />
-                <path
-                  d="M10 2v2M10 16v2M2 10h2M16 10h2M4.22 4.22l1.42 1.42M14.36 14.36l1.42 1.42M4.22 15.78l1.42-1.42M14.36 5.64l1.42-1.42"
-                  stroke-linecap="round"
-                />
+                <path d="M10 2v2M10 16v2M2 10h2M16 10h2M4.22 4.22l1.42 1.42M14.36 14.36l1.42 1.42M4.22 15.78l1.42-1.42M14.36 5.64l1.42-1.42" stroke-linecap="round" />
               </svg>
             </span>
             <span class="ikona-ksiezyc">
-              <svg
-                viewBox="0 0 20 20"
-                fill="currentColor"
-                width="15"
-                height="15"
-              >
-                <path
-                  d="M17.5 12.4A7.5 7.5 0 0 1 7.6 2.5a7.5 7.5 0 1 0 9.9 9.9z"
-                />
+              <svg viewBox="0 0 20 20" fill="currentColor" width="15" height="15">
+                <path d="M17.5 12.4A7.5 7.5 0 0 1 7.6 2.5a7.5 7.5 0 1 0 9.9 9.9z" />
               </svg>
             </span>
           </button>
-          <button
-            id="btn-eksport"
-            class="btn-naglowek btn-naglowek--tekst ukryty"
-            title="Eksportuj CSV"
-          >
-            <svg
-              viewBox="0 0 20 20"
-              fill="none"
-              stroke="currentColor"
-              stroke-width="1.8"
-              width="14"
-              height="14"
-            >
-              <path
-                d="M10 3v10M6 9l4 4 4-4"
-                stroke-linecap="round"
-                stroke-linejoin="round"
-              />
+          <button id="btn-eksport" class="btn-naglowek btn-naglowek--tekst ukryty" title="Eksportuj CSV">
+            <svg viewBox="0 0 20 20" fill="none" stroke="currentColor" stroke-width="1.8" width="14" height="14">
+              <path d="M10 3v10M6 9l4 4 4-4" stroke-linecap="round" stroke-linejoin="round" />
               <path d="M3 15h14" stroke-linecap="round" />
             </svg>
             CSV
@@ -105,9 +64,7 @@
 
     <div id="hero">
       <div class="hero-wewnatrz">
-        <button id="btn-zamknij-info" class="hero-zamknij" title="Zamknij">
-          &#10005;
-        </button>
+        <button id="btn-zamknij-info" class="hero-zamknij" title="Zamknij">&#10005;</button>
         <div class="hero-siatka">
           <div class="hero-lewo">
             <h2>Kalkulator średniej ważonej ECTS</h2>
@@ -125,26 +82,15 @@
             <div class="wzor-ramka">
               <span class="wzor-etykieta">WZÓR</span>
               <div class="wzor-ulamek">
-                <span class="wzor-licznik"
-                  >&#x2211; (ocena<sub>i</sub> &times; ECTS<sub>i</sub>)</span
-                >
+                <span class="wzor-licznik">&#x2211; (ocena<sub>i</sub> &times; ECTS<sub>i</sub>)</span>
                 <span class="wzor-linia"></span>
                 <span class="wzor-mianownik">&#x2211; ECTS<sub>i</sub></span>
               </div>
             </div>
             <ol class="kroki">
-              <li>
-                <span class="krok-numer">1</span> Wybierz semestr w formularzu
-                (opcjonalnie)
-              </li>
-              <li>
-                <span class="krok-numer">2</span> Dodaj przedmiot, wyniki
-                aktualizują się na żywo
-              </li>
-              <li>
-                <span class="krok-numer">3</span> Kliknij kilka filtrów
-                jednocześnie, żeby porównać semestry
-              </li>
+              <li><span class="krok-numer">1</span> Wybierz semestr w formularzu (opcjonalnie)</li>
+              <li><span class="krok-numer">2</span> Dodaj przedmiot, wyniki aktualizują się na żywo</li>
+              <li><span class="krok-numer">3</span> Kliknij kilka filtrów jednocześnie, żeby porównać semestry</li>
             </ol>
           </div>
         </div>
@@ -158,13 +104,7 @@
           <form id="formularz">
             <div class="pole">
               <label for="f-nazwa">Nazwa</label>
-              <input
-                id="f-nazwa"
-                type="text"
-                placeholder="np. Analiza Matematyczna"
-                autocomplete="off"
-                required
-              />
+              <input id="f-nazwa" type="text" placeholder="np. Analiza Matematyczna" autocomplete="off" required />
             </div>
             <div class="pole-rzad">
               <div class="pole">
@@ -181,32 +121,14 @@
               </div>
               <div class="pole">
                 <label for="f-ects">ECTS</label>
-                <input
-                  id="f-ects"
-                  type="number"
-                  min="0.5"
-                  max="30"
-                  step="0.5"
-                  placeholder="5"
-                  required
-                />
+                <input id="f-ects" type="number" min="0.5" max="30" step="0.5" placeholder="5" required />
               </div>
               <div class="pole pole--male">
                 <label for="f-sem">Sem.</label>
-                <input
-                  id="f-sem"
-                  type="number"
-                  min="1"
-                  max="14"
-                  step="1"
-                  placeholder="nr"
-                />
+                <input id="f-sem" type="number" min="1" max="14" step="1" placeholder="nr" />
               </div>
             </div>
-            <div
-              id="podglad-formularza"
-              class="podglad-formularza ukryty"
-            ></div>
+            <div id="podglad-formularza" class="podglad-formularza ukryty"></div>
             <button type="submit" class="btn-glowny">Dodaj przedmiot</button>
           </form>
 
@@ -225,9 +147,7 @@
               Przedmioty
               <span id="znaczek-liczby" class="znaczek ukryty"></span>
             </h3>
-            <button id="btn-wyczysc" class="btn-niebezpieczny ukryty">
-              wyczyść
-            </button>
+            <button id="btn-wyczysc" class="btn-niebezpieczny ukryty">wyczyść</button>
           </div>
 
           <div id="filtry-owijka" class="filtry-owijka ukryty">
@@ -250,13 +170,8 @@
           <div class="statystyki-lewo">
             <div class="statystyka">
               <span class="statystyka-etykieta">Średnia ważona</span>
-              <strong id="stat-srednia" class="statystyka-glowna"
-                >&#8212;</strong
-              >
-              <span
-                id="stat-dokladna"
-                class="statystyka-dokladna ukryty"
-              ></span>
+              <strong id="stat-srednia" class="statystyka-glowna">-</strong>
+              <span id="stat-dokladna" class="statystyka-dokladna ukryty"></span>
             </div>
             <div class="statystyki-rzad">
               <div class="statystyka">
@@ -272,39 +187,15 @@
             <div class="cel-sekcja" id="cel-sekcja">
               <div class="cel-rzad">
                 <label for="cel-wejscie" class="cel-label">
-                  <svg
-                    viewBox="0 0 20 20"
-                    fill="none"
-                    stroke="currentColor"
-                    stroke-width="1.7"
-                    width="13"
-                    height="13"
-                    style="vertical-align: -1px"
-                  >
+                  <svg viewBox="0 0 20 20" fill="none" stroke="currentColor" stroke-width="1.7" width="13" height="13" style="vertical-align: -1px">
                     <circle cx="10" cy="10" r="8" />
                     <circle cx="10" cy="10" r="4.5" />
-                    <circle
-                      cx="10"
-                      cy="10"
-                      r="1.5"
-                      fill="currentColor"
-                      stroke="none"
-                    />
-                    <path
-                      d="M10 2v2M10 16v2M2 10h2M16 10h2"
-                      stroke-linecap="round"
-                    />
+                    <circle cx="10" cy="10" r="1.5" fill="currentColor" stroke="none" />
+                    <path d="M10 2v2M10 16v2M2 10h2M16 10h2" stroke-linecap="round" />
                   </svg>
                   Cel średniej
                 </label>
-                <input
-                  id="cel-wejscie"
-                  type="number"
-                  min="2"
-                  max="5"
-                  step="0.01"
-                  placeholder="np. 4.50"
-                />
+                <input id="cel-wejscie" type="number" min="2" max="5" step="0.01" placeholder="np. 4.50" />
               </div>
               <div id="cel-info" class="cel-info ukryty"></div>
               <div id="cel-pasek" class="cel-pasek ukryty">
@@ -326,138 +217,66 @@
         <div class="karta karta--narzedzie karta--co-jesli" id="karta-co-jesli">
           <div class="narzedzie-naglowek">
             <div class="narzedzie-ikona-owijka">
-              <svg
-                class="narzedzie-ikona"
-                viewBox="0 0 24 24"
-                fill="none"
-                stroke="currentColor"
-                stroke-width="1.6"
-              >
-                <path
-                  d="M9.5 9a2.5 2.5 0 0 1 5 0c0 2.5-2.5 2.5-2.5 4"
-                  stroke-linecap="round"
-                />
-                <circle
-                  cx="12"
-                  cy="17.5"
-                  r=".75"
-                  fill="currentColor"
-                  stroke="none"
-                />
-                <path
-                  d="M5 3H3a1 1 0 0 0-1 1v16a1 1 0 0 0 1 1h18a1 1 0 0 0 1-1V4a1 1 0 0 0-1-1h-2"
-                  stroke-linecap="round"
-                />
+              <svg class="narzedzie-ikona" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6">
+                <path d="M9.5 9a2.5 2.5 0 0 1 5 0c0 2.5-2.5 2.5-2.5 4" stroke-linecap="round" />
+                <circle cx="12" cy="17.5" r=".75" fill="currentColor" stroke="none" />
+                <path d="M5 3H3a1 1 0 0 0-1 1v16a1 1 0 0 0 1 1h18a1 1 0 0 0 1-1V4a1 1 0 0 0-1-1h-2" stroke-linecap="round" />
                 <rect x="7" y="1" width="10" height="4" rx="2" />
               </svg>
             </div>
             <div>
               <h3 class="karta-tytul karta-tytul--narzedzie">Co jeśli?</h3>
-              <p class="narzedzie-opis">
-                Symuluj wpływ przyszłych ocen na średnią bez zapisywania.
-              </p>
+              <p class="narzedzie-opis">Symuluj wpływ przyszłych ocen na średnią bez zapisywania.</p>
             </div>
           </div>
           <div id="cj-wejscia" class="cj-wejscia"></div>
-          <button id="cj-dodaj" type="button" class="btn-duch">
-            + kolejny przedmiot
-          </button>
+          <button id="cj-dodaj" type="button" class="btn-duch">+ kolejny przedmiot</button>
           <div id="cj-wynik" class="cj-wynik ukryty">
             <div class="cj-statystyka">
               <span class="cj-etykieta">Teraz</span>
-              <strong id="cj-teraz">&#8212;</strong>
+              <strong id="cj-teraz">-</strong>
             </div>
             <div class="cj-strzalka-owijka">
               <svg viewBox="0 0 40 16" fill="none" class="cj-strzalka-svg">
-                <path
-                  d="M2 8h32M28 3l6 5-6 5"
-                  stroke="currentColor"
-                  stroke-width="1.8"
-                  stroke-linecap="round"
-                  stroke-linejoin="round"
-                />
+                <path d="M2 8h32M28 3l6 5-6 5" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" />
               </svg>
             </div>
             <div class="cj-statystyka cj-statystyka--duza">
               <span class="cj-etykieta">Po zmianach</span>
-              <strong id="cj-potem">&#8212;</strong>
+              <strong id="cj-potem">-</strong>
             </div>
             <span id="cj-roznica" class="cj-roznica"></span>
           </div>
-          <p id="cj-pusty" class="narzedzie-podpowiedz">
-            Najpierw dodaj jakiś przedmiot do listy.
-          </p>
+          <p id="cj-pusty" class="narzedzie-podpowiedz">Najpierw dodaj jakiś przedmiot do listy.</p>
         </div>
 
-        <div
-          class="karta karta--narzedzie karta--stypendium"
-          id="karta-stypendium"
-        >
+        <div class="karta karta--narzedzie karta--stypendium" id="karta-stypendium">
           <div class="narzedzie-naglowek">
             <div class="narzedzie-ikona-owijka narzedzie-ikona-owijka--gold">
-              <svg
-                class="narzedzie-ikona"
-                viewBox="0 0 24 24"
-                fill="none"
-                stroke="currentColor"
-                stroke-width="1.6"
-              >
+              <svg class="narzedzie-ikona" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6">
                 <rect x="2" y="7" width="20" height="13" rx="2" />
-                <path
-                  d="M16 7V5a2 2 0 0 0-2-2h-4a2 2 0 0 0-2 2v2"
-                  stroke-linecap="round"
-                />
+                <path d="M16 7V5a2 2 0 0 0-2-2h-4a2 2 0 0 0-2 2v2" stroke-linecap="round" />
                 <circle cx="12" cy="13.5" r="2.5" />
-                <path
-                  d="M6 10.5h.01M18 10.5h.01"
-                  stroke-linecap="round"
-                  stroke-width="2"
-                />
+                <path d="M6 10.5h.01M18 10.5h.01" stroke-linecap="round" stroke-width="2" />
               </svg>
             </div>
             <div>
-              <h3 class="karta-tytul karta-tytul--narzedzie">
-                Kalkulator stypendialny
-              </h3>
-              <p class="narzedzie-opis">
-                Szacunkowe obliczenia — ranking zależy od wyników całego
-                rocznika.
-              </p>
+              <h3 class="karta-tytul karta-tytul--narzedzie">Kalkulator stypendialny</h3>
+              <p class="narzedzie-opis">Szacunkowe obliczenia — ranking zależy od wyników całego rocznika.</p>
             </div>
           </div>
           <div class="sty-wejscia">
             <div class="pole">
               <label for="sty-prog">Próg średniej</label>
-              <input
-                id="sty-prog"
-                type="number"
-                min="2"
-                max="5"
-                step="0.01"
-                placeholder="np. 4.25"
-              />
+              <input id="sty-prog" type="number" min="2" max="5" step="0.01" placeholder="np. 4.25" />
             </div>
             <div class="pole">
               <label for="sty-osoby">Osób na roku</label>
-              <input
-                id="sty-osoby"
-                type="number"
-                min="1"
-                max="2000"
-                step="1"
-                placeholder="np. 120"
-              />
+              <input id="sty-osoby" type="number" min="1" max="2000" step="1" placeholder="np. 120" />
             </div>
             <div class="pole">
               <label for="sty-proc">% ze stypendium</label>
-              <input
-                id="sty-proc"
-                type="number"
-                min="1"
-                max="100"
-                step="1"
-                placeholder="np. 10"
-              />
+              <input id="sty-proc" type="number" min="1" max="100" step="1" placeholder="np. 10" />
             </div>
           </div>
           <div id="sty-wynik" class="sty-wynik ukryty">
@@ -471,55 +290,38 @@
             <div class="sty-statystyki">
               <div class="sty-statystyka">
                 <span class="sty-etykieta">Twoja śr.</span>
-                <strong id="sty-twoja">&#8212;</strong>
+                <strong id="sty-twoja">-</strong>
               </div>
               <div class="sty-statystyka">
                 <span class="sty-etykieta">Próg</span>
-                <strong id="sty-prog-wartosc">&#8212;</strong>
+                <strong id="sty-prog-wartosc">-</strong>
               </div>
               <div class="sty-statystyka">
                 <span class="sty-etykieta">Różnica</span>
-                <strong id="sty-roznica">&#8212;</strong>
+                <strong id="sty-roznica">-</strong>
               </div>
               <div class="sty-statystyka">
                 <span class="sty-etykieta">Miejsce ~</span>
-                <strong id="sty-miejsce">&#8212;</strong>
+                <strong id="sty-miejsce">-</strong>
               </div>
               <div class="sty-statystyka">
                 <span class="sty-etykieta">Osób przed Tobą</span>
-                <strong id="sty-przed">&#8212;</strong>
+                <strong id="sty-przed">-</strong>
               </div>
             </div>
             <div id="sty-komunikat" class="sty-komunikat"></div>
           </div>
-          <p id="sty-pusty" class="narzedzie-podpowiedz">
-            Wpisz próg, liczbę osób i procent, żeby zobaczyć szacunek.
-          </p>
+          <p id="sty-pusty" class="narzedzie-podpowiedz">Wpisz próg, liczbę osób i procent, żeby zobaczyć szacunek.</p>
         </div>
       </main>
     </div>
 
     <footer class="stopka">
       <div class="stopka-wewnatrz">
-        <code class="stopka-wzor"
-          >średnia = &Sigma;(ocena &times; ECTS) / &Sigma;ECTS</code
-        >
-        <a
-          href="https://github.com/lukon-dev"
-          target="_blank"
-          rel="noopener"
-          class="stopka-gh"
-        >
-          <svg
-            viewBox="0 0 16 16"
-            fill="currentColor"
-            width="14"
-            height="14"
-            aria-hidden="true"
-          >
-            <path
-              d="M8 0C3.58 0 0 3.58 0 8c0 3.54 2.29 6.53 5.47 7.59.4.07.55-.17.55-.38 0-.19-.01-.82-.01-1.49-2.01.37-2.53-.49-2.69-.94-.09-.23-.48-.94-.82-1.13-.28-.15-.68-.52-.01-.53.63-.01 1.08.58 1.23.82.72 1.21 1.87.87 2.33.66.07-.52.28-.87.51-1.07-1.78-.2-3.64-.89-3.64-3.95 0-.87.31-1.59.82-2.15-.08-.2-.36-1.02.08-2.12 0 0 .67-.21 2.2.82.64-.18 1.32-.27 2-.27.68 0 1.36.09 2 .27 1.53-1.04 2.2-.82 2.2-.82.44 1.1.16 1.92.08 2.12.51.56.82 1.27.82 2.15 0 3.07-1.87 3.75-3.65 3.95.29.25.54.73.54 1.48 0 1.07-.01 1.93-.01 2.2 0 .21.15.46.55.38A8.013 8.013 0 0016 8c0-4.42-3.58-8-8-8z"
-            />
+        <code class="stopka-wzor">srednia = &Sigma;(ocena &times; ECTS) / &Sigma;ECTS</code>
+        <a href="https://github.com/lukon-dev" target="_blank" rel="noopener" class="stopka-gh">
+          <svg viewBox="0 0 16 16" fill="currentColor" width="14" height="14" aria-hidden="true">
+            <path d="M8 0C3.58 0 0 3.58 0 8c0 3.54 2.29 6.53 5.47 7.59.4.07.55-.17.55-.38 0-.19-.01-.82-.01-1.49-2.01.37-2.53-.49-2.69-.94-.09-.23-.48-.94-.82-1.13-.28-.15-.68-.52-.01-.53.63-.01 1.08.58 1.23.82.72 1.21 1.87.87 2.33.66.07-.52.28-.87.51-1.07-1.78-.2-3.64-.89-3.64-3.95 0-.87.31-1.59.82-2.15-.08-.2-.36-1.02.08-2.12 0 0 .67-.21 2.2.82.64-.18 1.32-.27 2-.27.68 0 1.36.09 2 .27 1.53-1.04 2.2-.82 2.2-.82.44 1.1.16 1.92.08 2.12.51.56.82 1.27.82 2.15 0 3.07-1.87 3.75-3.65 3.95.29.25.54.73.54 1.48 0 1.07-.01 1.93-.01 2.2 0 .21.15.46.55.38A8.013 8.013 0 0016 8c0-4.42-3.58-8-8-8z" />
           </svg>
           lukon-dev
         </a>

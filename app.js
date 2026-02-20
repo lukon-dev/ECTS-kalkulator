@@ -1,3 +1,12 @@
+// rejestracja service workera (PWA)
+if ("serviceWorker" in navigator) {
+  window.addEventListener("load", () => {
+    navigator.serviceWorker.register("./sw.js").catch((err) => {
+      console.warn("SW rejestracja nie powiodla sie:", err);
+    });
+  });
+}
+
 const znajdzElement = (selektor) => document.querySelector(selektor);
 
 const elementy = {
@@ -12,6 +21,7 @@ const elementy = {
   znaczekLiczby: znajdzElement("#znaczek-liczby"),
   przyciskWyczyszczenia: znajdzElement("#btn-wyczysc"),
   przyciskEksportu: znajdzElement("#btn-eksport"),
+  przyciskZainstaluj: znajdzElement("#btn-zainstaluj"),
   owijkaFiltrow: znajdzElement("#filtry-owijka"),
   filtry: znajdzElement("#filtry"),
   statystykaSredniej: znajdzElement("#stat-srednia"),
@@ -77,6 +87,27 @@ let bohaterWidoczny = localStorage.getItem(KLUCZ_BOHATERA) !== "0";
 let trybDokladny = false;
 let aktywneFiltery = new Set();
 let wierszeCj = [{ identyfikator: 0, ocena: 4.5, ects: 5 }];
+
+// PWA install prompt
+let installPrompt = null;
+window.addEventListener("beforeinstallprompt", (e) => {
+  e.preventDefault();
+  installPrompt = e;
+  elementy.przyciskZainstaluj.classList.remove("ukryty");
+});
+window.addEventListener("appinstalled", () => {
+  installPrompt = null;
+  elementy.przyciskZainstaluj.classList.add("ukryty");
+  pokazPowiadomienie("Aplikacja zainstalowana!");
+});
+elementy.przyciskZainstaluj.addEventListener("click", async () => {
+  if (!installPrompt) return;
+  const result = await installPrompt.prompt();
+  if (result.outcome === "accepted") {
+    installPrompt = null;
+    elementy.przyciskZainstaluj.classList.add("ukryty");
+  }
+});
 
 function klasaOceny(ocena) {
   return KLASY_OCEN[ocena] ?? "";
@@ -156,7 +187,7 @@ function odswiezStatystyki() {
   if (liczba) elementy.znaczekLiczby.textContent = liczba;
 
   if (!liczba) {
-    elementy.statystykaSredniej.textContent = "\u2014";
+    elementy.statystykaSredniej.textContent = "-";
     elementy.statystykaSredniej.className = "statystyka-glowna";
     elementy.statystykaEcts.textContent = "0";
     elementy.statystykaDokladna.classList.add("ukryty");
@@ -218,7 +249,7 @@ function obliczCelSredniej() {
   elementy.celEtykiety.classList.remove("ukryty");
 
   if (srednia >= cel) {
-    elementy.celInfo.innerHTML = `<strong>Cel osiągnięty!</strong> Zapas: ${roznica.toFixed(3)} pkt powyżej ${cel.toFixed(2)}.`;
+    elementy.celInfo.innerHTML = `<strong>Cel osiagniety!</strong> Zapas: ${roznica.toFixed(3)} pkt powyzej ${cel.toFixed(2)}.`;
     elementy.celWypelnienie.style.width = "100%";
     elementy.celWypelnienie.className = "cel-wypelnienie ok";
   } else {
@@ -227,7 +258,7 @@ function obliczCelSredniej() {
       0,
     );
     const potrzebaEcts = Math.max(0, (cel * sumaEcts - sumaWazna) / (5 - cel));
-    elementy.celInfo.innerHTML = `Brakuje <strong>${Math.abs(roznica).toFixed(3)} pkt</strong>. Potrzebujesz ok. <strong>${potrzebaEcts.toFixed(1)} ECTS</strong> z oceną 5.0 do celu ${cel.toFixed(2)}.`;
+    elementy.celInfo.innerHTML = `Brakuje <strong>${Math.abs(roznica).toFixed(3)} pkt</strong>. Potrzebujesz ok. <strong>${potrzebaEcts.toFixed(1)} ECTS</strong> z ocena 5.0 do celu ${cel.toFixed(2)}.`;
     const zakres = cel - 2.0;
     const postep = zakres > 0 ? Math.max(0, (srednia - 2.0) / zakres) : 0;
     const procent = Math.min(postep * 100, 99);
@@ -253,7 +284,7 @@ function pobierzZawartoscCSV() {
       (suma, przedmiot) => suma + przedmiot.ocena * przedmiot.ects,
       0,
     ) / sumaEcts;
-  const podsumowanie = `"Średnia ważona",${srednia.toFixed(4)},${sumaEcts}`;
+  const podsumowanie = `"Srednia wazona",${srednia.toFixed(4)},${sumaEcts}`;
   return [naglowek, ...wiersze, "", podsumowanie].join("\n");
 }
 
@@ -413,7 +444,7 @@ function renderujListe() {
           <div class="element-nazwa" title="${przedmiot.nazwa}">${przedmiot.nazwa}</div>
           <div class="element-pod">${przedmiot.ects} ECTS${przedmiot.semestr ? " &middot; sem. " + przedmiot.semestr : ""}</div>
         </div>
-        <button class="element-usun" type="button" aria-label="usuń">&#10005;</button>
+        <button class="element-usun" type="button" aria-label="usun">&#10005;</button>
       `;
       element.querySelector(".element-usun").addEventListener("click", () => {
         element.classList.add("znikanie-element");
@@ -634,7 +665,7 @@ function obliczStypendium() {
 
   if (srednia >= prog) {
     elementy.komunikatStypendium.className = "sty-komunikat ok";
-    elementy.komunikatStypendium.innerHTML = `<strong>Jesteś powyżej progu.</strong> Zapas: ${roznica.toFixed(3)} pkt. Szacunkowo ${liczbaOsobPrzed} ${liczbaOsobPrzed === 1 ? "osoba ma" : "osoby mają"} lepszą średnią.`;
+    elementy.komunikatStypendium.innerHTML = `<strong>Jestes powyzej progu.</strong> Zapas: ${roznica.toFixed(3)} pkt. Szacunkowo ${liczbaOsobPrzed} ${liczbaOsobPrzed === 1 ? "osoba ma" : "osoby maja"} lepsza srednia.`;
   } else {
     const sumaWazna = przedmioty.reduce(
       (suma, przedmiot) => suma + przedmiot.ocena * przedmiot.ects,
@@ -645,7 +676,7 @@ function obliczStypendium() {
       (prog * sumaEcts - sumaWazna) / (5 - prog),
     );
     elementy.komunikatStypendium.className = "sty-komunikat nie";
-    elementy.komunikatStypendium.innerHTML = `<strong>Brakuje: ${Math.abs(roznica).toFixed(3)} pkt.</strong> Szacunkowo ${liczbaOsobPrzed} ${liczbaOsobPrzed === 1 ? "osoba jest" : "osoby są"} przed Tobą. Do progu ${prog.toFixed(2)} potrzebujesz ok. <em>${potrzebaEcts.toFixed(1)} ECTS</em> z oceną 5.0.`;
+    elementy.komunikatStypendium.innerHTML = `<strong>Brakuje: ${Math.abs(roznica).toFixed(3)} pkt.</strong> Szacunkowo ${liczbaOsobPrzed} ${liczbaOsobPrzed === 1 ? "osoba jest" : "osoby sa"} przed Toba. Do progu ${prog.toFixed(2)} potrzebujesz ok. <em>${potrzebaEcts.toFixed(1)} ECTS</em> z ocena 5.0.`;
   }
 }
 
@@ -659,6 +690,7 @@ function renderujWszystko() {
   obliczStypendium();
 }
 
+// eventy
 elementy.przyciskMotywu.addEventListener("click", () =>
   ustawMotyw(aktywnyMotyw === "noc" ? "dzien" : "noc"),
 );
@@ -692,7 +724,7 @@ elementy.formularz.addEventListener("submit", (zdarzenie) => {
   const semestr = elementy.poleSemestru.value.trim() || null;
 
   if (!ocena) {
-    alert("Wybierz ocenę!");
+    alert("Wybierzocene!");
     return;
   }
   if (!ects || ects <= 0) {
@@ -713,7 +745,7 @@ elementy.formularz.addEventListener("submit", (zdarzenie) => {
 });
 
 elementy.przyciskWyczyszczenia.addEventListener("click", () => {
-  if (!confirm("Usunąć wszystkie przedmioty?")) return;
+  if (!confirm("Usunac wszystkie przedmioty?")) return;
   przedmioty = [];
   aktywneFiltery.clear();
   zapiszDane();
