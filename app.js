@@ -1,335 +1,696 @@
-const $ = (s) => document.querySelector(s);
+const znajdzElement = (selektor) => document.querySelector(selektor);
 
-const el = {
-  form: $("#form"),
-  fNazwa: $("#f-nazwa"),
-  fOcena: $("#f-ocena"),
-  fEcts: $("#f-ects"),
-  fSem: $("#f-sem"),
-  preview: $("#form-preview"),
-  lista: $("#lista"),
-  empty: $("#empty"),
-  badge: $("#badge"),
-  btnClear: $("#btn-clear"),
-  filtryWrap: $("#filtry-wrap"),
-  filtry: $("#filtry"),
-  statSr: $("#stat-sr"),
-  statEcts: $("#stat-ects"),
-  statCount: $("#stat-count"),
-  statPrecise: $("#stat-precise"),
-  btnPrecise: $("#btn-precise"),
-  wykres: $("#wykres"),
-  semChips: $("#sem-chips"),
-  cjInputs: $("#cj-inputs"),
-  cjAdd: $("#cj-add"),
-  cjResult: $("#cj-result"),
-  cjNow: $("#cj-now"),
-  cjNext: $("#cj-next"),
-  cjDelta: $("#cj-delta"),
-  cjEmpty: $("#cj-empty"),
-  styProg: $("#sty-prog"),
-  styOsoby: $("#sty-osoby"),
-  styProc: $("#sty-proc"),
-  styResult: $("#sty-result"),
-  styEmpty: $("#sty-empty"),
-  styFill: $("#sty-fill"),
-  styMarker: $("#sty-marker"),
-  styTy: $("#sty-ty"),
-  styTwoja: $("#sty-twoja"),
-  styProgVal: $("#sty-prog-val"),
-  styDiff: $("#sty-diff"),
-  styPlace: $("#sty-place"),
-  styBefore: $("#sty-before"),
-  styMsg: $("#sty-msg"),
-  hero: $("#hero"),
-  heroClose: $("#btn-hero-close"),
-  infoShow: $("#btn-info-show"),
-  btnTheme: $("#btn-theme"),
+const elementy = {
+  formularz: znajdzElement("#formularz"),
+  polaNazwy: znajdzElement("#f-nazwa"),
+  poleOceny: znajdzElement("#f-ocena"),
+  poleEcts: znajdzElement("#f-ects"),
+  poleSemestru: znajdzElement("#f-sem"),
+  podgladFormularza: znajdzElement("#podglad-formularza"),
+  listaPrzedmiotow: znajdzElement("#lista-przedmiotow"),
+  komunikatPusty: znajdzElement("#pusty"),
+  znaczekLiczby: znajdzElement("#znaczek-liczby"),
+  przyciskWyczyszczenia: znajdzElement("#btn-wyczysc"),
+  przyciskEksportu: znajdzElement("#btn-eksport"),
+  owijkaFiltrow: znajdzElement("#filtry-owijka"),
+  filtry: znajdzElement("#filtry"),
+  statystykaSredniej: znajdzElement("#stat-srednia"),
+  statystykaEcts: znajdzElement("#stat-ects"),
+  statystykaLiczby: znajdzElement("#stat-liczba"),
+  statystykaDokladna: znajdzElement("#stat-dokladna"),
+  checkboxDokladna: znajdzElement("#checkbox-dokladna"),
+  wykres: znajdzElement("#wykres"),
+  chipySemestrow: znajdzElement("#chipy-semestrow"),
+  wejsciaCj: znajdzElement("#cj-wejscia"),
+  przyciskDodajCj: znajdzElement("#cj-dodaj"),
+  wynikCj: znajdzElement("#cj-wynik"),
+  terazCj: znajdzElement("#cj-teraz"),
+  potemCj: znajdzElement("#cj-potem"),
+  roznicaCj: znajdzElement("#cj-roznica"),
+  pustyCj: znajdzElement("#cj-pusty"),
+  progStypendium: znajdzElement("#sty-prog"),
+  osobyStypendium: znajdzElement("#sty-osoby"),
+  procentStypendium: znajdzElement("#sty-proc"),
+  wynikStypendium: znajdzElement("#sty-wynik"),
+  pustyStypendium: znajdzElement("#sty-pusty"),
+  wypelnienieStypendium: znajdzElement("#sty-wypelnienie"),
+  markerStypendium: znajdzElement("#sty-marker"),
+  tyStypendium: znajdzElement("#sty-ty"),
+  twojaStypendium: znajdzElement("#sty-twoja"),
+  progWartoscStypendium: znajdzElement("#sty-prog-wartosc"),
+  roznicaStypendium: znajdzElement("#sty-roznica"),
+  miejsceStypendium: znajdzElement("#sty-miejsce"),
+  przedStypendium: znajdzElement("#sty-przed"),
+  komunikatStypendium: znajdzElement("#sty-komunikat"),
+  bohater: znajdzElement("#hero"),
+  przyciskZamknijInfo: znajdzElement("#btn-zamknij-info"),
+  przyciskPokazInfo: znajdzElement("#btn-pokaz-info"),
+  przyciskMotywu: znajdzElement("#btn-motyw"),
+  celWejscie: znajdzElement("#cel-wejscie"),
+  celInfo: znajdzElement("#cel-info"),
+  celPasek: znajdzElement("#cel-pasek"),
+  celWypelnienie: znajdzElement("#cel-wypelnienie"),
+  celEtykiety: znajdzElement("#cel-etykiety"),
+  celEtykietaPrawa: znajdzElement("#cel-etykieta-prawa"),
+  kontenerPowiadomien: znajdzElement("#kontener-powiadomien"),
 };
 
-let data = JSON.parse(localStorage.getItem("ectscalc")) || [];
-let motyw = localStorage.getItem("ectscalc_motyw") || "noc";
-let heroOpen = localStorage.getItem("ectscalc_hero") !== "0";
-let precise = false;
-let activeFilters = new Set();
-let cjRows = [{ id: 0, ocena: 4.5, ects: 5 }];
-
-const GRADES = [2, 3, 3.5, 4, 4.5, 5];
-const GRADE_CLASS = {
+const DOSTEPNE_OCENY = [2, 3, 3.5, 4, 4.5, 5];
+const KLASY_OCEN = Object.freeze({
   2: "g2",
   3: "g3",
   3.5: "g35",
   4: "g4",
   4.5: "g45",
   5: "g5",
-};
-const CHART_CLASS = {
-  2: "g2",
-  3: "g3",
-  3.5: "g35",
-  4: "g4",
-  4.5: "g45",
-  5: "g5",
-};
-
-function gc(g) {
-  return GRADE_CLASS[g] || "";
-}
-
-function wAvg(list) {
-  if (!list.length) return null;
-  const se = list.reduce((a, p) => a + p.ects, 0);
-  if (!se) return null;
-  return list.reduce((a, p) => a + p.ocena * p.ects, 0) / se;
-}
-
-function roundGrade(sr) {
-  return Math.round(sr * 2) / 2;
-}
-
-function save() {
-  localStorage.setItem("ectscalc", JSON.stringify(data));
-}
-
-function setMotyw(m) {
-  motyw = m;
-  document.documentElement.setAttribute("data-motyw", m);
-  localStorage.setItem("ectscalc_motyw", m);
-}
-el.btnTheme.addEventListener("click", () =>
-  setMotyw(motyw === "noc" ? "dzien" : "noc"),
-);
-setMotyw(motyw);
-
-function setHero(open) {
-  heroOpen = open;
-  el.hero.classList.toggle("hidden", !open);
-  el.infoShow.style.display = open ? "none" : "";
-  localStorage.setItem("ectscalc_hero", open ? "1" : "0");
-}
-el.heroClose.addEventListener("click", () => setHero(false));
-el.infoShow.addEventListener("click", () => setHero(true));
-setHero(heroOpen);
-
-el.btnPrecise.addEventListener("click", () => {
-  precise = !precise;
-  el.btnPrecise.classList.toggle("on", precise);
-  refreshStats();
 });
 
-const savedSem = localStorage.getItem("ectscalc_sem");
-if (savedSem) el.fSem.value = savedSem;
-el.fSem.addEventListener("change", () =>
-  localStorage.setItem("ectscalc_sem", el.fSem.value),
-);
+const KLUCZ_DANYCH = "ectscalc";
+const KLUCZ_MOTYWU = "ectscalc_motyw";
+const KLUCZ_BOHATERA = "ectscalc_hero";
+const KLUCZ_SEMESTRU = "ectscalc_sem";
+const KLUCZ_CELU = "ectscalc_cel";
 
-function grupuj() {
-  const g = {};
-  data.forEach((p) => {
-    const k = p.semestr || "brak";
-    if (!g[k]) g[k] = [];
-    g[k].push(p);
-  });
-  return g;
+let przedmioty = JSON.parse(localStorage.getItem(KLUCZ_DANYCH)) || [];
+let aktywnyMotyw = localStorage.getItem(KLUCZ_MOTYWU) || "noc";
+let bohaterWidoczny = localStorage.getItem(KLUCZ_BOHATERA) !== "0";
+let trybDokladny = false;
+let aktywneFiltery = new Set();
+let wierszeCj = [{ identyfikator: 0, ocena: 4.5, ects: 5 }];
+
+function klasaOceny(ocena) {
+  return KLASY_OCEN[ocena] ?? "";
 }
 
-function sortKeys(keys) {
-  return [...keys].sort((a, b) => {
-    if (a === "brak") return 1;
-    if (b === "brak") return -1;
-    return +a - +b;
-  });
-}
-
-function refreshStats() {
-  const n = data.length;
-  el.statCount.textContent = n;
-  el.empty.style.display = n ? "none" : "flex";
-  el.btnClear.classList.toggle("hidden", !n);
-  el.badge.classList.toggle("hidden", !n);
-  if (n) el.badge.textContent = n;
-
-  if (!n) {
-    el.statSr.textContent = "\u2014";
-    el.statSr.className = "stat-main";
-    el.statEcts.textContent = "0";
-    el.statPrecise.classList.add("hidden");
-    return;
-  }
-
-  const se = data.reduce((a, p) => a + p.ects, 0);
-  const sr = data.reduce((a, p) => a + p.ocena * p.ects, 0) / se;
-
-  el.statEcts.textContent = se;
-  el.statSr.textContent = sr.toFixed(2);
-  el.statSr.className = "stat-main " + gc(roundGrade(sr));
-
-  if (precise) {
-    el.statPrecise.textContent = "= " + sr.toFixed(8);
-    el.statPrecise.classList.remove("hidden");
-  } else {
-    el.statPrecise.classList.add("hidden");
-  }
-}
-
-function renderWykres() {
-  el.wykres.innerHTML = "";
-  const counts = {};
-  GRADES.forEach((g) => (counts[g] = 0));
-  data.forEach((p) => counts[p.ocena]++);
-  const max = Math.max(...Object.values(counts), 1);
-
-  GRADES.forEach((grade) => {
-    const n = counts[grade];
-    const pct = (n / max) * 100;
-    const col = document.createElement("div");
-    col.className = "wykres-col";
-    col.innerHTML = `
-      <span class="wykres-n">${n || ""}</span>
-      <div class="wykres-bar ${CHART_CLASS[grade]}" style="height:${Math.max(pct, n ? 8 : 0)}%" title="${grade}: ${n}"></div>
-      <span class="wykres-etk">${grade}</span>
-    `;
-    el.wykres.appendChild(col);
-  });
-}
-
-function renderSemChips() {
-  el.semChips.innerHTML = "";
-  const g = grupuj();
-  const keys = sortKeys(Object.keys(g));
-  if (keys.length <= 1 && keys[0] === "brak") return;
-
-  keys.forEach((sem) => {
-    const sr = wAvg(g[sem]);
-    if (!sr) return;
-    const ects = g[sem].reduce((a, p) => a + p.ects, 0);
-    const chip = document.createElement("div");
-    chip.className = "sem-chip";
-    chip.innerHTML = `
-      <span class="sem-chip-label">${sem === "brak" ? "bez semestru" : "semestr " + sem}</span>
-      <span class="sem-chip-val ${gc(roundGrade(sr))}">${sr.toFixed(2)}</span>
-      <span class="sem-chip-sub">${ects} ECTS &middot; ${g[sem].length} przedm.</span>
-    `;
-    el.semChips.appendChild(chip);
-  });
-}
-
-function renderFiltry() {
-  el.filtry.innerHTML = "";
-  const g = grupuj();
-  const keys = sortKeys(Object.keys(g));
-
-  if (keys.length <= 1) {
-    el.filtryWrap.classList.add("hidden");
-    return;
-  }
-  el.filtryWrap.classList.remove("hidden");
-
-  const mk = (label, val) => {
-    const isAll = val === "all";
-    const on = isAll ? activeFilters.size === 0 : activeFilters.has(val);
-    const btn = document.createElement("button");
-    btn.type = "button";
-    btn.className = "filtr" + (on ? " on" : "");
-    btn.textContent = label;
-    btn.addEventListener("click", () => {
-      if (isAll) activeFilters.clear();
-      else
-        activeFilters.has(val)
-          ? activeFilters.delete(val)
-          : activeFilters.add(val);
-      renderFiltry();
-      renderLista();
-    });
-    return btn;
-  };
-
-  el.filtry.appendChild(mk("Wszystkie", "all"));
-  keys.forEach((k) =>
-    el.filtry.appendChild(mk(k === "brak" ? "bez sem." : "sem. " + k, k)),
+function obliczSredniaWazona(listaPrzedmiotow) {
+  if (!listaPrzedmiotow.length) return null;
+  const sumaEcts = listaPrzedmiotow.reduce(
+    (suma, przedmiot) => suma + przedmiot.ects,
+    0,
+  );
+  if (!sumaEcts) return null;
+  return (
+    listaPrzedmiotow.reduce(
+      (suma, przedmiot) => suma + przedmiot.ocena * przedmiot.ects,
+      0,
+    ) / sumaEcts
   );
 }
 
-function renderLista() {
-  el.lista.innerHTML = "";
-  if (!data.length) return;
+function zaokraglOcene(srednia) {
+  return Math.round(srednia * 2) / 2;
+}
 
-  const g = grupuj();
-  const keys = sortKeys(Object.keys(g));
-  const show =
-    activeFilters.size === 0 ? keys : keys.filter((k) => activeFilters.has(k));
+function zapiszDane() {
+  localStorage.setItem(KLUCZ_DANYCH, JSON.stringify(przedmioty));
+}
 
-  show.forEach((sem) => {
-    if (keys.length > 1) {
-      const sr = wAvg(g[sem]);
-      const li = document.createElement("li");
-      li.className = "sem-header";
-      const ects = g[sem].reduce((a, p) => a + p.ects, 0);
-      li.innerHTML = `
-        <span>${sem === "brak" ? "bez semestru" : "semestr " + sem}</span>
-        <span class="sem-meta">
-          ${sr ? `<span class="sem-sr">${sr.toFixed(2)}</span>` : ""}
-          <span class="sem-info">${ects} ECTS</span>
+function grupujPoSemestrach() {
+  return przedmioty.reduce((grupy, przedmiot) => {
+    const klucz = przedmiot.semestr || "brak";
+    if (!grupy[klucz]) grupy[klucz] = [];
+    grupy[klucz].push(przedmiot);
+    return grupy;
+  }, {});
+}
+
+function sortujKlucze(klucze) {
+  return [...klucze].sort((klucz1, klucz2) => {
+    if (klucz1 === "brak") return 1;
+    if (klucz2 === "brak") return -1;
+    return +klucz1 - +klucz2;
+  });
+}
+
+function pokazPowiadomienie(tekst, rodzaj = "ok") {
+  const powiadomienie = document.createElement("div");
+  powiadomienie.className = `powiadomienie ${rodzaj}`;
+  powiadomienie.textContent = tekst;
+  elementy.kontenerPowiadomien.appendChild(powiadomienie);
+  setTimeout(() => {
+    powiadomienie.classList.add("znikanie");
+    setTimeout(() => powiadomienie.remove(), 250);
+  }, 2400);
+}
+
+function ustawMotyw(motyw) {
+  aktywnyMotyw = motyw;
+  document.documentElement.setAttribute("data-motyw", motyw);
+  localStorage.setItem(KLUCZ_MOTYWU, motyw);
+}
+
+function ustawBohatera(widoczny) {
+  bohaterWidoczny = widoczny;
+  elementy.bohater.classList.toggle("ukryty", !widoczny);
+  elementy.przyciskPokazInfo.style.display = widoczny ? "none" : "";
+  localStorage.setItem(KLUCZ_BOHATERA, widoczny ? "1" : "0");
+}
+
+function odswiezStatystyki() {
+  const liczba = przedmioty.length;
+  elementy.statystykaLiczby.textContent = liczba;
+  elementy.komunikatPusty.style.display = liczba ? "none" : "flex";
+  elementy.przyciskWyczyszczenia.classList.toggle("ukryty", !liczba);
+  elementy.przyciskEksportu.classList.toggle("ukryty", !liczba);
+  elementy.znaczekLiczby.classList.toggle("ukryty", !liczba);
+  if (liczba) elementy.znaczekLiczby.textContent = liczba;
+
+  if (!liczba) {
+    elementy.statystykaSredniej.textContent = "\u2014";
+    elementy.statystykaSredniej.className = "statystyka-glowna";
+    elementy.statystykaEcts.textContent = "0";
+    elementy.statystykaDokladna.classList.add("ukryty");
+    ukryjCel();
+    return;
+  }
+
+  const sumaEcts = przedmioty.reduce(
+    (suma, przedmiot) => suma + przedmiot.ects,
+    0,
+  );
+  const srednia =
+    przedmioty.reduce(
+      (suma, przedmiot) => suma + przedmiot.ocena * przedmiot.ects,
+      0,
+    ) / sumaEcts;
+
+  elementy.statystykaEcts.textContent = sumaEcts;
+  elementy.statystykaSredniej.textContent = srednia.toFixed(2);
+  elementy.statystykaSredniej.className =
+    "statystyka-glowna " + klasaOceny(zaokraglOcene(srednia));
+
+  if (trybDokladny) {
+    elementy.statystykaDokladna.textContent = "= " + srednia.toFixed(8);
+    elementy.statystykaDokladna.classList.remove("ukryty");
+  } else {
+    elementy.statystykaDokladna.classList.add("ukryty");
+  }
+
+  obliczCelSredniej();
+}
+
+function ukryjCel() {
+  elementy.celInfo.classList.add("ukryty");
+  elementy.celPasek.classList.add("ukryty");
+  elementy.celEtykiety.classList.add("ukryty");
+}
+
+function obliczCelSredniej() {
+  const cel = parseFloat(elementy.celWejscie.value);
+  if (!cel || cel < 2 || cel > 5 || !przedmioty.length) {
+    ukryjCel();
+    return;
+  }
+
+  const sumaEcts = przedmioty.reduce(
+    (suma, przedmiot) => suma + przedmiot.ects,
+    0,
+  );
+  const srednia =
+    przedmioty.reduce(
+      (suma, przedmiot) => suma + przedmiot.ocena * przedmiot.ects,
+      0,
+    ) / sumaEcts;
+  const roznica = srednia - cel;
+
+  elementy.celInfo.classList.remove("ukryty");
+  elementy.celPasek.classList.remove("ukryty");
+  elementy.celEtykiety.classList.remove("ukryty");
+
+  if (srednia >= cel) {
+    elementy.celInfo.innerHTML = `<strong>Cel osiągnięty!</strong> Zapas: ${roznica.toFixed(3)} pkt powyżej ${cel.toFixed(2)}.`;
+    elementy.celWypelnienie.style.width = "100%";
+    elementy.celWypelnienie.className = "cel-wypelnienie ok";
+  } else {
+    const sumaWazna = przedmioty.reduce(
+      (suma, przedmiot) => suma + przedmiot.ocena * przedmiot.ects,
+      0,
+    );
+    const potrzebaEcts = Math.max(0, (cel * sumaEcts - sumaWazna) / (5 - cel));
+    elementy.celInfo.innerHTML = `Brakuje <strong>${Math.abs(roznica).toFixed(3)} pkt</strong>. Potrzebujesz ok. <strong>${potrzebaEcts.toFixed(1)} ECTS</strong> z oceną 5.0 do celu ${cel.toFixed(2)}.`;
+    const zakres = cel - 2.0;
+    const postep = zakres > 0 ? Math.max(0, (srednia - 2.0) / zakres) : 0;
+    const procent = Math.min(postep * 100, 99);
+    elementy.celWypelnienie.style.width = procent + "%";
+    elementy.celWypelnienie.className =
+      procent >= 70 ? "cel-wypelnienie warn" : "cel-wypelnienie nie";
+  }
+  elementy.celEtykietaPrawa.textContent = cel.toFixed(2);
+}
+
+function pobierzZawartoscCSV() {
+  const naglowek = "Nazwa,Ocena,ECTS,Semestr";
+  const wiersze = przedmioty.map(
+    (przedmiot) =>
+      `"${przedmiot.nazwa.replace(/"/g, '""')}",${przedmiot.ocena},${przedmiot.ects},${przedmiot.semestr || ""}`,
+  );
+  const sumaEcts = przedmioty.reduce(
+    (suma, przedmiot) => suma + przedmiot.ects,
+    0,
+  );
+  const srednia =
+    przedmioty.reduce(
+      (suma, przedmiot) => suma + przedmiot.ocena * przedmiot.ects,
+      0,
+    ) / sumaEcts;
+  const podsumowanie = `"Średnia ważona",${srednia.toFixed(4)},${sumaEcts}`;
+  return [naglowek, ...wiersze, "", podsumowanie].join("\n");
+}
+
+function pobierzPlikCSV(zawartosc) {
+  const blob = new Blob([zawartosc], { type: "text/csv;charset=utf-8;" });
+  const url = URL.createObjectURL(blob);
+  const link = document.createElement("a");
+  link.href = url;
+  link.download = "ectscalc.csv";
+  link.click();
+  URL.revokeObjectURL(url);
+  pokazPowiadomienie("Pobrano plik ectscalc.csv");
+}
+
+function eksportujDoCSV() {
+  if (!przedmioty.length) return;
+  const zawartosc = pobierzZawartoscCSV();
+
+  if (!navigator.clipboard) {
+    pobierzPlikCSV(zawartosc);
+    return;
+  }
+
+  navigator.clipboard
+    .writeText(zawartosc)
+    .then(() => pokazPowiadomienie("Skopiowano CSV do schowka"))
+    .catch(() => pobierzPlikCSV(zawartosc));
+}
+
+function renderujWykres() {
+  elementy.wykres.innerHTML = "";
+  const licznikOcen = Object.fromEntries(
+    DOSTEPNE_OCENY.map((ocena) => [ocena, 0]),
+  );
+  przedmioty.forEach((przedmiot) => licznikOcen[przedmiot.ocena]++);
+  const maksimum = Math.max(...Object.values(licznikOcen), 1);
+
+  DOSTEPNE_OCENY.forEach((ocena) => {
+    const liczba = licznikOcen[ocena];
+    const procent = (liczba / maksimum) * 100;
+    const kolumna = document.createElement("div");
+    kolumna.className = "wykres-kolumna";
+    kolumna.innerHTML = `
+      <span class="wykres-liczba">${liczba || ""}</span>
+      <div class="wykres-slupek ${KLASY_OCEN[ocena]}" style="height:${Math.max(procent, liczba ? 8 : 0)}%" title="${ocena}: ${liczba}"></div>
+      <span class="wykres-podpis">${ocena}</span>
+    `;
+    elementy.wykres.appendChild(kolumna);
+  });
+}
+
+function renderujChipySemestrow() {
+  elementy.chipySemestrow.innerHTML = "";
+  const grupy = grupujPoSemestrach();
+  const klucze = sortujKlucze(Object.keys(grupy));
+  if (klucze.length <= 1 && klucze[0] === "brak") return;
+
+  klucze.forEach((semestr) => {
+    const srednia = obliczSredniaWazona(grupy[semestr]);
+    if (!srednia) return;
+    const sumaEcts = grupy[semestr].reduce(
+      (suma, przedmiot) => suma + przedmiot.ects,
+      0,
+    );
+    const chip = document.createElement("div");
+    chip.className = "chip-semestru";
+    chip.innerHTML = `
+      <span class="chip-etykieta">${semestr === "brak" ? "bez semestru" : "semestr " + semestr}</span>
+      <span class="chip-wartosc ${klasaOceny(zaokraglOcene(srednia))}">${srednia.toFixed(2)}</span>
+      <span class="chip-pod">${sumaEcts} ECTS &middot; ${grupy[semestr].length} przedm.</span>
+    `;
+    elementy.chipySemestrow.appendChild(chip);
+  });
+}
+
+function renderujFiltry() {
+  elementy.filtry.innerHTML = "";
+  const grupy = grupujPoSemestrach();
+  const klucze = sortujKlucze(Object.keys(grupy));
+
+  if (klucze.length <= 1) {
+    elementy.owijkaFiltrow.classList.add("ukryty");
+    return;
+  }
+  elementy.owijkaFiltrow.classList.remove("ukryty");
+
+  const tworzPrzyciskFiltru = (etykieta, wartosc) => {
+    const czyWszystkie = wartosc === "wszystkie";
+    const czyAktywny = czyWszystkie
+      ? aktywneFiltery.size === 0
+      : aktywneFiltery.has(wartosc);
+    const przycisk = document.createElement("button");
+    przycisk.type = "button";
+    przycisk.className = "filtr" + (czyAktywny ? " aktywny" : "");
+    przycisk.textContent = etykieta;
+    przycisk.addEventListener("click", () => {
+      if (czyWszystkie) {
+        aktywneFiltery.clear();
+      } else {
+        aktywneFiltery.has(wartosc)
+          ? aktywneFiltery.delete(wartosc)
+          : aktywneFiltery.add(wartosc);
+      }
+      renderujFiltry();
+      renderujListe();
+    });
+    return przycisk;
+  };
+
+  elementy.filtry.appendChild(tworzPrzyciskFiltru("Wszystkie", "wszystkie"));
+  klucze.forEach((klucz) =>
+    elementy.filtry.appendChild(
+      tworzPrzyciskFiltru(
+        klucz === "brak" ? "bez sem." : "sem. " + klucz,
+        klucz,
+      ),
+    ),
+  );
+}
+
+function renderujListe() {
+  elementy.listaPrzedmiotow.innerHTML = "";
+  if (!przedmioty.length) return;
+
+  const grupy = grupujPoSemestrach();
+  const klucze = sortujKlucze(Object.keys(grupy));
+  const widoczneSemestry =
+    aktywneFiltery.size === 0
+      ? klucze
+      : klucze.filter((klucz) => aktywneFiltery.has(klucz));
+
+  widoczneSemestry.forEach((semestr) => {
+    if (klucze.length > 1) {
+      const srednia = obliczSredniaWazona(grupy[semestr]);
+      const sumaEcts = grupy[semestr].reduce(
+        (suma, przedmiot) => suma + przedmiot.ects,
+        0,
+      );
+      const naglowek = document.createElement("li");
+      naglowek.className = "naglowek-semestru";
+      naglowek.innerHTML = `
+        <span>${semestr === "brak" ? "bez semestru" : "semestr " + semestr}</span>
+        <span class="meta-semestru">
+          ${srednia ? `<span class="srednia-semestru">${srednia.toFixed(2)}</span>` : ""}
+          <span class="info-semestru">${sumaEcts} ECTS</span>
         </span>
       `;
-      el.lista.appendChild(li);
+      elementy.listaPrzedmiotow.appendChild(naglowek);
     }
 
-    g[sem].forEach((p) => {
-      const li = document.createElement("li");
-      li.className = "item " + gc(p.ocena);
-      li.innerHTML = `
-        <span class="item-grade">${p.ocena.toFixed(1)}</span>
-        <div class="item-info">
-          <div class="item-name" title="${p.nazwa}">${p.nazwa}</div>
-          <div class="item-sub">${p.ects} ECTS${p.semestr ? " &middot; sem. " + p.semestr : ""}</div>
+    grupy[semestr].forEach((przedmiot) => {
+      const element = document.createElement("li");
+      element.className = "element-listy " + klasaOceny(przedmiot.ocena);
+      element.innerHTML = `
+        <span class="element-ocena">${przedmiot.ocena.toFixed(1)}</span>
+        <div class="element-info">
+          <div class="element-nazwa" title="${przedmiot.nazwa}">${przedmiot.nazwa}</div>
+          <div class="element-pod">${przedmiot.ects} ECTS${przedmiot.semestr ? " &middot; sem. " + przedmiot.semestr : ""}</div>
         </div>
-        <button class="item-del" type="button" aria-label="usun">&#10005;</button>
+        <button class="element-usun" type="button" aria-label="usuń">&#10005;</button>
       `;
-      li.querySelector(".item-del").addEventListener("click", () => {
-        li.classList.add("going");
+      element.querySelector(".element-usun").addEventListener("click", () => {
+        element.classList.add("znikanie-element");
         setTimeout(() => {
-          data = data.filter((x) => x.id !== p.id);
-          const g2 = grupuj();
-          activeFilters.forEach((f) => {
-            if (!g2[f]) activeFilters.delete(f);
+          przedmioty = przedmioty.filter(
+            (pozycja) =>
+              (pozycja.identyfikator ?? pozycja.id) !==
+              (przedmiot.identyfikator ?? przedmiot.id),
+          );
+          const noweGrupy = grupujPoSemestrach();
+          aktywneFiltery.forEach((filtr) => {
+            if (!noweGrupy[filtr]) aktywneFiltery.delete(filtr);
           });
-          save();
-          render();
+          zapiszDane();
+          renderujWszystko();
         }, 220);
       });
-      el.lista.appendChild(li);
+      elementy.listaPrzedmiotow.appendChild(element);
     });
   });
 }
 
-function updatePreview() {
-  const ocena = parseFloat(el.fOcena.value);
-  const ects = parseFloat(el.fEcts.value);
-  if (!ocena || !ects || ects <= 0 || !data.length) {
-    el.preview.classList.add("hidden");
+function zaktualizujPodgladFormularza() {
+  const ocena = parseFloat(elementy.poleOceny.value);
+  const ects = parseFloat(elementy.poleEcts.value);
+
+  if (!ocena || !ects || ects <= 0 || !przedmioty.length) {
+    elementy.podgladFormularza.classList.add("ukryty");
     return;
   }
-  const se = data.reduce((a, p) => a + p.ects, 0);
-  const sw = data.reduce((a, p) => a + p.ocena * p.ects, 0);
-  const now = sw / se;
-  const next = (sw + ocena * ects) / (se + ects);
-  const d = next - now;
-  const sign = d >= 0 ? "+" : "";
-  const col = d >= 0 ? "var(--g5)" : d >= -0.05 ? "var(--g35)" : "var(--g2)";
-  el.preview.classList.remove("hidden");
-  el.preview.innerHTML = `po dodaniu: <strong>${next.toFixed(2)}</strong>&nbsp;<span style="color:${col}">(${sign}${d.toFixed(3)})</span>`;
+
+  const sumaEcts = przedmioty.reduce(
+    (suma, przedmiot) => suma + przedmiot.ects,
+    0,
+  );
+  const sumaWazna = przedmioty.reduce(
+    (suma, przedmiot) => suma + przedmiot.ocena * przedmiot.ects,
+    0,
+  );
+  const sredniaObecna = sumaWazna / sumaEcts;
+  const sredniaPo = (sumaWazna + ocena * ects) / (sumaEcts + ects);
+  const roznica = sredniaPo - sredniaObecna;
+  const znak = roznica >= 0 ? "+" : "";
+  const kolor =
+    roznica >= 0 ? "var(--g5)" : roznica >= -0.05 ? "var(--g35)" : "var(--g2)";
+
+  elementy.podgladFormularza.classList.remove("ukryty");
+  elementy.podgladFormularza.innerHTML = `po dodaniu: <strong>${sredniaPo.toFixed(2)}</strong>&nbsp;<span style="color:${kolor}">(${znak}${roznica.toFixed(3)})</span>`;
 }
 
-el.fOcena.addEventListener("change", updatePreview);
-el.fEcts.addEventListener("input", updatePreview);
+function renderujWierszeCj() {
+  elementy.wejsciaCj.innerHTML = "";
 
-el.form.addEventListener("submit", (e) => {
-  e.preventDefault();
-  const nazwa = el.fNazwa.value.trim();
-  const ocena = parseFloat(el.fOcena.value);
-  const ects = parseFloat(el.fEcts.value);
-  const semestr = el.fSem.value.trim() || null;
+  wierszeCj.forEach((wiersz, indeks) => {
+    const kontener = document.createElement("div");
+    kontener.className = "cj-rzad";
+    kontener.innerHTML = `
+      <div class="pole">
+        <label>Ocena</label>
+        <select class="cj-ocena">
+          ${DOSTEPNE_OCENY.map((wartosc) => `<option value="${wartosc}"${wiersz.ocena == wartosc ? " selected" : ""}>${wartosc.toFixed(1)}</option>`).join("")}
+        </select>
+      </div>
+      <div class="pole">
+        <label>ECTS</label>
+        <input type="number" class="cj-ects" min="0.5" max="30" step="0.5" value="${wiersz.ects}" />
+      </div>
+      ${
+        wierszeCj.length > 1
+          ? `<button type="button" class="cj-usun">&#10005;</button>`
+          : `<div></div>`
+      }
+    `;
+    kontener
+      .querySelector(".cj-ocena")
+      .addEventListener("change", (zdarzenie) => {
+        wierszeCj[indeks].ocena = +zdarzenie.target.value;
+        obliczCoJesli();
+      });
+    kontener
+      .querySelector(".cj-ects")
+      .addEventListener("input", (zdarzenie) => {
+        wierszeCj[indeks].ects = +zdarzenie.target.value;
+        obliczCoJesli();
+      });
+    if (wierszeCj.length > 1) {
+      kontener.querySelector(".cj-usun").addEventListener("click", () => {
+        wierszeCj.splice(indeks, 1);
+        renderujWierszeCj();
+        obliczCoJesli();
+      });
+    }
+    elementy.wejsciaCj.appendChild(kontener);
+  });
+}
+
+function klasaDeltaRoznicy(roznica) {
+  if (roznica > 0.001) return "delta-wzrost";
+  if (roznica >= -0.015) return "delta-neutralna";
+  if (roznica >= -0.06) return "delta-cieplo";
+  if (roznica >= -0.15) return "delta-pomarancz";
+  return "delta-spadek";
+}
+
+function obliczCoJesli() {
+  if (!przedmioty.length) {
+    elementy.wynikCj.classList.add("ukryty");
+    elementy.pustyCj.style.display = "";
+    return;
+  }
+
+  elementy.pustyCj.style.display = "none";
+
+  const sumaEcts = przedmioty.reduce(
+    (suma, przedmiot) => suma + przedmiot.ects,
+    0,
+  );
+  const sumaWazna = przedmioty.reduce(
+    (suma, przedmiot) => suma + przedmiot.ocena * przedmiot.ects,
+    0,
+  );
+  const sredniaObecna = sumaWazna / sumaEcts;
+
+  let dodatkEcts = 0;
+  let dodatkWazna = 0;
+  let danePoprawne = true;
+
+  wierszeCj.forEach((wiersz) => {
+    if (!wiersz.ects || wiersz.ects <= 0) {
+      danePoprawne = false;
+      return;
+    }
+    dodatkEcts += wiersz.ects;
+    dodatkWazna += wiersz.ocena * wiersz.ects;
+  });
+
+  if (!danePoprawne || !dodatkEcts) {
+    elementy.wynikCj.classList.add("ukryty");
+    return;
+  }
+
+  const sredniaPo = (sumaWazna + dodatkWazna) / (sumaEcts + dodatkEcts);
+  const roznica = sredniaPo - sredniaObecna;
+  const znak = roznica >= 0 ? "+" : "";
+
+  elementy.wynikCj.classList.remove("ukryty");
+  elementy.terazCj.textContent = sredniaObecna.toFixed(2);
+  elementy.terazCj.className = klasaOceny(zaokraglOcene(sredniaObecna));
+  elementy.potemCj.textContent = sredniaPo.toFixed(2);
+  elementy.potemCj.className = klasaOceny(zaokraglOcene(sredniaPo));
+  elementy.roznicaCj.textContent = znak + roznica.toFixed(3);
+  elementy.roznicaCj.className = "cj-roznica " + klasaDeltaRoznicy(roznica);
+}
+
+function obliczStypendium() {
+  const prog = parseFloat(elementy.progStypendium.value);
+  const osoby = parseInt(elementy.osobyStypendium.value, 10);
+  const procent = parseFloat(elementy.procentStypendium.value);
+
+  if (!prog || !osoby || !procent || !przedmioty.length) {
+    elementy.wynikStypendium.classList.add("ukryty");
+    elementy.pustyStypendium.style.display = "";
+    return;
+  }
+
+  elementy.wynikStypendium.classList.remove("ukryty");
+  elementy.pustyStypendium.style.display = "none";
+
+  const sumaEcts = przedmioty.reduce(
+    (suma, przedmiot) => suma + przedmiot.ects,
+    0,
+  );
+  const srednia =
+    przedmioty.reduce(
+      (suma, przedmiot) => suma + przedmiot.ocena * przedmiot.ects,
+      0,
+    ) / sumaEcts;
+  const liczbaStypendystow = Math.ceil(osoby * (procent / 100));
+  const zakresSkali = 3.0;
+  const pozycjaTy = Math.min(Math.max((srednia - 2) / zakresSkali, 0), 1) * 100;
+  const pozycjaProgu = Math.min(Math.max((prog - 2) / zakresSkali, 0), 1) * 100;
+  const roznica = srednia - prog;
+
+  elementy.wypelnienieStypendium.style.width = pozycjaTy + "%";
+  elementy.wypelnienieStypendium.className =
+    "sty-wypelnienie " + (srednia >= prog ? "ok" : "nie");
+  elementy.markerStypendium.style.left = pozycjaProgu + "%";
+  elementy.tyStypendium.style.left = pozycjaTy + "%";
+  elementy.twojaStypendium.textContent = srednia.toFixed(2);
+  elementy.twojaStypendium.className = klasaOceny(zaokraglOcene(srednia));
+  elementy.progWartoscStypendium.textContent = prog.toFixed(2);
+
+  const znak = roznica >= 0 ? "+" : "";
+  elementy.roznicaStypendium.textContent = znak + roznica.toFixed(3);
+  elementy.roznicaStypendium.style.color =
+    roznica >= 0 ? "var(--g5)" : "var(--g2)";
+
+  const szacowaneMiejsce =
+    srednia >= prog
+      ? Math.max(
+          1,
+          Math.round(
+            (1 - ((srednia - prog) / zakresSkali) * 3) * liczbaStypendystow,
+          ),
+        )
+      : Math.round(
+          liczbaStypendystow +
+            ((prog - srednia) / zakresSkali) * (osoby - liczbaStypendystow) * 2,
+        );
+
+  const miejsce = Math.min(szacowaneMiejsce, osoby);
+  const liczbaOsobPrzed = Math.max(0, miejsce - 1);
+
+  elementy.miejsceStypendium.textContent = "~" + miejsce + " / " + osoby;
+  elementy.przedStypendium.textContent = "~" + liczbaOsobPrzed;
+  elementy.przedStypendium.style.color =
+    liczbaOsobPrzed < liczbaStypendystow ? "var(--g5)" : "var(--g2)";
+
+  if (srednia >= prog) {
+    elementy.komunikatStypendium.className = "sty-komunikat ok";
+    elementy.komunikatStypendium.innerHTML = `<strong>Jesteś powyżej progu.</strong> Zapas: ${roznica.toFixed(3)} pkt. Szacunkowo ${liczbaOsobPrzed} ${liczbaOsobPrzed === 1 ? "osoba ma" : "osoby mają"} lepszą średnią.`;
+  } else {
+    const sumaWazna = przedmioty.reduce(
+      (suma, przedmiot) => suma + przedmiot.ocena * przedmiot.ects,
+      0,
+    );
+    const potrzebaEcts = Math.max(
+      0,
+      (prog * sumaEcts - sumaWazna) / (5 - prog),
+    );
+    elementy.komunikatStypendium.className = "sty-komunikat nie";
+    elementy.komunikatStypendium.innerHTML = `<strong>Brakuje: ${Math.abs(roznica).toFixed(3)} pkt.</strong> Szacunkowo ${liczbaOsobPrzed} ${liczbaOsobPrzed === 1 ? "osoba jest" : "osoby są"} przed Tobą. Do progu ${prog.toFixed(2)} potrzebujesz ok. <em>${potrzebaEcts.toFixed(1)} ECTS</em> z oceną 5.0.`;
+  }
+}
+
+function renderujWszystko() {
+  odswiezStatystyki();
+  renderujWykres();
+  renderujChipySemestrow();
+  renderujFiltry();
+  renderujListe();
+  obliczCoJesli();
+  obliczStypendium();
+}
+
+elementy.przyciskMotywu.addEventListener("click", () =>
+  ustawMotyw(aktywnyMotyw === "noc" ? "dzien" : "noc"),
+);
+ustawMotyw(aktywnyMotyw);
+
+elementy.przyciskZamknijInfo.addEventListener("click", () =>
+  ustawBohatera(false),
+);
+elementy.przyciskPokazInfo.addEventListener("click", () => ustawBohatera(true));
+ustawBohatera(bohaterWidoczny);
+
+elementy.checkboxDokladna.addEventListener("change", (zdarzenie) => {
+  trybDokladny = zdarzenie.target.checked;
+  odswiezStatystyki();
+});
+
+const zapisanySemestr = localStorage.getItem(KLUCZ_SEMESTRU);
+if (zapisanySemestr) elementy.poleSemestru.value = zapisanySemestr;
+elementy.poleSemestru.addEventListener("change", () =>
+  localStorage.setItem(KLUCZ_SEMESTRU, elementy.poleSemestru.value),
+);
+
+elementy.poleOceny.addEventListener("change", zaktualizujPodgladFormularza);
+elementy.poleEcts.addEventListener("input", zaktualizujPodgladFormularza);
+
+elementy.formularz.addEventListener("submit", (zdarzenie) => {
+  zdarzenie.preventDefault();
+  const nazwa = elementy.polaNazwy.value.trim();
+  const ocena = parseFloat(elementy.poleOceny.value);
+  const ects = parseFloat(elementy.poleEcts.value);
+  const semestr = elementy.poleSemestru.value.trim() || null;
+
   if (!ocena) {
     alert("Wybierz ocenę!");
     return;
@@ -339,197 +700,46 @@ el.form.addEventListener("submit", (e) => {
     return;
   }
 
-  data.push({ id: Date.now(), nazwa, ocena, ects, semestr });
-  save();
+  przedmioty.push({ identyfikator: Date.now(), nazwa, ocena, ects, semestr });
+  zapiszDane();
 
-  el.fNazwa.value = "";
-  el.fOcena.value = "";
-  el.fEcts.value = "";
-  el.preview.classList.add("hidden");
+  elementy.polaNazwy.value = "";
+  elementy.poleOceny.value = "";
+  elementy.poleEcts.value = "";
+  elementy.podgladFormularza.classList.add("ukryty");
 
-  render();
-  el.fNazwa.focus();
+  renderujWszystko();
+  elementy.polaNazwy.focus();
 });
 
-el.btnClear.addEventListener("click", () => {
+elementy.przyciskWyczyszczenia.addEventListener("click", () => {
   if (!confirm("Usunąć wszystkie przedmioty?")) return;
-  data = [];
-  activeFilters.clear();
-  save();
-  render();
+  przedmioty = [];
+  aktywneFiltery.clear();
+  zapiszDane();
+  renderujWszystko();
 });
 
-function cjRender() {
-  el.cjInputs.innerHTML = "";
-  cjRows.forEach((row, i) => {
-    const div = document.createElement("div");
-    div.className = "cj-row";
-    div.innerHTML = `
-      <div class="field">
-        <label>Ocena</label>
-        <select class="cj-ocena">
-          ${GRADES.map((v) => `<option value="${v}"${row.ocena == v ? " selected" : ""}>${v.toFixed(1)}</option>`).join("")}
-        </select>
-      </div>
-      <div class="field">
-        <label>ECTS</label>
-        <input type="number" class="cj-ects" min="0.5" max="30" step="0.5" value="${row.ects}" />
-      </div>
-      ${
-        cjRows.length > 1
-          ? `<button type="button" class="cj-del">&#10005;</button>`
-          : `<div></div>`
-      }
-    `;
-    div.querySelector(".cj-ocena").addEventListener("change", (e) => {
-      cjRows[i].ocena = +e.target.value;
-      cjCalc();
-    });
-    div.querySelector(".cj-ects").addEventListener("input", (e) => {
-      cjRows[i].ects = +e.target.value;
-      cjCalc();
-    });
-    if (cjRows.length > 1) {
-      div.querySelector(".cj-del").addEventListener("click", () => {
-        cjRows.splice(i, 1);
-        cjRender();
-        cjCalc();
-      });
-    }
-    el.cjInputs.appendChild(div);
-  });
-}
+elementy.przyciskEksportu.addEventListener("click", eksportujDoCSV);
 
-el.cjAdd.addEventListener("click", () => {
-  cjRows.push({ id: Date.now(), ocena: 4.5, ects: 5 });
-  cjRender();
-  cjCalc();
+elementy.przyciskDodajCj.addEventListener("click", () => {
+  wierszeCj.push({ identyfikator: Date.now(), ocena: 4.5, ects: 5 });
+  renderujWierszeCj();
+  obliczCoJesli();
 });
 
-function deltaClass(d) {
-  if (d > 0.001) return "d-up";
-  if (d >= -0.015) return "d-neutral";
-  if (d >= -0.06) return "d-warm";
-  if (d >= -0.15) return "d-orange";
-  return "d-down";
-}
+[
+  elementy.progStypendium,
+  elementy.osobyStypendium,
+  elementy.procentStypendium,
+].forEach((pole) => pole.addEventListener("input", obliczStypendium));
 
-function cjCalc() {
-  if (!data.length) {
-    el.cjResult.classList.add("hidden");
-    el.cjEmpty.style.display = "";
-    return;
-  }
-  el.cjEmpty.style.display = "none";
+const zapisanyCel = localStorage.getItem(KLUCZ_CELU);
+if (zapisanyCel) elementy.celWejscie.value = zapisanyCel;
+elementy.celWejscie.addEventListener("input", () => {
+  localStorage.setItem(KLUCZ_CELU, elementy.celWejscie.value);
+  obliczCelSredniej();
+});
 
-  const se = data.reduce((a, p) => a + p.ects, 0);
-  const sw = data.reduce((a, p) => a + p.ocena * p.ects, 0);
-  const now = sw / se;
-
-  let addE = 0,
-    addW = 0,
-    ok = true;
-  cjRows.forEach((r) => {
-    if (!r.ects || r.ects <= 0) {
-      ok = false;
-      return;
-    }
-    addE += r.ects;
-    addW += r.ocena * r.ects;
-  });
-
-  if (!ok || !addE) {
-    el.cjResult.classList.add("hidden");
-    return;
-  }
-
-  const next = (sw + addW) / (se + addE);
-  const d = next - now;
-  const sign = d >= 0 ? "+" : "";
-
-  el.cjResult.classList.remove("hidden");
-  el.cjNow.textContent = now.toFixed(2);
-  el.cjNow.className = gc(roundGrade(now));
-  el.cjNext.textContent = next.toFixed(2);
-  el.cjNext.className = gc(roundGrade(next));
-  el.cjDelta.textContent = sign + d.toFixed(3);
-  el.cjDelta.className = "cj-delta " + deltaClass(d);
-}
-
-cjRender();
-
-function styCalc() {
-  const prog = parseFloat(el.styProg.value);
-  const osoby = parseInt(el.styOsoby.value);
-  const proc = parseFloat(el.styProc.value);
-
-  if (!prog || !osoby || !proc || !data.length) {
-    el.styResult.classList.add("hidden");
-    el.styEmpty.style.display = "";
-    return;
-  }
-
-  el.styResult.classList.remove("hidden");
-  el.styEmpty.style.display = "none";
-
-  const se = data.reduce((a, p) => a + p.ects, 0);
-  const sr = data.reduce((a, p) => a + p.ocena * p.ects, 0) / se;
-
-  const stypN = Math.ceil(osoby * (proc / 100));
-  const range = 3.0;
-  const posTy = Math.min(Math.max((sr - 2) / range, 0), 1) * 100;
-  const posProg = Math.min(Math.max((prog - 2) / range, 0), 1) * 100;
-  const diff = sr - prog;
-
-  el.styFill.style.width = posTy + "%";
-  el.styFill.className = "sty-fill " + (sr >= prog ? "ok" : "no");
-  el.styMarker.style.left = posProg + "%";
-  el.styTy.style.left = posTy + "%";
-
-  el.styTwoja.textContent = sr.toFixed(2);
-  el.styTwoja.className = gc(roundGrade(sr));
-  el.styProgVal.textContent = prog.toFixed(2);
-
-  const sign = diff >= 0 ? "+" : "";
-  el.styDiff.textContent = sign + diff.toFixed(3);
-  el.styDiff.style.color = diff >= 0 ? "var(--g5)" : "var(--g2)";
-
-  const estPlace =
-    sr >= prog
-      ? Math.max(1, Math.round((1 - ((sr - prog) / range) * 3) * stypN))
-      : Math.round(stypN + ((prog - sr) / range) * (osoby - stypN) * 2);
-
-  const place = Math.min(estPlace, osoby);
-  const przed = Math.max(0, place - 1);
-
-  el.styPlace.textContent = "~" + place + " / " + osoby;
-  el.styBefore.textContent = "~" + przed;
-  el.styBefore.style.color = przed < stypN ? "var(--g5)" : "var(--g2)";
-
-  if (sr >= prog) {
-    el.styMsg.className = "sty-msg ok";
-    el.styMsg.innerHTML = `<strong>Jesteś powyżej progu.</strong> Zapas to: ${diff.toFixed(3)} pkt. Szacunkowo ${przed} ${przed === 1 ? "osoba ma" : "osoby mają"} 
-    lepszą srednią. Pamietaj, są to szacunkowe wartości, gdzie wartość może różnić się od rzeczywistej.`;
-  } else {
-    const sw2 = data.reduce((a, p) => a + p.ocena * p.ects, 0);
-    const need = Math.max(0, (prog * se - sw2) / (5 - prog));
-    el.styMsg.className = "sty-msg no";
-    el.styMsg.innerHTML = `<strong>Brakuje: ${Math.abs(diff).toFixed(3)} pkt.</strong> Szacunkowo ${przed} ${przed === 1 ? "osoba jest" : "osoby są"} przed Tobą. Żeby dobić do ${prog.toFixed(2)} potrzebujesz ok. <em>${need.toFixed(1)} ECTS</em> z ocena 5.0.`;
-  }
-}
-
-[el.styProg, el.styOsoby, el.styProc].forEach((e) =>
-  e.addEventListener("input", styCalc),
-);
-
-function render() {
-  refreshStats();
-  renderWykres();
-  renderSemChips();
-  renderFiltry();
-  renderLista();
-  cjCalc();
-  styCalc();
-}
-
-render();
+renderujWierszeCj();
+renderujWszystko();

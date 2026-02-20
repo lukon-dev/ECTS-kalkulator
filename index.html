@@ -6,7 +6,7 @@
     <title>ECTScalc | Kalkulator średniej ważonej</title>
     <meta
       name="description"
-      content="Oblicz swoją średnią  ważoną ECTS. Dane lokalne, bez konta."
+      content="Oblicz swoją średnią ważoną ECTS. Dane lokalne, bez konta."
     />
     <link rel="preconnect" href="https://fonts.googleapis.com" />
     <link
@@ -16,68 +16,134 @@
     <link rel="stylesheet" href="style.css" />
   </head>
   <body>
+    <div class="tlo-bloby">
+      <div class="tlo-blob"></div>
+      <div class="tlo-blob"></div>
+      <div class="tlo-blob"></div>
+    </div>
+
     <header>
-      <div class="header-inner">
-        <h1>ECTS<span class="accent">calc</span></h1>
-        <div class="header-actions">
-          <button id="btn-info-show" class="hdr-btn" title="Jak to działa?">
-            ?
+      <div class="naglowek-wewnatrz">
+        <h1>ECTS<span class="akcent">calc</span></h1>
+        <div class="naglowek-przyciski">
+          <button
+            id="btn-pokaz-info"
+            class="btn-naglowek"
+            title="Jak to działa?"
+          >
+            <svg
+              viewBox="0 0 20 20"
+              fill="none"
+              stroke="currentColor"
+              stroke-width="1.8"
+              width="16"
+              height="16"
+            >
+              <circle cx="10" cy="10" r="8" />
+              <path d="M10 9v5M10 6.5v.5" stroke-linecap="round" />
+            </svg>
           </button>
           <button
-            id="btn-precise"
-            class="hdr-btn mono"
-            title="Pokaż dokładną wartość"
+            id="btn-motyw"
+            class="btn-naglowek btn-motyw"
+            title="Zmień motyw"
           >
-            &#8776;
+            <span class="ikona-slonce">
+              <svg
+                viewBox="0 0 20 20"
+                fill="none"
+                stroke="currentColor"
+                stroke-width="1.8"
+                width="16"
+                height="16"
+              >
+                <circle cx="10" cy="10" r="3.5" />
+                <path
+                  d="M10 2v2M10 16v2M2 10h2M16 10h2M4.22 4.22l1.42 1.42M14.36 14.36l1.42 1.42M4.22 15.78l1.42-1.42M14.36 5.64l1.42-1.42"
+                  stroke-linecap="round"
+                />
+              </svg>
+            </span>
+            <span class="ikona-ksiezyc">
+              <svg
+                viewBox="0 0 20 20"
+                fill="currentColor"
+                width="15"
+                height="15"
+              >
+                <path
+                  d="M17.5 12.4A7.5 7.5 0 0 1 7.6 2.5a7.5 7.5 0 1 0 9.9 9.9z"
+                />
+              </svg>
+            </span>
           </button>
-          <button id="btn-theme" class="hdr-btn" title="Zmień motyw">
-            &#9728;&#65039;
+          <button
+            id="btn-eksport"
+            class="btn-naglowek btn-naglowek--tekst ukryty"
+            title="Eksportuj CSV"
+          >
+            <svg
+              viewBox="0 0 20 20"
+              fill="none"
+              stroke="currentColor"
+              stroke-width="1.8"
+              width="14"
+              height="14"
+            >
+              <path
+                d="M10 3v10M6 9l4 4 4-4"
+                stroke-linecap="round"
+                stroke-linejoin="round"
+              />
+              <path d="M3 15h14" stroke-linecap="round" />
+            </svg>
+            CSV
           </button>
         </div>
       </div>
     </header>
 
     <div id="hero">
-      <div class="hero-inner">
-        <button id="btn-hero-close" class="hero-close" title="Zamknij">
+      <div class="hero-wewnatrz">
+        <button id="btn-zamknij-info" class="hero-zamknij" title="Zamknij">
           &#10005;
         </button>
-        <div class="hero-grid">
-          <div class="hero-left">
+        <div class="hero-siatka">
+          <div class="hero-lewo">
             <h2>Kalkulator średniej ważonej ECTS</h2>
             <p>
               Liczy tak samo jak dziekanat. Dane siedzą lokalnie w przeglądarce,
-              bez konta, ani serwera.
+              bez konta ani serwera.
             </p>
-            <div class="hero-note">
-              <span class="note-badge">Wazne</span>
+            <div class="hero-notatka">
+              <span class="notatka-znaczek">Ważne</span>
               Wpisuj tylko przedmioty z oceną wliczaną do średniej. Zaliczenia
               "zal" i wpisy bez oceny całkowicie pomijaj.
             </div>
           </div>
-          <div class="hero-right">
-            <div class="wzor-box">
-              <span class="wzor-tag">WZÓR</span>
-              <div class="wzor-frac">
-                <span class="wzor-num"
+          <div class="hero-prawo">
+            <div class="wzor-ramka">
+              <span class="wzor-etykieta">WZÓR</span>
+              <div class="wzor-ulamek">
+                <span class="wzor-licznik"
                   >&#x2211; (ocena<sub>i</sub> &times; ECTS<sub>i</sub>)</span
                 >
-                <span class="wzor-line"></span>
-                <span class="wzor-den">&#x2211; ECTS<sub>i</sub></span>
+                <span class="wzor-linia"></span>
+                <span class="wzor-mianownik">&#x2211; ECTS<sub>i</sub></span>
               </div>
             </div>
-            <ol class="steps">
+            <ol class="kroki">
               <li>
-                <span class="step-n">1</span> Wybierz semestr w formularzu
+                <span class="krok-numer">1</span> Wybierz semestr w formularzu
                 (opcjonalnie)
               </li>
               <li>
-                <span class="step-n">2</span> Dodaj przedmiot, wyniki
+                <span class="krok-numer">2</span> Dodaj przedmiot, wyniki
                 aktualizują się na żywo
               </li>
               <li>
-                <span class="step-n">3</span> Kliknij kilka filtrów jednocześnie,
-                żeby porównać semestry
+                <span class="krok-numer">3</span> Kliknij kilka filtrów
+                jednocześnie, żeby porównać semestry
               </li>
             </ol>
           </div>
@@ -85,12 +151,12 @@
       </div>
     </div>
 
-    <div class="layout">
-      <aside class="sidebar">
-        <div class="card" id="card-form">
-          <h3 class="card-title">Dodaj przedmiot</h3>
-          <form id="form">
-            <div class="field">
+    <div class="uklad">
+      <aside class="pasek-boczny">
+        <div class="karta" id="karta-formularz">
+          <h3 class="karta-tytul">Dodaj przedmiot</h3>
+          <form id="formularz">
+            <div class="pole">
               <label for="f-nazwa">Nazwa</label>
               <input
                 id="f-nazwa"
@@ -100,8 +166,8 @@
                 required
               />
             </div>
-            <div class="field-row">
-              <div class="field">
+            <div class="pole-rzad">
+              <div class="pole">
                 <label for="f-ocena">Ocena</label>
                 <select id="f-ocena" required>
                   <option value="" disabled selected>wybierz</option>
@@ -113,7 +179,7 @@
                   <option value="5">5.0 bdb</option>
                 </select>
               </div>
-              <div class="field">
+              <div class="pole">
                 <label for="f-ects">ECTS</label>
                 <input
                   id="f-ects"
@@ -125,7 +191,7 @@
                   required
                 />
               </div>
-              <div class="field field--sm">
+              <div class="pole pole--male">
                 <label for="f-sem">Sem.</label>
                 <input
                   id="f-sem"
@@ -137,104 +203,230 @@
                 />
               </div>
             </div>
-            <div id="form-preview" class="form-preview hidden"></div>
-            <button type="submit" class="btn-primary">Dodaj przedmiot</button>
+            <div
+              id="podglad-formularza"
+              class="podglad-formularza ukryty"
+            ></div>
+            <button type="submit" class="btn-glowny">Dodaj przedmiot</button>
           </form>
+
+          <div class="dokladna-wartosc-toggle" id="toggle-dokladna">
+            <label class="toggle-etykieta">
+              <input type="checkbox" id="checkbox-dokladna" />
+              <span class="toggle-suwak"></span>
+              <span class="toggle-tekst">Pokaż dokładną wartość</span>
+            </label>
+          </div>
         </div>
 
-        <div class="card" id="card-lista">
-          <div class="lista-top">
-            <h3 class="card-title">
-              Przedmioty <span id="badge" class="badge hidden"></span>
+        <div class="karta" id="karta-lista">
+          <div class="lista-gora">
+            <h3 class="karta-tytul">
+              Przedmioty
+              <span id="znaczek-liczby" class="znaczek ukryty"></span>
             </h3>
-            <button id="btn-clear" class="btn-danger hidden">wyczyść</button>
+            <button id="btn-wyczysc" class="btn-niebezpieczny ukryty">
+              wyczyść
+            </button>
           </div>
 
-          <div id="filtry-wrap" class="filtry-wrap hidden">
-            <p class="filtry-label">Filtruj semestry</p>
+          <div id="filtry-owijka" class="filtry-owijka ukryty">
+            <p class="filtry-etykieta">Filtruj semestry</p>
             <div id="filtry" class="filtry"></div>
           </div>
 
-          <div id="empty" class="empty">
+          <div id="pusty" class="pusty">
             <span>&#127891;</span>
             <p>Brak przedmiotów</p>
             <small>Dodaj pierwszy przedmiot w formularzu powyżej.</small>
           </div>
 
-          <ul id="lista" class="lista"></ul>
+          <ul id="lista-przedmiotow" class="lista-przedmiotow"></ul>
         </div>
       </aside>
 
-      <main class="content">
-        <div class="card card--stats" id="card-stats">
-          <div class="stats-left">
-            <div class="stat">
-              <span class="stat-label">Średnia ważona</span>
-              <strong id="stat-sr" class="stat-main">&#8212;</strong>
-              <span id="stat-precise" class="stat-precise hidden"></span>
+      <main class="zawartosc">
+        <div class="karta karta--statystyki" id="karta-statystyki">
+          <div class="statystyki-lewo">
+            <div class="statystyka">
+              <span class="statystyka-etykieta">Średnia ważona</span>
+              <strong id="stat-srednia" class="statystyka-glowna"
+                >&#8212;</strong
+              >
+              <span
+                id="stat-dokladna"
+                class="statystyka-dokladna ukryty"
+              ></span>
             </div>
-            <div class="stats-row">
-              <div class="stat">
-                <span class="stat-label">Suma ECTS</span>
-                <strong id="stat-ects" class="stat-val">0</strong>
+            <div class="statystyki-rzad">
+              <div class="statystyka">
+                <span class="statystyka-etykieta">Suma ECTS</span>
+                <strong id="stat-ects" class="statystyka-wartosc">0</strong>
               </div>
-              <div class="stat">
-                <span class="stat-label">Przedmiotów</span>
-                <strong id="stat-count" class="stat-val">0</strong>
+              <div class="statystyka">
+                <span class="statystyka-etykieta">Przedmiotów</span>
+                <strong id="stat-liczba" class="statystyka-wartosc">0</strong>
+              </div>
+            </div>
+
+            <div class="cel-sekcja" id="cel-sekcja">
+              <div class="cel-rzad">
+                <label for="cel-wejscie" class="cel-label">
+                  <svg
+                    viewBox="0 0 20 20"
+                    fill="none"
+                    stroke="currentColor"
+                    stroke-width="1.7"
+                    width="13"
+                    height="13"
+                    style="vertical-align: -1px"
+                  >
+                    <circle cx="10" cy="10" r="8" />
+                    <circle cx="10" cy="10" r="4.5" />
+                    <circle
+                      cx="10"
+                      cy="10"
+                      r="1.5"
+                      fill="currentColor"
+                      stroke="none"
+                    />
+                    <path
+                      d="M10 2v2M10 16v2M2 10h2M16 10h2"
+                      stroke-linecap="round"
+                    />
+                  </svg>
+                  Cel średniej
+                </label>
+                <input
+                  id="cel-wejscie"
+                  type="number"
+                  min="2"
+                  max="5"
+                  step="0.01"
+                  placeholder="np. 4.50"
+                />
+              </div>
+              <div id="cel-info" class="cel-info ukryty"></div>
+              <div id="cel-pasek" class="cel-pasek ukryty">
+                <div id="cel-wypelnienie" class="cel-wypelnienie"></div>
+              </div>
+              <div id="cel-etykiety" class="cel-etykiety ukryty">
+                <span>teraz</span><span id="cel-etykieta-prawa">cel</span>
               </div>
             </div>
           </div>
-          <div class="stats-right">
-            <span class="wykres-label">Rozkład ocen</span>
+          <div class="statystyki-prawo">
+            <span class="wykres-etykieta">Rozkład ocen</span>
             <div id="wykres" class="wykres"></div>
           </div>
         </div>
 
-        <div id="sem-chips" class="sem-chips"></div>
+        <div id="chipy-semestrow" class="chipy-semestrow"></div>
 
-        <div class="card" id="card-cj">
-          <div class="tool-header">
+        <div class="karta karta--narzedzie karta--co-jesli" id="karta-co-jesli">
+          <div class="narzedzie-naglowek">
+            <div class="narzedzie-ikona-owijka">
+              <svg
+                class="narzedzie-ikona"
+                viewBox="0 0 24 24"
+                fill="none"
+                stroke="currentColor"
+                stroke-width="1.6"
+              >
+                <path
+                  d="M9.5 9a2.5 2.5 0 0 1 5 0c0 2.5-2.5 2.5-2.5 4"
+                  stroke-linecap="round"
+                />
+                <circle
+                  cx="12"
+                  cy="17.5"
+                  r=".75"
+                  fill="currentColor"
+                  stroke="none"
+                />
+                <path
+                  d="M5 3H3a1 1 0 0 0-1 1v16a1 1 0 0 0 1 1h18a1 1 0 0 0 1-1V4a1 1 0 0 0-1-1h-2"
+                  stroke-linecap="round"
+                />
+                <rect x="7" y="1" width="10" height="4" rx="2" />
+              </svg>
+            </div>
             <div>
-              <h3 class="card-title">&#128302; Co jesli?</h3>
-              <p class="tool-desc">
-                Symuluj wpływ przyszłych ocen na średnią bez zapisywania. Można
-                dodać kilka naraz.
+              <h3 class="karta-tytul karta-tytul--narzedzie">Co jeśli?</h3>
+              <p class="narzedzie-opis">
+                Symuluj wpływ przyszłych ocen na średnią bez zapisywania.
               </p>
             </div>
           </div>
-          <div id="cj-inputs" class="cj-inputs"></div>
-          <button id="cj-add" type="button" class="btn-ghost">
+          <div id="cj-wejscia" class="cj-wejscia"></div>
+          <button id="cj-dodaj" type="button" class="btn-duch">
             + kolejny przedmiot
           </button>
-          <div id="cj-result" class="cj-result hidden">
-            <div class="cj-stat">
-              <span class="cj-label">Teraz</span>
-              <strong id="cj-now">&#8212;</strong>
+          <div id="cj-wynik" class="cj-wynik ukryty">
+            <div class="cj-statystyka">
+              <span class="cj-etykieta">Teraz</span>
+              <strong id="cj-teraz">&#8212;</strong>
             </div>
-            <span class="cj-arrow">&#8594;</span>
-            <div class="cj-stat cj-stat--big">
-              <span class="cj-label">Po zmianach</span>
-              <strong id="cj-next">&#8212;</strong>
+            <div class="cj-strzalka-owijka">
+              <svg viewBox="0 0 40 16" fill="none" class="cj-strzalka-svg">
+                <path
+                  d="M2 8h32M28 3l6 5-6 5"
+                  stroke="currentColor"
+                  stroke-width="1.8"
+                  stroke-linecap="round"
+                  stroke-linejoin="round"
+                />
+              </svg>
             </div>
-            <span id="cj-delta" class="cj-delta"></span>
+            <div class="cj-statystyka cj-statystyka--duza">
+              <span class="cj-etykieta">Po zmianach</span>
+              <strong id="cj-potem">&#8212;</strong>
+            </div>
+            <span id="cj-roznica" class="cj-roznica"></span>
           </div>
-          <p id="cj-empty" class="tool-hint">
+          <p id="cj-pusty" class="narzedzie-podpowiedz">
             Najpierw dodaj jakiś przedmiot do listy.
           </p>
         </div>
 
-        <div class="card" id="card-sty">
-          <div class="tool-header">
+        <div
+          class="karta karta--narzedzie karta--stypendium"
+          id="karta-stypendium"
+        >
+          <div class="narzedzie-naglowek">
+            <div class="narzedzie-ikona-owijka narzedzie-ikona-owijka--gold">
+              <svg
+                class="narzedzie-ikona"
+                viewBox="0 0 24 24"
+                fill="none"
+                stroke="currentColor"
+                stroke-width="1.6"
+              >
+                <rect x="2" y="7" width="20" height="13" rx="2" />
+                <path
+                  d="M16 7V5a2 2 0 0 0-2-2h-4a2 2 0 0 0-2 2v2"
+                  stroke-linecap="round"
+                />
+                <circle cx="12" cy="13.5" r="2.5" />
+                <path
+                  d="M6 10.5h.01M18 10.5h.01"
+                  stroke-linecap="round"
+                  stroke-width="2"
+                />
+              </svg>
+            </div>
             <div>
-              <h3 class="card-title">&#127942; Kalkulator stypendialny</h3>
-              <p class="tool-desc">
-                Szacunkowe obliczenia, ranking zależy od wyników całego
+              <h3 class="karta-tytul karta-tytul--narzedzie">
+                Kalkulator stypendialny
+              </h3>
+              <p class="narzedzie-opis">
+                Szacunkowe obliczenia — ranking zależy od wyników całego
                 rocznika.
               </p>
             </div>
           </div>
-          <div class="sty-inputs">
-            <div class="field">
+          <div class="sty-wejscia">
+            <div class="pole">
               <label for="sty-prog">Próg średniej</label>
               <input
                 id="sty-prog"
@@ -245,7 +437,7 @@
                 placeholder="np. 4.25"
               />
             </div>
-            <div class="field">
+            <div class="pole">
               <label for="sty-osoby">Osób na roku</label>
               <input
                 id="sty-osoby"
@@ -256,7 +448,7 @@
                 placeholder="np. 120"
               />
             </div>
-            <div class="field">
+            <div class="pole">
               <label for="sty-proc">% ze stypendium</label>
               <input
                 id="sty-proc"
@@ -268,55 +460,55 @@
               />
             </div>
           </div>
-          <div id="sty-result" class="sty-result hidden">
-            <div class="sty-bar-wrap">
-              <div class="sty-bar" id="sty-bar">
-                <div id="sty-fill" class="sty-fill"></div>
+          <div id="sty-wynik" class="sty-wynik ukryty">
+            <div class="sty-pasek-owijka">
+              <div class="sty-pasek" id="sty-pasek">
+                <div id="sty-wypelnienie" class="sty-wypelnienie"></div>
                 <div id="sty-marker" class="sty-marker"></div>
                 <span id="sty-ty" class="sty-ty">Ty</span>
               </div>
             </div>
-            <div class="sty-stats">
-              <div class="sty-stat">
-                <span class="sty-label">Twoja śr.</span>
+            <div class="sty-statystyki">
+              <div class="sty-statystyka">
+                <span class="sty-etykieta">Twoja śr.</span>
                 <strong id="sty-twoja">&#8212;</strong>
               </div>
-              <div class="sty-stat">
-                <span class="sty-label">Próg</span>
-                <strong id="sty-prog-val">&#8212;</strong>
+              <div class="sty-statystyka">
+                <span class="sty-etykieta">Próg</span>
+                <strong id="sty-prog-wartosc">&#8212;</strong>
               </div>
-              <div class="sty-stat">
-                <span class="sty-label">Rożnica</span>
-                <strong id="sty-diff">&#8212;</strong>
+              <div class="sty-statystyka">
+                <span class="sty-etykieta">Różnica</span>
+                <strong id="sty-roznica">&#8212;</strong>
               </div>
-              <div class="sty-stat">
-                <span class="sty-label">Miejsce ~</span>
-                <strong id="sty-place">&#8212;</strong>
+              <div class="sty-statystyka">
+                <span class="sty-etykieta">Miejsce ~</span>
+                <strong id="sty-miejsce">&#8212;</strong>
               </div>
-              <div class="sty-stat">
-                <span class="sty-label">Osób przed Tobą</span>
-                <strong id="sty-before">&#8212;</strong>
+              <div class="sty-statystyka">
+                <span class="sty-etykieta">Osób przed Tobą</span>
+                <strong id="sty-przed">&#8212;</strong>
               </div>
             </div>
-            <div id="sty-msg" class="sty-msg"></div>
+            <div id="sty-komunikat" class="sty-komunikat"></div>
           </div>
-          <p id="sty-empty" class="tool-hint">
+          <p id="sty-pusty" class="narzedzie-podpowiedz">
             Wpisz próg, liczbę osób i procent, żeby zobaczyć szacunek.
           </p>
         </div>
       </main>
     </div>
 
-    <footer class="footer">
-      <div class="footer-inner">
-        <code class="footer-wzor"
+    <footer class="stopka">
+      <div class="stopka-wewnatrz">
+        <code class="stopka-wzor"
           >średnia = &Sigma;(ocena &times; ECTS) / &Sigma;ECTS</code
         >
         <a
           href="https://github.com/lukon-dev"
           target="_blank"
           rel="noopener"
-          class="footer-gh"
+          class="stopka-gh"
         >
           <svg
             viewBox="0 0 16 16"
@@ -334,6 +526,7 @@
       </div>
     </footer>
 
+    <div id="kontener-powiadomien"></div>
     <script src="app.js"></script>
   </body>
 </html>
