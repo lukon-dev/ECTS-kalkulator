@@ -441,16 +441,18 @@ function dodajSwipe(el, przedmiot) {
   el.addEventListener(
     "touchstart",
     (e) => {
+      if (e.touches.length !== 1) return;
       startX = e.touches[0].clientX;
       startY = e.touches[0].clientY;
       el.style.transition = "none";
     },
-    { passive: true },
+    { passive: false },
   );
 
   el.addEventListener(
     "touchmove",
     (e) => {
+      if (e.touches.length !== 1) return;
       const dx = e.touches[0].clientX - startX;
       const dy = e.touches[0].clientY - startY;
       if (Math.abs(dy) > Math.abs(dx) + 5) return;
@@ -781,17 +783,4 @@ elementy.przyciskDodajCj.addEventListener("click", () => {
 
 const zapisanyCel = localStorage.getItem(KLUCZ_CELU);
 if (zapisanyCel) elementy.celWejscie.value = zapisanyCel;
-elementy.celWejscie.addEventListener("input", () => {
-  localStorage.setItem(KLUCZ_CELU, elementy.celWejscie.value);
-  obliczCelSredniej();
-});
-
-window.addEventListener("resize", () => {
-  if (konfettiAktywne) {
-    elementy.konfettiCanvas.width = window.innerWidth;
-    elementy.konfettiCanvas.height = window.innerHeight;
-  }
-});
-
-renderujWierszeCj();
-renderujWszystko();
+elementy.celWej
