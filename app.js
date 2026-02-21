@@ -59,6 +59,13 @@ const elementy = {
   celEtykietaPrawa: znajdzElement("#cel-etykieta-prawa"),
   kontenerPowiadomien: znajdzElement("#kontener-powiadomien"),
   konfettiCanvas: znajdzElement("#konfetti-canvas"),
+  modalEdycji: znajdzElement("#modal-edycji"),
+  modalNazwa: znajdzElement("#e-nazwa"),
+  modalOcena: znajdzElement("#e-ocena"),
+  modalEcts: znajdzElement("#e-ects"),
+  modalSemestr: znajdzElement("#e-sem"),
+  modalZapisz: znajdzElement("#modal-zapisz"),
+  modalAnuluj: znajdzElement("#modal-anuluj"),
 };
 
 const DOSTEPNE_OCENY = [2, 3, 3.5, 4, 4.5, 5];
@@ -85,9 +92,14 @@ let aktywneFiltery = new Set();
 let wierszeCj = [{ identyfikator: 0, ocena: 4.5, ects: 5 }];
 let ostatnioUsuniety = null;
 let celOsiagniety = false;
+let edytowanyId = null;
 
 document.addEventListener("keydown", (e) => {
   if (e.key === "Escape") {
+    if (!elementy.modalEdycji.classList.contains("ukryty")) {
+      zamknijModal();
+      return;
+    }
     elementy.polaNazwy.value = "";
     elementy.poleOceny.value = "";
     elementy.poleEcts.value = "";
@@ -140,7 +152,7 @@ function uruchomKonfetti() {
   const ctx = canvas.getContext("2d");
   const kolory = [
     "#00e5a0",
-    "#6366f1",
+    "#06b6d4",
     "#f59e0b",
     "#e5484d",
     "#7cc443",
@@ -190,9 +202,11 @@ function uruchomKonfetti() {
 function klasaOceny(o) {
   return KLASY_OCEN[o] ?? "";
 }
+
 function zaokraglOcene(s) {
   return Math.round(s * 2) / 2;
 }
+
 function zapiszDane() {
   localStorage.setItem(KLUCZ_DANYCH, JSON.stringify(przedmioty));
 }
@@ -501,6 +515,49 @@ function usunPrzedmiot(przedmiot, el) {
   }, 220);
 }
 
+function otworzModal(przedmiot) {
+  edytowanyId = przedmiot.identyfikator ?? przedmiot.id;
+  elementy.modalNazwa.value = przedmiot.nazwa;
+  elementy.modalOcena.value = przedmiot.ocena;
+  elementy.modalEcts.value = przedmiot.ects;
+  elementy.modalSemestr.value = przedmiot.semestr || "";
+  elementy.modalEdycji.classList.remove("ukryty");
+  elementy.modalNazwa.focus();
+}
+
+function zamknijModal() {
+  elementy.modalEdycji.classList.add("ukryty");
+  edytowanyId = null;
+}
+
+function zapiszEdycje() {
+  const nazwa = elementy.modalNazwa.value.trim();
+  const ocena = parseFloat(elementy.modalOcena.value);
+  const ects = parseFloat(elementy.modalEcts.value);
+  const semestr = elementy.modalSemestr.value.trim() || null;
+
+  if (!nazwa) {
+    elementy.modalNazwa.focus();
+    return;
+  }
+  if (!ocena) return;
+  if (!ects || ects <= 0) return;
+
+  const indeks = przedmioty.findIndex(
+    (p) => (p.identyfikator ?? p.id) === edytowanyId,
+  );
+  if (indeks === -1) {
+    zamknijModal();
+    return;
+  }
+
+  przedmioty[indeks] = { ...przedmioty[indeks], nazwa, ocena, ects, semestr };
+  zapiszDane();
+  renderujWszystko();
+  zamknijModal();
+  pokazPowiadomienie("Zaktualizowano: " + nazwa);
+}
+
 function renderujListe() {
   elementy.listaPrzedmiotow.innerHTML = "";
   if (!przedmioty.length) return;
@@ -536,7 +593,21 @@ function renderujListe() {
           <div class="element-nazwa" title="${przedmiot.nazwa}">${przedmiot.nazwa}</div>
           <div class="element-pod">${przedmiot.ects} ECTS${przedmiot.semestr ? " &middot; sem. " + przedmiot.semestr : ""}</div>
         </div>
-        <button class="element-usun" type="button" aria-label="usun">&#10005;</button>`;
+        <div class="element-akcje">
+          <button class="element-edytuj" type="button" aria-label="edytuj">
+            <svg viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="1.7" width="13" height="13">
+              <path d="M11.5 2.5a1.5 1.5 0 0 1 2.1 2.1L5 13.2l-2.8.7.7-2.8L11.5 2.5z" stroke-linejoin="round" />
+            </svg>
+          </button>
+          <button class="element-usun" type="button" aria-label="usun">
+            <svg viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="1.7" width="13" height="13">
+              <path d="M2 4h12M5 4V2.5a.5.5 0 0 1 .5-.5h5a.5.5 0 0 1 .5.5V4M6 7v5M10 7v5M3 4l.8 9.5a.5.5 0 0 0 .5.5h7.4a.5.5 0 0 0 .5-.5L13 4" stroke-linecap="round" stroke-linejoin="round" />
+            </svg>
+          </button>
+        </div>`;
+      el.querySelector(".element-edytuj").addEventListener("click", () =>
+        otworzModal(przedmiot),
+      );
       el.querySelector(".element-usun").addEventListener("click", () =>
         usunPrzedmiot(przedmiot, el),
       );
@@ -690,7 +761,7 @@ function obliczStypendium() {
 
   if (srednia >= prog) {
     elementy.komunikatStypendium.className = "sty-komunikat ok";
-    elementy.komunikatStypendium.innerHTML = `<strong>Jestes powyzej progu.</strong> Zapas: ${roznica.toFixed(3)} pkt. Szacunkowo ${przed} ${przed === 1 ? "osoba ma" : "osoby maja"} lepsza srednia.`;
+    elementy.komunikatStypendium.innerHTML = `<strong>Jesteś powyżej progu.</strong> Zapas: ${roznica.toFixed(3)} pkt. Szacunkowo ${przed} ${przed === 1 ? "osoba ma" : "osoby mają"} lepszą średnia.`;
   } else {
     const sw = przedmioty.reduce((s, p) => s + p.ocena * p.ects, 0);
     const potrzebaEcts = Math.max(0, (prog * se - sw) / (5 - prog));
@@ -741,7 +812,7 @@ elementy.formularz.addEventListener("submit", (e) => {
   const ects = parseFloat(elementy.poleEcts.value);
   const semestr = elementy.poleSemestru.value.trim() || null;
   if (!ocena) {
-    alert("Wybierz ocene!");
+    alert("Wybierz ocenę!");
     return;
   }
   if (!ects || ects <= 0) {
@@ -761,7 +832,7 @@ elementy.formularz.addEventListener("submit", (e) => {
 });
 
 elementy.przyciskWyczyszczenia.addEventListener("click", () => {
-  if (!confirm("Usunac wszystkie przedmioty?")) return;
+  if (!confirm("Usunąć wszystkie przedmioty?")) return;
   przedmioty = [];
   aktywneFiltery.clear();
   celOsiagniety = false;
@@ -783,4 +854,19 @@ elementy.przyciskDodajCj.addEventListener("click", () => {
 
 const zapisanyCel = localStorage.getItem(KLUCZ_CELU);
 if (zapisanyCel) elementy.celWejscie.value = zapisanyCel;
-elementy.celWej
+elementy.celWejscie.addEventListener("input", () => {
+  localStorage.setItem(KLUCZ_CELU, elementy.celWejscie.value);
+  obliczCelSredniej();
+});
+
+elementy.modalZapisz.addEventListener("click", zapiszEdycje);
+elementy.modalAnuluj.addEventListener("click", zamknijModal);
+elementy.modalEdycji.addEventListener("click", (e) => {
+  if (e.target === elementy.modalEdycji) zamknijModal();
+});
+elementy.modalNazwa.addEventListener("keydown", (e) => {
+  if (e.key === "Enter") zapiszEdycje();
+});
+
+renderujWierszeCj();
+renderujWszystko();

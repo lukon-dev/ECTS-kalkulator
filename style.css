@@ -8,9 +8,9 @@
 
 :root {
   --tlo: #03050a;
-  --tlo-karta: rgba(10, 13, 22, 0.52);
-  --tlo-wejscie: rgba(15, 19, 32, 0.72);
-  --tlo-hover: rgba(22, 27, 46, 0.82);
+  --tlo-karta: rgba(8, 12, 22, 0.58);
+  --tlo-wejscie: rgba(12, 17, 32, 0.72);
+  --tlo-hover: rgba(18, 24, 44, 0.82);
   --ramka: rgba(255, 255, 255, 0.05);
   --ramka-mid: rgba(255, 255, 255, 0.09);
   --ramka-jasna: rgba(255, 255, 255, 0.15);
@@ -21,20 +21,21 @@
   --tekst: #eaecf3;
   --tekst-mid: rgba(234, 236, 243, 0.46);
   --tekst-dim: rgba(234, 236, 243, 0.24);
-  --cien: 0 16px 56px rgba(0, 0, 0, 0.75), 0 1px 0 rgba(255, 255, 255, 0.07) inset;
-  --cien-hover: 0 24px 72px rgba(0, 0, 0, 0.85), 0 1px 0 rgba(255, 255, 255, 0.12) inset;
-  --szklo: backdrop-filter: blur(64px) saturate(280%) brightness(1.1);
+  --cien:
+    0 16px 56px rgba(0, 0, 0, 0.75), 0 1px 0 rgba(255, 255, 255, 0.07) inset;
+  --cien-hover:
+    0 24px 72px rgba(0, 0, 0, 0.85), 0 1px 0 rgba(255, 255, 255, 0.12) inset;
   --g2: #e5484d;
   --g3: #f76b15;
   --g35: #f5a623;
   --g4: #7cc443;
   --g45: #30a46c;
   --g5: #00e5a0;
-  --blob1: rgba(0, 229, 160, 0.2);
-  --blob2: rgba(110, 55, 255, 0.14);
-  --blob3: rgba(0, 100, 255, 0.11);
-  --co-jesli-kolor: #6366f1;
-  --co-jesli-dim: rgba(99, 102, 241, 0.1);
+  --blob1: rgba(0, 229, 160, 0.18);
+  --blob2: rgba(0, 180, 200, 0.13);
+  --blob3: rgba(0, 140, 190, 0.1);
+  --co-jesli-kolor: #06b6d4;
+  --co-jesli-dim: rgba(6, 182, 212, 0.1);
   --sty-kolor: #f59e0b;
   --sty-dim: rgba(245, 158, 11, 0.1);
   --spreczyna: cubic-bezier(0.34, 1.56, 0.64, 1);
@@ -43,32 +44,33 @@
 }
 
 [data-motyw="dzien"] {
-  --tlo: #d4ddf2;
-  --tlo-karta: rgba(255, 255, 255, 0.75);
-  --tlo-wejscie: rgba(246, 249, 255, 0.88);
-  --tlo-hover: rgba(237, 242, 255, 0.95);
-  --ramka: rgba(0, 0, 0, 0.048);
-  --ramka-mid: rgba(0, 0, 0, 0.08);
+  --tlo: #d8e8e3;
+  --tlo-karta: rgba(255, 255, 255, 0.62);
+  --tlo-wejscie: rgba(248, 252, 250, 0.85);
+  --tlo-hover: rgba(240, 248, 244, 0.92);
+  --ramka: rgba(0, 60, 40, 0.07);
+  --ramka-mid: rgba(0, 60, 40, 0.1);
   --ramka-jasna: rgba(255, 255, 255, 0.98);
-  --akcent: #00a87a;
-  --akcent-dim: rgba(0, 168, 122, 0.09);
-  --akcent-glow: rgba(0, 168, 122, 0.22);
-  --akcent-glow2: rgba(0, 168, 122, 0.06);
-  --tekst: #0e1220;
-  --tekst-mid: rgba(14, 18, 32, 0.5);
-  --tekst-dim: rgba(14, 18, 32, 0.27);
-  --cien: 0 6px 32px rgba(0, 0, 0, 0.08), 0 1px 0 rgba(255, 255, 255, 0.99) inset;
-  --cien-hover: 0 14px 44px rgba(0, 0, 0, 0.13), 0 1px 0 rgba(255, 255, 255, 0.99) inset;
-  --szklo: backdrop-filter: blur(56px) saturate(300%) brightness(1.08);
-  --g2: #dc2626;
-  --g3: #ea580c;
-  --g35: #d97706;
-  --g4: #65a30d;
-  --g45: #059669;
-  --g5: #047857;
-  --blob1: rgba(0, 200, 140, 0.07);
-  --blob2: rgba(80, 50, 210, 0.052);
-  --blob3: rgba(0, 80, 200, 0.048);
+  --akcent: #009e72;
+  --akcent-dim: rgba(0, 158, 114, 0.1);
+  --akcent-glow: rgba(0, 158, 114, 0.25);
+  --akcent-glow2: rgba(0, 158, 114, 0.07);
+  --tekst: #0c1a14;
+  --tekst-mid: rgba(12, 26, 20, 0.52);
+  --tekst-dim: rgba(12, 26, 20, 0.3);
+  --cien:
+    0 6px 32px rgba(0, 0, 0, 0.07), 0 1px 0 rgba(255, 255, 255, 0.95) inset;
+  --cien-hover:
+    0 14px 44px rgba(0, 0, 0, 0.1), 0 1px 0 rgba(255, 255, 255, 0.98) inset;
+  --g2: #c81e1e;
+  --g3: #d94f0a;
+  --g35: #b45309;
+  --g4: #4d7c0f;
+  --g45: #047857;
+  --g5: #065f46;
+  --blob1: rgba(0, 180, 130, 0.13);
+  --blob2: rgba(0, 160, 140, 0.09);
+  --blob3: rgba(0, 140, 100, 0.07);
 }
 
 html {
@@ -83,7 +85,9 @@ body {
   background: var(--tlo);
   color: var(--tekst);
   min-height: 100vh;
-  transition: background 0.6s var(--ease-out), color 0.6s var(--ease-out);
+  transition:
+    background 0.6s var(--ease-out),
+    color 0.6s var(--ease-out);
   overflow-x: hidden;
   -webkit-user-select: none;
   user-select: none;
@@ -100,10 +104,11 @@ body {
 .tlo-blob {
   position: absolute;
   border-radius: 50%;
-  filter: blur(120px);
+  filter: blur(100px);
   animation: animacjaBlobu 24s ease-in-out infinite;
   will-change: transform;
-  opacity: 0.8;
+  opacity: 0.9;
+  transform: translateZ(0);
 }
 
 .tlo-blob:nth-child(1) {
@@ -139,17 +144,18 @@ body {
 }
 
 @keyframes animacjaBlobu {
-  0%, 100% {
-    transform: translate(0, 0) scale(1) rotate(0deg);
+  0%,
+  100% {
+    transform: translate(0, 0) scale(1) rotate(0deg) translateZ(0);
   }
   25% {
-    transform: translate(40px, -50px) scale(1.1) rotate(12deg);
+    transform: translate(40px, -50px) scale(1.1) rotate(12deg) translateZ(0);
   }
   50% {
-    transform: translate(-30px, 60px) scale(0.95) rotate(-8deg);
+    transform: translate(-30px, 60px) scale(0.95) rotate(-8deg) translateZ(0);
   }
   75% {
-    transform: translate(-60px, -10px) scale(1.05) rotate(5deg);
+    transform: translate(-60px, -10px) scale(1.05) rotate(5deg) translateZ(0);
   }
 }
 
@@ -168,16 +174,35 @@ header {
   left: 0;
   right: 0;
   z-index: 30;
-  background: rgba(10, 13, 22, 0.45);
+  background: rgba(8, 12, 22, 0.5);
   backdrop-filter: blur(80px) saturate(300%);
   -webkit-backdrop-filter: blur(80px) saturate(300%);
-  border-bottom: 1px solid rgba(255, 255, 255, 0.08);
+  border-bottom: 1px solid rgba(255, 255, 255, 0.07);
   padding: 0 22px;
   height: 54px;
   display: flex;
   align-items: center;
-  transition: background 0.5s var(--ease-out), box-shadow 0.4s var(--ease-out);
-  box-shadow: 0 8px 32px rgba(0, 0, 0, 0.3), 0 0 1px rgba(255, 255, 255, 0.1) inset;
+  transition:
+    background 0.5s var(--ease-out),
+    box-shadow 0.4s var(--ease-out);
+  box-shadow: 0 8px 32px rgba(0, 0, 0, 0.3);
+}
+
+header::before {
+  content: "";
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+  height: 1px;
+  background: linear-gradient(
+    90deg,
+    transparent,
+    rgba(255, 255, 255, 0.18),
+    rgba(255, 255, 255, 0.08),
+    transparent
+  );
+  pointer-events: none;
 }
 
 header::after {
@@ -186,21 +211,16 @@ header::after {
   bottom: -1px;
   left: 0;
   right: 0;
-  height: 2px;
-  background: linear-gradient(90deg, transparent 0%, var(--akcent-glow) 30%, var(--akcent-dim) 60%, transparent 100%);
-  animation: headerLinia 6s ease-in-out infinite;
-  opacity: 0.6;
-}
-
-@keyframes headerLinia {
-  0%, 100% {
-    opacity: 0.3;
-    transform: scaleX(0.5) translateX(-30%);
-  }
-  50% {
-    opacity: 0.8;
-    transform: scaleX(1.1) translateX(10%);
-  }
+  height: 1px;
+  background: linear-gradient(
+    90deg,
+    transparent 0%,
+    var(--akcent-dim) 25%,
+    var(--akcent-glow) 50%,
+    var(--akcent-dim) 75%,
+    transparent 100%
+  );
+  opacity: 0.7;
 }
 
 .naglowek-wewnatrz {
@@ -222,8 +242,9 @@ h1 {
 
 h1 .akcent {
   color: var(--akcent);
-  text-shadow: 0 0 20px var(--akcent-glow), 0 0 40px rgba(0, 229, 160, 0.3);
-  filter: drop-shadow(0 0 8px var(--akcent-glow));
+  text-shadow:
+    0 0 20px var(--akcent-glow),
+    0 0 40px rgba(0, 229, 160, 0.3);
 }
 
 .naglowek-przyciski {
@@ -236,7 +257,7 @@ h1 .akcent {
   height: 38px;
   min-width: 38px;
   padding: 0 12px;
-  background: rgba(15, 19, 32, 0.4);
+  background: rgba(12, 17, 32, 0.5);
   border: 1px solid rgba(255, 255, 255, 0.1);
   border-radius: 11px;
   color: var(--tekst-dim);
@@ -252,43 +273,49 @@ h1 .akcent {
   overflow: hidden;
   -webkit-tap-highlight-color: transparent;
   touch-action: manipulation;
-  transition: all 0.35s cubic-bezier(0.23, 1, 0.32, 1);
-  backdrop-filter: blur(10px);
-  -webkit-backdrop-filter: blur(10px);
+  transition: all 0.3s cubic-bezier(0.23, 1, 0.32, 1);
+  backdrop-filter: blur(12px);
+  -webkit-backdrop-filter: blur(12px);
+  box-shadow:
+    0 1px 0 rgba(255, 255, 255, 0.14) inset,
+    0 -1px 0 rgba(0, 0, 0, 0.1) inset;
 }
 
 .btn-naglowek::before {
   content: "";
   position: absolute;
-  inset: 0;
-  background: linear-gradient(135deg, rgba(255, 255, 255, 0.12) 0%, transparent 60%);
-  opacity: 0;
-  transition: opacity 0.3s var(--ease-out);
+  top: 0;
+  left: 0;
+  right: 0;
+  height: 50%;
+  background: linear-gradient(
+    180deg,
+    rgba(255, 255, 255, 0.12) 0%,
+    transparent 100%
+  );
+  border-radius: 11px 11px 0 0;
+  pointer-events: none;
 }
 
 .btn-naglowek:hover {
   color: var(--tekst);
-  background: rgba(22, 27, 46, 0.6);
-  border-color: rgba(255, 255, 255, 0.2);
-  box-shadow: 0 8px 24px rgba(0, 0, 0, 0.4), 0 0 20px rgba(0, 229, 160, 0.1), 0 1px 0 rgba(255, 255, 255, 0.12) inset;
-  transform: translateY(-2px);
-  backdrop-filter: blur(12px);
-}
-
-.btn-naglowek:hover::before {
-  opacity: 1;
+  background: rgba(18, 24, 46, 0.65);
+  border-color: rgba(255, 255, 255, 0.18);
+  box-shadow:
+    0 6px 20px rgba(0, 0, 0, 0.4),
+    0 0 16px rgba(0, 229, 160, 0.08);
 }
 
 .btn-naglowek:active {
-  transform: translateY(0) scale(0.92);
+  transform: scale(0.92);
   transition-duration: 0.1s;
 }
 
 .btn-naglowek.aktywny {
   color: var(--akcent);
   border-color: var(--akcent);
-  background: rgba(0, 229, 160, 0.12);
-  box-shadow: 0 0 30px rgba(0, 229, 160, 0.3), 0 0 0 1px rgba(0, 229, 160, 0.15) inset;
+  background: rgba(0, 229, 160, 0.1);
+  box-shadow: 0 0 24px rgba(0, 229, 160, 0.25);
 }
 
 .btn-motyw {
@@ -304,7 +331,9 @@ h1 .akcent {
   top: 50%;
   left: 50%;
   transform: translate(-50%, -50%);
-  transition: transform 0.6s cubic-bezier(0.34, 1.56, 0.64, 1), opacity 0.4s var(--ease-out);
+  transition:
+    transform 0.6s cubic-bezier(0.34, 1.56, 0.64, 1),
+    opacity 0.4s var(--ease-out);
   pointer-events: none;
 }
 
@@ -324,12 +353,15 @@ h1 .akcent {
 }
 
 #hero {
-  background: rgba(10, 13, 22, 0.4);
+  background: rgba(8, 12, 22, 0.45);
   backdrop-filter: blur(70px) saturate(280%);
   -webkit-backdrop-filter: blur(70px) saturate(280%);
   border-bottom: 1px solid rgba(255, 255, 255, 0.07);
   overflow: hidden;
-  transition: background 0.5s var(--ease-out), max-height 0.6s var(--ease), opacity 0.4s var(--ease-out);
+  transition:
+    background 0.5s var(--ease-out),
+    max-height 0.6s var(--ease),
+    opacity 0.4s var(--ease-out);
   max-height: 400px;
   margin-top: 54px;
 }
@@ -399,7 +431,7 @@ h1 .akcent {
 .hero-notatka {
   font-size: 12px;
   color: var(--tekst-dim);
-  background: rgba(15, 19, 32, 0.5);
+  background: rgba(12, 17, 32, 0.5);
   border: 1px solid rgba(255, 255, 255, 0.08);
   border-radius: 9px;
   padding: 9px 12px;
@@ -432,7 +464,7 @@ h1 .akcent {
 }
 
 .wzor-ramka {
-  background: rgba(15, 19, 32, 0.4);
+  background: rgba(12, 17, 32, 0.4);
   border: 1px solid rgba(255, 255, 255, 0.08);
   border-radius: 10px;
   padding: 12px 16px;
@@ -491,7 +523,9 @@ h1 .akcent {
   display: flex;
   align-items: flex-start;
   gap: 8px;
-  transition: transform 0.3s var(--spreczyna), color 0.3s;
+  transition:
+    transform 0.3s var(--spreczyna),
+    color 0.3s;
 }
 
 .kroki li:hover {
@@ -551,10 +585,11 @@ h1 .akcent {
   top: 72px;
   max-height: calc(100vh - 90px);
   overflow-y: auto;
-  overflow-x: visible;
+  overflow-x: hidden;
+  overflow-x: clip;
   scrollbar-width: thin;
   scrollbar-color: rgba(255, 255, 255, 0.1) transparent;
-  padding-bottom: 16px;
+  padding: 6px 4px 16px;
 }
 
 .zawartosc {
@@ -564,17 +599,23 @@ h1 .akcent {
 }
 
 .karta {
-  background: rgba(10, 13, 22, 0.35);
+  background: rgba(8, 12, 22, 0.42);
   backdrop-filter: blur(70px) saturate(280%) brightness(1.08);
   -webkit-backdrop-filter: blur(70px) saturate(280%) brightness(1.08);
-  border: 1px solid rgba(255, 255, 255, 0.08);
+  border: 1px solid rgba(255, 255, 255, 0.07);
   border-radius: 22px;
   padding: 18px;
-  box-shadow: 0 8px 32px rgba(0, 0, 0, 0.3), 0 0 1px rgba(255, 255, 255, 0.1) inset;
-  transition: all 0.4s cubic-bezier(0.23, 1, 0.32, 1);
+  box-shadow:
+    0 8px 32px rgba(0, 0, 0, 0.35),
+    0 1px 0 rgba(255, 255, 255, 0.14) inset,
+    0 -1px 0 rgba(0, 0, 0, 0.12) inset,
+    inset 1px 0 rgba(255, 255, 255, 0.07);
+  transition:
+    box-shadow 0.4s cubic-bezier(0.23, 1, 0.32, 1),
+    border-color 0.4s cubic-bezier(0.23, 1, 0.32, 1);
   animation: pojawienieKarty 0.6s var(--ease) both;
   position: relative;
-  overflow: hidden;
+  overflow: visible;
 }
 
 .karta::before {
@@ -583,51 +624,51 @@ h1 .akcent {
   top: 0;
   left: 0;
   right: 0;
-  height: 1px;
-  background: linear-gradient(90deg, transparent 0%, rgba(255, 255, 255, 0.2) 30%, rgba(255, 255, 255, 0.3) 50%, rgba(255, 255, 255, 0.2) 70%, transparent 100%);
-  border-radius: 22px 22px 0 0;
+  bottom: 0;
+  border-radius: 22px;
+  background: linear-gradient(
+    135deg,
+    rgba(255, 255, 255, 0.12) 0%,
+    rgba(255, 255, 255, 0.05) 35%,
+    transparent 60%
+  );
   pointer-events: none;
+  z-index: 0;
 }
 
 .karta::after {
   content: "";
   position: absolute;
-  top: -50%;
-  left: -70%;
-  width: 60%;
-  height: 200%;
+  top: 0;
+  left: 0;
+  right: 0;
+  height: 1px;
   background: linear-gradient(
-    105deg,
-    transparent 30%,
-    rgba(255, 255, 255, 0.06) 50%,
-    transparent 70%
+    90deg,
+    transparent 5%,
+    rgba(255, 255, 255, 0.28) 30%,
+    rgba(255, 255, 255, 0.38) 50%,
+    rgba(255, 255, 255, 0.22) 70%,
+    transparent 95%
   );
+  border-radius: 22px 22px 0 0;
   pointer-events: none;
-  animation: shimmer 8s ease-in-out infinite;
+  z-index: 1;
 }
 
-@keyframes shimmer {
-  0% {
-    transform: translateX(-100%) skewX(-20deg);
-    opacity: 0;
-  }
-  15% {
-    opacity: 1;
-  }
-  50% {
-    transform: translateX(280%) skewX(-20deg);
-    opacity: 1;
-  }
-  52%, 100% {
-    transform: translateX(280%) skewX(-20deg);
-    opacity: 0;
-  }
+.karta > * {
+  position: relative;
+  z-index: 2;
 }
 
 .karta:hover {
-  box-shadow: 0 16px 48px rgba(0, 0, 0, 0.4), 0 0 30px rgba(0, 229, 160, 0.1), 0 0 1px rgba(255, 255, 255, 0.15) inset;
+  box-shadow:
+    0 16px 48px rgba(0, 0, 0, 0.45),
+    0 0 28px rgba(0, 229, 160, 0.07),
+    0 1px 0 rgba(255, 255, 255, 0.18) inset,
+    0 -1px 0 rgba(0, 0, 0, 0.12) inset,
+    inset 1px 0 rgba(255, 255, 255, 0.08);
   border-color: rgba(255, 255, 255, 0.12);
-  transform: translateY(-4px);
 }
 
 .karta-tytul {
@@ -672,8 +713,8 @@ label {
 input,
 select {
   width: 100%;
-  background: rgba(15, 19, 32, 0.5);
-  border: 1px solid rgba(255, 255, 255, 0.1);
+  background: rgba(12, 17, 32, 0.55);
+  border: 1px solid rgba(255, 255, 255, 0.09);
   border-radius: 11px;
   color: var(--tekst);
   font-family: "Outfit", sans-serif;
@@ -681,8 +722,13 @@ select {
   padding: 10px 12px;
   appearance: none;
   -webkit-appearance: none;
-  transition: all 0.35s cubic-bezier(0.23, 1, 0.32, 1);
-  backdrop-filter: blur(10px);
+  transition: all 0.3s cubic-bezier(0.23, 1, 0.32, 1);
+  backdrop-filter: blur(8px);
+  -webkit-backdrop-filter: blur(8px);
+  position: relative;
+  box-shadow:
+    0 1px 4px rgba(0, 0, 0, 0.2) inset,
+    0 1px 0 rgba(255, 255, 255, 0.07) inset;
 }
 
 input::placeholder {
@@ -693,20 +739,21 @@ input:focus,
 select:focus {
   outline: none;
   border-color: var(--akcent);
-  background: rgba(0, 229, 160, 0.08);
-  box-shadow: 0 0 0 3px rgba(0, 229, 160, 0.15), 0 0 20px rgba(0, 229, 160, 0.15), 0 0 1px rgba(255, 255, 255, 0.2) inset;
-  transform: translateY(-2px);
+  background: rgba(0, 229, 160, 0.07);
+  box-shadow:
+    0 0 0 3px rgba(0, 229, 160, 0.12),
+    0 0 18px rgba(0, 229, 160, 0.12);
 }
 
 select option {
-  background: #12151e;
+  background: #0d1020;
 }
 
 .podglad-formularza {
   font-family: "JetBrains Mono", monospace;
   font-size: 12.5px;
   color: var(--tekst-mid);
-  background: rgba(15, 19, 32, 0.4);
+  background: rgba(12, 17, 32, 0.45);
   border: 1px solid rgba(255, 255, 255, 0.08);
   border-radius: 9px;
   padding: 7px 11px;
@@ -722,70 +769,225 @@ select option {
 .btn-glowny {
   width: 100%;
   padding: 12px;
-  background: linear-gradient(135deg, #1af0b0 0%, #00e5a0 45%, #00cfa0 75%, #00bfa0 100%);
-  background-size: 200% 200%;
-  color: #050706;
-  border: 1px solid rgba(255, 255, 255, 0.3);
+  background: linear-gradient(
+    180deg,
+    #12f0b5 0%,
+    #00e5a0 40%,
+    #00cfa0 80%,
+    #00bfa0 100%
+  );
+  color: #040a07;
+  border: none;
   border-radius: 12px;
   font-family: "Outfit", sans-serif;
   font-size: 14px;
   font-weight: 700;
   cursor: pointer;
   letter-spacing: 0.03em;
-  transition: all 0.4s cubic-bezier(0.23, 1, 0.32, 1);
+  transition:
+    box-shadow 0.35s cubic-bezier(0.23, 1, 0.32, 1),
+    filter 0.35s cubic-bezier(0.23, 1, 0.32, 1);
   position: relative;
   overflow: hidden;
   margin-bottom: 14px;
   -webkit-tap-highlight-color: transparent;
   touch-action: manipulation;
-  box-shadow: 0 8px 24px rgba(0, 229, 160, 0.3), 0 2px 0 rgba(255, 255, 255, 0.4) inset;
+  box-shadow:
+    0 6px 20px rgba(0, 229, 160, 0.28),
+    0 1px 0 rgba(255, 255, 255, 0.45) inset,
+    0 -1px 0 rgba(0, 0, 0, 0.15) inset;
 }
 
 .btn-glowny::before {
   content: "";
   position: absolute;
-  inset: 0;
-  background: linear-gradient(180deg, rgba(255, 255, 255, 0.3) 0%, rgba(255, 255, 255, 0.08) 50%, transparent 100%);
+  top: 0;
+  left: 0;
+  right: 0;
+  height: 50%;
+  background: linear-gradient(
+    180deg,
+    rgba(255, 255, 255, 0.28) 0%,
+    rgba(255, 255, 255, 0.06) 100%
+  );
   pointer-events: none;
+  z-index: 1;
 }
 
 .btn-glowny::after {
   content: "";
   position: absolute;
-  top: -50%;
-  left: -75%;
-  width: 50%;
-  height: 200%;
-  background: linear-gradient(105deg, transparent 40%, rgba(255, 255, 255, 0.4) 50%, transparent 60%);
-  transform: skewX(-20deg);
-  transition: left 0.6s var(--ease);
+  inset: 0;
+  background: linear-gradient(
+    135deg,
+    rgba(255, 255, 255, 0.15) 0%,
+    transparent 50%
+  );
   pointer-events: none;
+  z-index: 1;
 }
 
 .btn-glowny:hover {
-  transform: translateY(-3px) scale(1.02);
-  box-shadow: 0 16px 40px rgba(0, 229, 160, 0.4), 0 0 20px rgba(0, 229, 160, 0.2), 0 2px 0 rgba(255, 255, 255, 0.4) inset;
-  filter: brightness(1.1);
-  background-position: right center;
-}
-
-.btn-glowny:hover::after {
-  left: 125%;
+  box-shadow:
+    0 12px 32px rgba(0, 229, 160, 0.38),
+    0 0 16px rgba(0, 229, 160, 0.18),
+    0 1px 0 rgba(255, 255, 255, 0.45) inset;
+  filter: brightness(1.08);
 }
 
 .btn-glowny:active {
-  transform: translateY(0) scale(0.96);
-  box-shadow: 0 4px 12px rgba(0, 229, 160, 0.2);
+  box-shadow: 0 3px 10px rgba(0, 229, 160, 0.2);
+  filter: brightness(0.96);
   transition-duration: 0.1s;
 }
 
 [data-motyw="dzien"] .btn-glowny {
-  background: linear-gradient(135deg, #00cc90 0%, #00a87a 55%, #00956c 100%);
+  background: linear-gradient(180deg, #00d89a 0%, #00a87a 55%, #00956c 100%);
   color: #fff;
 }
 
+[data-motyw="dzien"] header {
+  background: rgba(216, 232, 227, 0.68);
+  border-bottom-color: rgba(0, 50, 30, 0.08);
+  box-shadow: 0 4px 24px rgba(0, 0, 0, 0.05);
+}
+
+[data-motyw="dzien"] .karta {
+  background: rgba(255, 255, 255, 0.48);
+  border-color: rgba(255, 255, 255, 0.8);
+  box-shadow:
+    0 6px 28px rgba(0, 0, 0, 0.07),
+    0 1px 0 rgba(255, 255, 255, 0.98) inset,
+    0 -1px 0 rgba(0, 60, 40, 0.06) inset,
+    inset 1px 0 rgba(255, 255, 255, 0.7);
+}
+
+[data-motyw="dzien"] .karta::before {
+  background: linear-gradient(
+    135deg,
+    rgba(255, 255, 255, 0.65) 0%,
+    rgba(255, 255, 255, 0.2) 40%,
+    transparent 65%
+  );
+}
+
+[data-motyw="dzien"] .karta::after {
+  background: linear-gradient(
+    90deg,
+    transparent 5%,
+    rgba(255, 255, 255, 0.98) 30%,
+    rgba(255, 255, 255, 1) 50%,
+    rgba(255, 255, 255, 0.9) 70%,
+    transparent 95%
+  );
+}
+
+[data-motyw="dzien"] .karta:hover {
+  box-shadow:
+    0 12px 40px rgba(0, 0, 0, 0.1),
+    0 0 20px rgba(0, 158, 114, 0.06),
+    0 1px 0 rgba(255, 255, 255, 0.99) inset,
+    inset 1px 0 rgba(255, 255, 255, 0.85);
+  border-color: rgba(255, 255, 255, 0.95);
+}
+
+[data-motyw="dzien"] input,
+[data-motyw="dzien"] select {
+  background: rgba(255, 255, 255, 0.65);
+  border-color: rgba(0, 60, 40, 0.12);
+  box-shadow:
+    0 1px 3px rgba(0, 0, 0, 0.05) inset,
+    0 1px 0 rgba(255, 255, 255, 0.9) inset;
+}
+
+[data-motyw="dzien"] .btn-naglowek {
+  background: rgba(255, 255, 255, 0.45);
+  border-color: rgba(0, 60, 40, 0.12);
+}
+
+[data-motyw="dzien"] .btn-naglowek:hover {
+  background: rgba(255, 255, 255, 0.7);
+  border-color: rgba(0, 158, 114, 0.3);
+  box-shadow:
+    0 4px 16px rgba(0, 0, 0, 0.08),
+    0 0 12px rgba(0, 158, 114, 0.08);
+}
+
+[data-motyw="dzien"] .element-listy {
+  background: rgba(255, 255, 255, 0.5);
+  border-color: rgba(255, 255, 255, 0.75);
+  box-shadow:
+    0 1px 4px rgba(0, 0, 0, 0.05),
+    0 1px 0 rgba(255, 255, 255, 0.9) inset;
+}
+
+[data-motyw="dzien"] .element-listy:hover {
+  background: rgba(255, 255, 255, 0.75);
+  box-shadow:
+    0 4px 16px rgba(0, 0, 0, 0.08),
+    0 1px 0 rgba(255, 255, 255, 0.98) inset;
+}
+
+[data-motyw="dzien"] .filtr {
+  background: rgba(255, 255, 255, 0.48);
+  border-color: rgba(0, 60, 40, 0.1);
+}
+
+[data-motyw="dzien"] .filtr:hover {
+  background: rgba(255, 255, 255, 0.72);
+  border-color: rgba(0, 158, 114, 0.25);
+}
+
+[data-motyw="dzien"] .filtr.aktywny {
+  background: rgba(0, 158, 114, 0.1);
+  border-color: rgba(0, 158, 114, 0.4);
+}
+
+[data-motyw="dzien"] .chip-semestru {
+  background: rgba(255, 255, 255, 0.52);
+  border-color: rgba(255, 255, 255, 0.82);
+  box-shadow:
+    0 2px 12px rgba(0, 0, 0, 0.05),
+    0 1px 0 rgba(255, 255, 255, 0.95) inset;
+}
+
+[data-motyw="dzien"] .narzedzie-ikona-owijka {
+  background: rgba(6, 182, 212, 0.12);
+  border-color: rgba(6, 182, 212, 0.25);
+  box-shadow:
+    0 2px 8px rgba(6, 182, 212, 0.1),
+    0 1px 0 rgba(255, 255, 255, 0.8) inset;
+}
+
+[data-motyw="dzien"] .narzedzie-ikona-owijka--gold {
+  background: rgba(245, 158, 11, 0.12);
+  border-color: rgba(245, 158, 11, 0.25);
+  box-shadow:
+    0 2px 8px rgba(245, 158, 11, 0.1),
+    0 1px 0 rgba(255, 255, 255, 0.8) inset;
+}
+
+[data-motyw="dzien"] .toggle-suwak {
+  background: rgba(0, 0, 0, 0.12);
+  box-shadow: 0 1px 4px rgba(0, 0, 0, 0.12) inset;
+}
+
+[data-motyw="dzien"] .powiadomienie {
+  background: rgba(240, 248, 244, 0.92);
+  border-color: rgba(0, 60, 40, 0.15);
+  color: var(--tekst);
+}
+
+[data-motyw="dzien"] .modal-karta {
+  background: rgba(248, 252, 250, 0.95);
+  border-color: rgba(255, 255, 255, 0.9);
+  box-shadow:
+    0 24px 80px rgba(0, 0, 0, 0.15),
+    0 1px 0 rgba(255, 255, 255, 0.98) inset;
+}
+
 .dokladna-wartosc-toggle {
-  border-top: 1px solid rgba(255, 255, 255, 0.08);
+  border-top: 1px solid rgba(255, 255, 255, 0.07);
   padding-top: 12px;
   margin-top: 2px;
 }
@@ -822,7 +1024,27 @@ select option {
   border-radius: 99px;
   position: relative;
   transition: all 0.4s cubic-bezier(0.23, 1, 0.32, 1);
-  box-shadow: 0 0 0 1px rgba(255, 255, 255, 0.08) inset;
+  box-shadow:
+    0 1px 4px rgba(0, 0, 0, 0.3) inset,
+    0 1px 0 rgba(255, 255, 255, 0.1) inset;
+  overflow: hidden;
+}
+
+.toggle-suwak::before {
+  content: "";
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+  height: 50%;
+  background: linear-gradient(
+    180deg,
+    rgba(255, 255, 255, 0.12) 0%,
+    transparent 100%
+  );
+  border-radius: 99px 99px 0 0;
+  pointer-events: none;
+  z-index: 0;
 }
 
 .toggle-suwak::after {
@@ -832,21 +1054,24 @@ select option {
   left: 3px;
   width: 13px;
   height: 13px;
-  background: white;
+  background: linear-gradient(180deg, #fff 0%, #ddd 100%);
   border-radius: 50%;
   transition: all 0.4s cubic-bezier(0.34, 1.56, 0.64, 1);
-  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.2);
+  box-shadow: 0 2px 5px rgba(0, 0, 0, 0.3);
+  z-index: 1;
 }
 
 input[type="checkbox"]:checked ~ .toggle-suwak {
   background: var(--akcent);
-  box-shadow: 0 0 20px rgba(0, 229, 160, 0.4), 0 0 0 1px rgba(0, 229, 160, 0.2) inset;
+  box-shadow:
+    0 0 18px rgba(0, 229, 160, 0.35),
+    0 1px 4px rgba(0, 0, 0, 0.2) inset;
 }
 
 input[type="checkbox"]:checked ~ .toggle-suwak::after {
   transform: translateX(15px);
-  background: #050706;
-  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.3);
+  background: #040a07;
+  box-shadow: 0 2px 6px rgba(0, 0, 0, 0.35);
 }
 
 input[type="checkbox"]:checked ~ .toggle-tekst {
@@ -880,7 +1105,7 @@ input[type="checkbox"]:checked ~ .toggle-tekst {
   border-radius: 4px;
   padding: 1px 6px;
   animation: znaczekPop 0.5s var(--spreczyna) both;
-  box-shadow: 0 0 12px rgba(0, 229, 160, 0.2);
+  box-shadow: 0 0 10px rgba(0, 229, 160, 0.18);
 }
 
 @keyframes znaczekPop {
@@ -906,18 +1131,17 @@ input[type="checkbox"]:checked ~ .toggle-tekst {
   cursor: pointer;
   white-space: nowrap;
   -webkit-tap-highlight-color: transparent;
-  transition: all 0.35s cubic-bezier(0.23, 1, 0.32, 1);
+  transition: all 0.3s cubic-bezier(0.23, 1, 0.32, 1);
 }
 
 .btn-niebezpieczny:hover {
-  background: rgba(229, 72, 77, 0.12);
+  background: rgba(229, 72, 77, 0.1);
   color: #e5484d;
-  border-color: rgba(229, 72, 77, 0.4);
-  transform: translateY(-2px);
+  border-color: rgba(229, 72, 77, 0.38);
 }
 
 .btn-niebezpieczny:active {
-  transform: scale(0.92);
+  transform: scale(0.93);
 }
 
 .filtry-owijka {
@@ -940,8 +1164,8 @@ input[type="checkbox"]:checked ~ .toggle-tekst {
 }
 
 .filtr {
-  background: rgba(15, 19, 32, 0.4);
-  border: 1px solid rgba(255, 255, 255, 0.1);
+  background: rgba(12, 17, 32, 0.45);
+  border: 1px solid rgba(255, 255, 255, 0.09);
   border-radius: 20px;
   padding: 4px 12px;
   font-size: 12px;
@@ -951,26 +1175,44 @@ input[type="checkbox"]:checked ~ .toggle-tekst {
   cursor: pointer;
   -webkit-tap-highlight-color: transparent;
   touch-action: manipulation;
-  transition: all 0.35s cubic-bezier(0.23, 1, 0.32, 1);
+  transition: all 0.3s cubic-bezier(0.23, 1, 0.32, 1);
   backdrop-filter: blur(10px);
+  position: relative;
+  overflow: hidden;
+  box-shadow: 0 1px 0 rgba(255, 255, 255, 0.12) inset;
+}
+
+.filtr::before {
+  content: "";
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+  height: 50%;
+  background: linear-gradient(
+    180deg,
+    rgba(255, 255, 255, 0.07) 0%,
+    transparent 100%
+  );
+  border-radius: 20px 20px 0 0;
+  pointer-events: none;
 }
 
 .filtr:hover {
   color: var(--tekst);
-  border-color: rgba(255, 255, 255, 0.2);
-  transform: translateY(-2px) scale(1.05);
-  background: rgba(22, 27, 46, 0.5);
+  border-color: rgba(255, 255, 255, 0.18);
+  background: rgba(18, 24, 44, 0.6);
 }
 
 .filtr:active {
-  transform: scale(0.92);
+  transform: scale(0.93);
 }
 
 .filtr.aktywny {
-  background: rgba(0, 229, 160, 0.12);
+  background: rgba(0, 229, 160, 0.1);
   color: var(--akcent);
-  border-color: var(--akcent);
-  box-shadow: 0 0 20px rgba(0, 229, 160, 0.2), 0 0 0 1px rgba(0, 229, 160, 0.15) inset;
+  border-color: rgba(0, 229, 160, 0.4);
+  box-shadow: 0 0 16px rgba(0, 229, 160, 0.18);
 }
 
 .pusty {
@@ -1001,7 +1243,8 @@ input[type="checkbox"]:checked ~ .toggle-tekst {
 }
 
 @keyframes float {
-  0%, 100% {
+  0%,
+  100% {
     transform: translateY(0);
   }
   50% {
@@ -1047,7 +1290,7 @@ input[type="checkbox"]:checked ~ .toggle-tekst {
   border-radius: 4px;
   background: rgba(0, 229, 160, 0.12);
   color: var(--akcent);
-  box-shadow: 0 0 10px rgba(0, 229, 160, 0.15);
+  box-shadow: 0 0 8px rgba(0, 229, 160, 0.12);
 }
 
 .info-semestru {
@@ -1059,38 +1302,42 @@ input[type="checkbox"]:checked ~ .toggle-tekst {
   display: flex;
   align-items: center;
   gap: 9px;
-  padding: 10px 12px;
+  padding: 10px 10px 10px 12px;
   border-radius: 12px;
-  background: rgba(15, 19, 32, 0.4);
-  border: 1px solid rgba(255, 255, 255, 0.08);
+  background: rgba(12, 17, 32, 0.42);
+  border: 1px solid rgba(255, 255, 255, 0.07);
   border-left: 2.5px solid var(--kolor-oceny, rgba(255, 255, 255, 0.1));
   -webkit-tap-highlight-color: transparent;
-  transition: all 0.35s cubic-bezier(0.23, 1, 0.32, 1);
+  transition: all 0.3s cubic-bezier(0.23, 1, 0.32, 1);
   animation: slideIn 0.4s var(--ease) both;
   position: relative;
   overflow: hidden;
   touch-action: pan-y;
-  backdrop-filter: blur(10px);
+  backdrop-filter: blur(8px);
 }
 
-.element-listy::after {
+.element-listy::before {
   content: "";
   position: absolute;
-  inset: 0;
-  background: linear-gradient(90deg, rgba(255, 255, 255, 0) 0%, rgba(255, 255, 255, 0.03) 100%);
-  opacity: 0;
-  transition: opacity 0.3s;
+  top: 0;
+  left: 0;
+  right: 0;
+  height: 1px;
+  background: linear-gradient(
+    90deg,
+    transparent,
+    rgba(255, 255, 255, 0.1),
+    transparent
+  );
+  pointer-events: none;
 }
 
 .element-listy:hover {
-  background: rgba(22, 27, 46, 0.6);
-  box-shadow: 0 8px 24px rgba(0, 0, 0, 0.3), 0 0 20px rgba(0, 229, 160, 0.08), 0 0 1px rgba(255, 255, 255, 0.12) inset;
-  transform: translateY(-2px);
-  border-color: rgba(255, 255, 255, 0.12);
-}
-
-.element-listy:hover::after {
-  opacity: 1;
+  background: rgba(18, 24, 44, 0.65);
+  box-shadow:
+    0 6px 20px rgba(0, 0, 0, 0.28),
+    0 0 16px rgba(0, 229, 160, 0.06);
+  border-color: rgba(255, 255, 255, 0.11);
 }
 
 .element-ocena {
@@ -1124,27 +1371,45 @@ input[type="checkbox"]:checked ~ .toggle-tekst {
   margin-top: 1px;
 }
 
+.element-akcje {
+  display: flex;
+  align-items: center;
+  gap: 2px;
+  flex-shrink: 0;
+}
+
+.element-edytuj,
 .element-usun {
   background: transparent;
   border: none;
-  color: var(--tekst-dim);
   cursor: pointer;
   width: 28px;
   height: 28px;
-  border-radius: 6px;
+  border-radius: 7px;
   font-size: 12px;
   display: flex;
   align-items: center;
   justify-content: center;
   flex-shrink: 0;
   -webkit-tap-highlight-color: transparent;
-  transition: all 0.3s cubic-bezier(0.23, 1, 0.32, 1);
+  transition: all 0.25s cubic-bezier(0.23, 1, 0.32, 1);
+  color: var(--tekst-dim);
+  padding: 0;
+}
+
+.element-edytuj:hover {
+  color: var(--akcent);
+  background: rgba(0, 229, 160, 0.12);
+}
+
+.element-edytuj:active {
+  transform: scale(0.85);
 }
 
 .element-usun:hover {
   color: #e5484d;
-  background: rgba(229, 72, 77, 0.15);
-  transform: scale(1.25) rotate(15deg);
+  background: rgba(229, 72, 77, 0.14);
+  transform: scale(1.2) rotate(12deg);
 }
 
 .element-usun:active {
@@ -1214,32 +1479,32 @@ input[type="checkbox"]:checked ~ .toggle-tekst {
 
 .statystyka-glowna.g2 {
   color: var(--g2);
-  text-shadow: 0 0 40px rgba(229, 72, 77, 0.5);
+  text-shadow: 0 0 40px rgba(229, 72, 77, 0.4);
 }
 
 .statystyka-glowna.g3 {
   color: var(--g3);
-  text-shadow: 0 0 40px rgba(247, 107, 21, 0.5);
+  text-shadow: 0 0 40px rgba(247, 107, 21, 0.4);
 }
 
 .statystyka-glowna.g35 {
   color: var(--g35);
-  text-shadow: 0 0 40px rgba(245, 166, 35, 0.5);
+  text-shadow: 0 0 40px rgba(245, 166, 35, 0.4);
 }
 
 .statystyka-glowna.g4 {
   color: var(--g4);
-  text-shadow: 0 0 40px rgba(124, 196, 67, 0.5);
+  text-shadow: 0 0 40px rgba(124, 196, 67, 0.4);
 }
 
 .statystyka-glowna.g45 {
   color: var(--g45);
-  text-shadow: 0 0 40px rgba(48, 164, 108, 0.5);
+  text-shadow: 0 0 40px rgba(48, 164, 108, 0.4);
 }
 
 .statystyka-glowna.g5 {
   color: var(--g5);
-  text-shadow: 0 0 50px rgba(0, 229, 160, 0.6);
+  text-shadow: 0 0 50px rgba(0, 229, 160, 0.55);
 }
 
 .statystyka-dokladna {
@@ -1337,7 +1602,7 @@ input[type="checkbox"]:checked ~ .toggle-tekst {
 
 .wykres-slupek.g5 {
   background: var(--g5);
-  box-shadow: 0 0 16px rgba(0, 229, 160, 0.5);
+  box-shadow: 0 0 14px rgba(0, 229, 160, 0.45);
 }
 
 .wykres-podpis {
@@ -1349,7 +1614,7 @@ input[type="checkbox"]:checked ~ .toggle-tekst {
 .cel-sekcja {
   margin-top: 4px;
   padding-top: 14px;
-  border-top: 1px solid rgba(255, 255, 255, 0.08);
+  border-top: 1px solid rgba(255, 255, 255, 0.07);
 }
 
 .cel-rzad {
@@ -1389,12 +1654,12 @@ input[type="checkbox"]:checked ~ .toggle-tekst {
 
 .cel-pasek {
   height: 6px;
-  background: rgba(15, 19, 32, 0.5);
-  border: 1px solid rgba(255, 255, 255, 0.1);
+  background: rgba(12, 17, 32, 0.55);
+  border: 1px solid rgba(255, 255, 255, 0.08);
   border-radius: 6px;
   overflow: hidden;
   margin-top: 8px;
-  backdrop-filter: blur(10px);
+  backdrop-filter: blur(8px);
 }
 
 .cel-wypelnienie {
@@ -1405,17 +1670,17 @@ input[type="checkbox"]:checked ~ .toggle-tekst {
 
 .cel-wypelnienie.ok {
   background: linear-gradient(90deg, #00cfb0, #00e5a0);
-  box-shadow: 0 0 16px rgba(0, 229, 160, 0.5);
+  box-shadow: 0 0 14px rgba(0, 229, 160, 0.45);
 }
 
 .cel-wypelnienie.warn {
   background: linear-gradient(90deg, #f5a623, #f59e0b);
-  box-shadow: 0 0 12px rgba(245, 166, 35, 0.3);
+  box-shadow: 0 0 10px rgba(245, 166, 35, 0.3);
 }
 
 .cel-wypelnienie.nie {
   background: linear-gradient(90deg, #c43040, #e5484d);
-  box-shadow: 0 0 12px rgba(229, 72, 77, 0.3);
+  box-shadow: 0 0 10px rgba(229, 72, 77, 0.28);
 }
 
 .cel-etykiety {
@@ -1434,19 +1699,22 @@ input[type="checkbox"]:checked ~ .toggle-tekst {
 }
 
 .chip-semestru {
-  background: rgba(10, 13, 22, 0.35);
+  background: rgba(8, 12, 22, 0.42);
   backdrop-filter: blur(70px) saturate(280%);
   -webkit-backdrop-filter: blur(70px) saturate(280%);
-  border: 1px solid rgba(255, 255, 255, 0.08);
+  border: 1px solid rgba(255, 255, 255, 0.07);
   border-radius: 16px;
   padding: 10px 16px;
   display: flex;
   flex-direction: column;
   gap: 2px;
-  transition: all 0.4s cubic-bezier(0.23, 1, 0.32, 1);
+  transition: all 0.35s cubic-bezier(0.23, 1, 0.32, 1);
   animation: slideIn 0.5s var(--ease) both;
   position: relative;
   overflow: hidden;
+  box-shadow:
+    0 4px 16px rgba(0, 0, 0, 0.2),
+    0 1px 0 rgba(255, 255, 255, 0.12) inset;
 }
 
 .chip-semestru::before {
@@ -1455,15 +1723,39 @@ input[type="checkbox"]:checked ~ .toggle-tekst {
   top: 0;
   left: 0;
   right: 0;
+  bottom: 0;
+  background: linear-gradient(
+    135deg,
+    rgba(255, 255, 255, 0.1) 0%,
+    rgba(255, 255, 255, 0.03) 40%,
+    transparent 60%
+  );
+  border-radius: 16px;
+  pointer-events: none;
+}
+
+.chip-semestru::after {
+  content: "";
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
   height: 1px;
-  background: linear-gradient(90deg, transparent, rgba(255, 255, 255, 0.15), transparent);
+  background: linear-gradient(
+    90deg,
+    transparent,
+    rgba(255, 255, 255, 0.22),
+    transparent
+  );
   pointer-events: none;
 }
 
 .chip-semestru:hover {
-  box-shadow: 0 12px 32px rgba(0, 0, 0, 0.35), 0 0 20px rgba(0, 229, 160, 0.08);
-  transform: translateY(-4px) scale(1.02);
-  border-color: rgba(255, 255, 255, 0.12);
+  box-shadow:
+    0 10px 28px rgba(0, 0, 0, 0.35),
+    0 0 18px rgba(0, 229, 160, 0.07);
+  transform: translateY(-3px) scale(1.01);
+  border-color: rgba(255, 255, 255, 0.11);
 }
 
 .chip-etykieta {
@@ -1472,6 +1764,8 @@ input[type="checkbox"]:checked ~ .toggle-tekst {
   letter-spacing: 0.08em;
   text-transform: uppercase;
   color: var(--tekst-dim);
+  position: relative;
+  z-index: 1;
 }
 
 .chip-wartosc {
@@ -1480,37 +1774,37 @@ input[type="checkbox"]:checked ~ .toggle-tekst {
   font-weight: 700;
   color: var(--tekst);
   line-height: 1.1;
+  position: relative;
+  z-index: 1;
 }
 
 .chip-wartosc.g2 {
   color: var(--g2);
 }
-
 .chip-wartosc.g3 {
   color: var(--g3);
 }
-
 .chip-wartosc.g35 {
   color: var(--g35);
 }
-
 .chip-wartosc.g4 {
   color: var(--g4);
 }
-
 .chip-wartosc.g45 {
   color: var(--g45);
 }
 
 .chip-wartosc.g5 {
   color: var(--g5);
-  text-shadow: 0 0 16px rgba(0, 229, 160, 0.4);
+  text-shadow: 0 0 14px rgba(0, 229, 160, 0.38);
 }
 
 .chip-pod {
   font-family: "JetBrains Mono", monospace;
   font-size: 10px;
   color: var(--tekst-dim);
+  position: relative;
+  z-index: 1;
 }
 
 .karta--narzedzie {
@@ -1518,12 +1812,17 @@ input[type="checkbox"]:checked ~ .toggle-tekst {
   overflow: hidden;
 }
 
+.karta--narzedzie::before,
+.karta--narzedzie::after {
+  border-radius: 22px;
+}
+
 .narzedzie-naglowek {
   display: flex;
   align-items: center;
   gap: 14px;
   padding: 16px 18px 14px;
-  border-bottom: 1px solid rgba(255, 255, 255, 0.08);
+  border-bottom: 1px solid rgba(255, 255, 255, 0.07);
 }
 
 .narzedzie-ikona-owijka {
@@ -1531,72 +1830,81 @@ input[type="checkbox"]:checked ~ .toggle-tekst {
   height: 44px;
   flex-shrink: 0;
   border-radius: 13px;
-  background: rgba(99, 102, 241, 0.12);
-  border: 1px solid rgba(99, 102, 241, 0.2);
+  background: rgba(6, 182, 212, 0.1);
+  border: 1px solid rgba(6, 182, 212, 0.2);
   display: flex;
   align-items: center;
   justify-content: center;
   color: var(--co-jesli-kolor);
-  animation: pulse 3s ease-in-out infinite;
-  transition: all 0.4s cubic-bezier(0.23, 1, 0.32, 1);
+  animation: pulseCoJesli 3s ease-in-out infinite;
+  transition: all 0.35s cubic-bezier(0.23, 1, 0.32, 1);
   position: relative;
   overflow: hidden;
   backdrop-filter: blur(10px);
+}
+
+.narzedzie-ikona-owijka::before {
+  content: "";
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+  height: 55%;
+  background: linear-gradient(
+    180deg,
+    rgba(255, 255, 255, 0.18) 0%,
+    transparent 100%
+  );
+  border-radius: 13px 13px 0 0;
+  pointer-events: none;
+  z-index: 0;
 }
 
 .narzedzie-ikona-owijka::after {
   content: "";
   position: absolute;
   inset: 0;
-  background: linear-gradient(135deg, rgba(255, 255, 255, 0.15) 0%, transparent 60%);
+  background: linear-gradient(
+    135deg,
+    rgba(255, 255, 255, 0.1) 0%,
+    transparent 55%
+  );
   border-radius: 13px;
+  pointer-events: none;
+  z-index: 0;
 }
 
 .narzedzie-ikona-owijka:hover {
-  transform: scale(1.15) rotate(-8deg);
-  box-shadow: 0 8px 28px rgba(99, 102, 241, 0.35), 0 0 20px rgba(99, 102, 241, 0.2);
-  border-color: rgba(99, 102, 241, 0.4);
+  transform: scale(1.12) rotate(-7deg);
+  box-shadow: 0 6px 24px rgba(6, 182, 212, 0.3);
+  border-color: rgba(6, 182, 212, 0.4);
 }
 
 .narzedzie-ikona-owijka--gold {
-  background: rgba(245, 158, 11, 0.12);
+  background: rgba(245, 158, 11, 0.1);
   border-color: rgba(245, 158, 11, 0.2);
   color: var(--sty-kolor);
-}
-
-.narzedzie-ikona-owijka--gold:hover {
-  box-shadow: 0 8px 28px rgba(245, 158, 11, 0.35), 0 0 20px rgba(245, 158, 11, 0.2);
-  border-color: rgba(245, 158, 11, 0.4);
-}
-
-@keyframes pulse {
-  0%, 100% {
-    box-shadow: 0 0 0 0 transparent;
-  }
-  50% {
-    box-shadow: 0 0 0 8px transparent;
-  }
-}
-
-.karta--co-jesli .narzedzie-ikona-owijka {
-  animation: pulse 3s ease-in-out infinite;
-}
-
-@keyframes pulse {
-  0%, 100% {
-    box-shadow: 0 0 0 0 rgba(99, 102, 241, 0.1);
-  }
-  50% {
-    box-shadow: 0 0 0 10px rgba(99, 102, 241, 0);
-  }
-}
-
-.karta--stypendium .narzedzie-ikona-owijka {
   animation-name: pulseGold;
 }
 
+.narzedzie-ikona-owijka--gold:hover {
+  box-shadow: 0 6px 24px rgba(245, 158, 11, 0.3);
+  border-color: rgba(245, 158, 11, 0.4);
+}
+
+@keyframes pulseCoJesli {
+  0%,
+  100% {
+    box-shadow: 0 0 0 0 rgba(6, 182, 212, 0.1);
+  }
+  50% {
+    box-shadow: 0 0 0 10px rgba(6, 182, 212, 0);
+  }
+}
+
 @keyframes pulseGold {
-  0%, 100% {
+  0%,
+  100% {
     box-shadow: 0 0 0 0 rgba(245, 158, 11, 0.1);
   }
   50% {
@@ -1616,7 +1924,7 @@ input[type="checkbox"]:checked ~ .toggle-tekst {
 }
 
 .narzedzie-ikona-owijka:hover .narzedzie-ikona {
-  transform: scale(1.35) rotate(-12deg);
+  transform: scale(1.3) rotate(-10deg);
 }
 
 .karta-tytul--narzedzie {
@@ -1670,7 +1978,7 @@ input[type="checkbox"]:checked ~ .toggle-tekst {
   align-items: center;
   justify-content: center;
   -webkit-tap-highlight-color: transparent;
-  transition: all 0.3s cubic-bezier(0.23, 1, 0.32, 1);
+  transition: all 0.25s cubic-bezier(0.23, 1, 0.32, 1);
 }
 
 .cj-usun:hover {
@@ -1682,7 +1990,7 @@ input[type="checkbox"]:checked ~ .toggle-tekst {
 .btn-duch {
   display: block;
   background: transparent;
-  border: 1px dashed rgba(0, 229, 160, 0.3);
+  border: 1px dashed rgba(0, 229, 160, 0.28);
   border-radius: 11px;
   color: var(--tekst-dim);
   padding: 8px 12px;
@@ -1694,20 +2002,20 @@ input[type="checkbox"]:checked ~ .toggle-tekst {
   text-align: left;
   margin: 10px 18px 12px;
   -webkit-tap-highlight-color: transparent;
-  transition: all 0.35s cubic-bezier(0.23, 1, 0.32, 1);
+  transition: all 0.3s cubic-bezier(0.23, 1, 0.32, 1);
 }
 
 .btn-duch:hover {
   color: var(--akcent);
   border-color: var(--akcent);
-  background: rgba(0, 229, 160, 0.08);
-  transform: translateX(6px);
-  box-shadow: 0 0 20px rgba(0, 229, 160, 0.15);
+  background: rgba(0, 229, 160, 0.07);
+  transform: translateX(5px);
+  box-shadow: 0 0 16px rgba(0, 229, 160, 0.12);
   border-style: solid;
 }
 
 .btn-duch:active {
-  transform: translateX(2px) scale(0.96);
+  transform: translateX(2px) scale(0.97);
 }
 
 .cj-wynik {
@@ -1715,8 +2023,8 @@ input[type="checkbox"]:checked ~ .toggle-tekst {
   align-items: center;
   gap: 10px;
   flex-wrap: wrap;
-  background: rgba(15, 19, 32, 0.4);
-  border-top: 1px solid rgba(255, 255, 255, 0.08);
+  background: rgba(12, 17, 32, 0.45);
+  border-top: 1px solid rgba(255, 255, 255, 0.07);
   padding: 14px 18px;
   margin-top: 4px;
   animation: slideIn 0.5s var(--spreczyna) both;
@@ -1755,7 +2063,8 @@ input[type="checkbox"]:checked ~ .toggle-tekst {
 }
 
 @keyframes strzalkaRuch {
-  0%, 100% {
+  0%,
+  100% {
     transform: translateX(0);
     opacity: 0.5;
   }
@@ -1780,7 +2089,7 @@ input[type="checkbox"]:checked ~ .toggle-tekst {
 
 .delta-wzrost {
   color: #00e5a0;
-  text-shadow: 0 0 16px rgba(0, 229, 160, 0.5);
+  text-shadow: 0 0 14px rgba(0, 229, 160, 0.45);
 }
 
 .delta-neutralna {
@@ -1797,7 +2106,7 @@ input[type="checkbox"]:checked ~ .toggle-tekst {
 
 .delta-spadek {
   color: #e5484d;
-  text-shadow: 0 0 16px rgba(229, 72, 77, 0.4);
+  text-shadow: 0 0 14px rgba(229, 72, 77, 0.38);
 }
 
 .sty-wejscia {
@@ -1825,11 +2134,11 @@ input[type="checkbox"]:checked ~ .toggle-tekst {
 .sty-pasek {
   position: relative;
   height: 9px;
-  background: rgba(15, 19, 32, 0.5);
+  background: rgba(12, 17, 32, 0.55);
   border-radius: 9px;
-  border: 1px solid rgba(255, 255, 255, 0.1);
+  border: 1px solid rgba(255, 255, 255, 0.09);
   overflow: visible;
-  backdrop-filter: blur(10px);
+  backdrop-filter: blur(8px);
 }
 
 .sty-wypelnienie {
@@ -1840,12 +2149,12 @@ input[type="checkbox"]:checked ~ .toggle-tekst {
 
 .sty-wypelnienie.ok {
   background: linear-gradient(90deg, #00cfb0, #00e5a0);
-  box-shadow: 0 0 16px rgba(0, 229, 160, 0.4);
+  box-shadow: 0 0 14px rgba(0, 229, 160, 0.38);
 }
 
 .sty-wypelnienie.nie {
   background: linear-gradient(90deg, #c43040, #e5484d);
-  box-shadow: 0 0 12px rgba(229, 72, 77, 0.3);
+  box-shadow: 0 0 10px rgba(229, 72, 77, 0.28);
 }
 
 .sty-marker {
@@ -1857,11 +2166,11 @@ input[type="checkbox"]:checked ~ .toggle-tekst {
   border-radius: 2px;
   transform: translateX(-50%);
   transition: left 0.7s cubic-bezier(0.34, 1.56, 0.64, 1);
-  box-shadow: 0 0 8px rgba(255, 255, 255, 0.2);
+  box-shadow: 0 0 6px rgba(255, 255, 255, 0.18);
 }
 
 [data-motyw="dzien"] .sty-marker {
-  background: rgba(0, 0, 0, 0.3);
+  background: rgba(0, 0, 0, 0.28);
 }
 
 .sty-ty {
@@ -1874,7 +2183,7 @@ input[type="checkbox"]:checked ~ .toggle-tekst {
   transform: translateX(-50%);
   transition: left 0.7s cubic-bezier(0.34, 1.56, 0.64, 1);
   white-space: nowrap;
-  text-shadow: 0 0 10px var(--akcent-glow);
+  text-shadow: 0 0 8px var(--akcent-glow);
 }
 
 .sty-statystyki {
@@ -1915,8 +2224,8 @@ input[type="checkbox"]:checked ~ .toggle-tekst {
 }
 
 .sty-komunikat.ok {
-  background: rgba(0, 229, 160, 0.08);
-  border: 1px solid rgba(0, 229, 160, 0.15);
+  background: rgba(0, 229, 160, 0.07);
+  border: 1px solid rgba(0, 229, 160, 0.14);
 }
 
 .sty-komunikat.ok strong {
@@ -1924,8 +2233,8 @@ input[type="checkbox"]:checked ~ .toggle-tekst {
 }
 
 .sty-komunikat.nie {
-  background: rgba(229, 72, 77, 0.08);
-  border: 1px solid rgba(229, 72, 77, 0.15);
+  background: rgba(229, 72, 77, 0.07);
+  border: 1px solid rgba(229, 72, 77, 0.14);
 }
 
 .sty-komunikat.nie strong {
@@ -1950,16 +2259,18 @@ input[type="checkbox"]:checked ~ .toggle-tekst {
 }
 
 .powiadomienie {
-  background: rgba(10, 13, 24, 0.7);
+  background: rgba(8, 12, 24, 0.75);
   backdrop-filter: blur(50px) saturate(220%);
   -webkit-backdrop-filter: blur(50px) saturate(220%);
-  border: 1px solid rgba(255, 255, 255, 0.12);
+  border: 1px solid rgba(255, 255, 255, 0.1);
   border-radius: 14px;
   padding: 10px 16px;
   font-size: 13px;
   font-weight: 600;
   color: var(--tekst);
-  box-shadow: 0 16px 48px rgba(0, 0, 0, 0.5), 0 0 1px rgba(255, 255, 255, 0.1) inset;
+  box-shadow:
+    0 12px 40px rgba(0, 0, 0, 0.5),
+    0 1px 0 rgba(255, 255, 255, 0.09) inset;
   animation: powiadomieniePojawienie 0.5s var(--spreczyna) forwards;
   display: flex;
   align-items: center;
@@ -1967,20 +2278,20 @@ input[type="checkbox"]:checked ~ .toggle-tekst {
 }
 
 .powiadomienie.ok {
-  border-color: rgba(0, 229, 160, 0.35);
+  border-color: rgba(0, 229, 160, 0.3);
 }
 
 .powiadomienie.ok::before {
   content: "✓";
   color: var(--akcent);
   font-weight: 700;
-  text-shadow: 0 0 10px var(--akcent-glow);
+  text-shadow: 0 0 8px var(--akcent-glow);
   margin-right: 4px;
 }
 
 .powiadomienie-akcja {
   background: rgba(255, 255, 255, 0.1);
-  border: 1px solid rgba(255, 255, 255, 0.15);
+  border: 1px solid rgba(255, 255, 255, 0.13);
   border-radius: 6px;
   color: var(--tekst);
   font-family: "Outfit", sans-serif;
@@ -1992,13 +2303,12 @@ input[type="checkbox"]:checked ~ .toggle-tekst {
   flex-shrink: 0;
   pointer-events: all;
   -webkit-tap-highlight-color: transparent;
-  transition: all 0.3s cubic-bezier(0.23, 1, 0.32, 1);
+  transition: all 0.25s cubic-bezier(0.23, 1, 0.32, 1);
 }
 
 .powiadomienie-akcja:hover {
-  background: rgba(255, 255, 255, 0.2);
-  transform: scale(1.08);
-  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.2);
+  background: rgba(255, 255, 255, 0.18);
+  transform: scale(1.07);
 }
 
 .powiadomienie.znikanie {
@@ -2021,14 +2331,14 @@ input[type="checkbox"]:checked ~ .toggle-tekst {
 @keyframes powiadomienieFadeOut {
   to {
     opacity: 0;
-    transform: translateY(12px) scale(0.88);
-    filter: blur(3px);
+    transform: translateY(10px) scale(0.9);
+    filter: blur(2px);
   }
 }
 
 .stopka {
-  border-top: 1px solid rgba(255, 255, 255, 0.08);
-  background: rgba(10, 13, 22, 0.3);
+  border-top: 1px solid rgba(255, 255, 255, 0.07);
+  background: rgba(8, 12, 22, 0.35);
   backdrop-filter: blur(70px) saturate(280%);
   -webkit-backdrop-filter: blur(70px) saturate(280%);
   position: relative;
@@ -2060,13 +2370,110 @@ input[type="checkbox"]:checked ~ .toggle-tekst {
   font-weight: 700;
   color: var(--tekst-dim);
   text-decoration: none;
-  transition: all 0.35s cubic-bezier(0.23, 1, 0.32, 1);
+  transition: all 0.3s cubic-bezier(0.23, 1, 0.32, 1);
 }
 
 .stopka-gh:hover {
   color: var(--akcent);
   transform: translateY(-2px);
-  filter: drop-shadow(0 0 8px var(--akcent-glow));
+  filter: drop-shadow(0 0 6px var(--akcent-glow));
+}
+
+.modal-tlo {
+  position: fixed;
+  inset: 0;
+  z-index: 200;
+  background: rgba(0, 0, 0, 0.6);
+  backdrop-filter: blur(8px);
+  -webkit-backdrop-filter: blur(8px);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: 20px;
+  animation: fadeIn 0.2s var(--ease-out) both;
+}
+
+.modal-tlo.ukryty {
+  display: none !important;
+}
+
+.modal-karta {
+  background: rgba(10, 14, 26, 0.88);
+  backdrop-filter: blur(80px) saturate(300%);
+  -webkit-backdrop-filter: blur(80px) saturate(300%);
+  border: 1px solid rgba(255, 255, 255, 0.1);
+  border-radius: 22px;
+  padding: 22px;
+  width: 100%;
+  max-width: 380px;
+  box-shadow:
+    0 24px 80px rgba(0, 0, 0, 0.7),
+    0 1px 0 rgba(255, 255, 255, 0.16) inset,
+    0 -1px 0 rgba(0, 0, 0, 0.15) inset,
+    inset 1px 0 rgba(255, 255, 255, 0.08);
+  animation: pojawienieKarty 0.35s var(--spreczyna) both;
+  position: relative;
+  overflow: hidden;
+}
+
+.modal-karta::before {
+  content: "";
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  background: linear-gradient(
+    135deg,
+    rgba(255, 255, 255, 0.1) 0%,
+    rgba(255, 255, 255, 0.04) 35%,
+    transparent 60%
+  );
+  border-radius: 22px;
+  pointer-events: none;
+}
+
+.modal-karta::after {
+  content: "";
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+  height: 1px;
+  background: linear-gradient(
+    90deg,
+    transparent 5%,
+    rgba(255, 255, 255, 0.32) 30%,
+    rgba(255, 255, 255, 0.42) 50%,
+    rgba(255, 255, 255, 0.25) 70%,
+    transparent 95%
+  );
+  pointer-events: none;
+}
+
+.modal-karta > * {
+  position: relative;
+  z-index: 1;
+}
+
+.modal-tytul {
+  font-size: 11px;
+  font-weight: 700;
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+  color: var(--tekst-dim);
+  margin-bottom: 16px;
+}
+
+.modal-przyciski {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 8px;
+  margin-top: 14px;
+}
+
+.modal-przyciski .btn-glowny {
+  margin-bottom: 0;
 }
 
 .ukryty {
@@ -2089,7 +2496,7 @@ input[type="checkbox"]:checked ~ .toggle-tekst {
 @keyframes pojawienieKarty {
   from {
     opacity: 0;
-    transform: translateY(12px) scale(0.96);
+    transform: translateY(12px) scale(0.97);
     filter: blur(2px);
   }
   to {
@@ -2131,10 +2538,15 @@ input[type="checkbox"]:checked ~ .toggle-tekst {
 }
 
 @media (max-width: 720px) {
+  .tlo-blob {
+    filter: blur(70px);
+  }
+
   .uklad {
     grid-template-columns: 1fr;
     padding: 12px 12px 60px;
   }
+
   .pasek-boczny {
     position: relative;
     max-height: none;
@@ -2142,51 +2554,62 @@ input[type="checkbox"]:checked ~ .toggle-tekst {
     padding-bottom: 0;
     top: 0;
   }
+
   .hero-siatka {
     grid-template-columns: 1fr;
     gap: 14px;
   }
+
   .sty-wejscia {
     grid-template-columns: 1fr;
   }
+
   .karta--statystyki {
     grid-template-columns: 1fr;
   }
+
   .statystyki-prawo {
     flex-direction: row;
     align-items: flex-end;
     gap: 14px;
   }
+
   .stopka-wewnatrz {
     flex-direction: column;
     gap: 6px;
     text-align: center;
   }
+
   #kontener-powiadomien {
     bottom: 14px;
     right: 14px;
     left: 14px;
   }
+
   .btn-naglowek {
     height: 44px;
     min-width: 44px;
   }
+
+  .element-edytuj,
   .element-usun {
     width: 36px;
     height: 36px;
   }
+
   .filtr {
     padding: 6px 14px;
   }
+
   .btn-niebezpieczny {
     padding: 6px 12px;
   }
+
   .element-listy:hover {
     transform: none;
+    box-shadow: none;
   }
-  .karta::after {
-    display: none;
-  }
+
   .statystyka-glowna {
     font-size: 44px;
   }
