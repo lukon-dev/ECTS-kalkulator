@@ -98,13 +98,13 @@
           <div class="hero-lewo">
             <h2>Kalkulator średniej ważonej ECTS</h2>
             <p>
-              Liczy tak samo jak dziekanat. Dane siedzą lokalnie w przeglądarce,
+              Liczy tak samo jak dziekanat. Dane są umieszczone lokalnie w przeglądarce,
               bez konta ani serwera.
             </p>
             <div class="hero-notatka">
               <span class="notatka-znaczek">Ważne</span>
-              Wpisuj tylko przedmioty z oceną wliczaną do średniej. Zaliczenia
-              "ZAL" i wpisy bez oceny całkowicie pomijaj.
+              Zaimplementuj tylko przedmioty z oceną wliczaną do średniej. Zaliczenia
+              "ZAL" i wpisy bez oceny nie bierz pod uwagę.
             </div>
           </div>
           <div class="hero-prawo">
@@ -179,7 +179,7 @@
                 />
               </div>
               <div class="pole pole-sem">
-                <label for="f-sem">Sem.</label>
+                <label for="f-sem">Semestr</label>
                 <input
                   id="f-sem"
                   type="number"
@@ -343,7 +343,7 @@
           </div>
           <div id="co-jesli-wejscia" class="co-jesli-wejscia"></div>
           <button id="co-jesli-dodaj" type="button" class="btn-duch">
-            + kolejny przedmiot
+            + dodaj kolejny przedmiot
           </button>
 
           <div id="co-jesli-wynik" class="co-jesli-wynik ukryty">
