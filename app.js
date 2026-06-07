@@ -46,7 +46,6 @@ const e = {
   miejsceStypendium: $("#stypendium-miejsce"),
   przedStypendium: $("#stypendium-przed"),
   podobniStypendium: $("#stypendium-podobni"),
-  szansaStypendium: $("#stypendium-szansa"),
   szansaBadge: $("#stypendium-szansa-badge"),
   komunikatStypendium: $("#stypendium-komunikat"),
   bohater: $("#hero"),
@@ -817,7 +816,6 @@ function obliczStypendium() {
       : Math.round(Math.max(5, 50 - ((prog - srednia) / 0.5) * 45))
   ));
 
-  if (e.szansaStypendium) e.szansaStypendium.textContent = "~" + szansaProc + "%";
   if (e.szansaBadge) {
     const badgeCls = szansaProc >= 70 ? "badge-ok" : szansaProc >= 40 ? "badge-ryzyko" : "badge-nie";
     e.szansaBadge.className = "szansa-badge " + badgeCls;
