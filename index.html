@@ -1,0 +1,639 @@
+<!doctype html>
+<html lang="pl" data-motyw="noc">
+  <head>
+    <meta charset="UTF-8" />
+    <meta
+      name="viewport"
+      content="width=device-width, initial-scale=1.0, viewport-fit=cover, user-scalable=no"
+    />
+    <title>ECTScalc — Kalkulator średniej ważonej ECTS dla studentów</title>
+    <meta
+      name="description"
+      content="Kalkulator średniej ważonej ECTS dla studentów. Liczy tak samo jak dziekanat — dodaj przedmioty, filtruj semestry, symuluj oceny. Dane zapisywane lokalnie, bez konta."
+    />
+    <meta name="theme-color" content="#00e5a0" />
+    <meta property="og:type" content="website" />
+    <meta property="og:title" content="ECTScalc – Kalkulator średniej ważonej ECTS dla studentów" />
+    <meta property="og:description" content="Kalkulator średniej ważonej ECTS dla studentów. Liczy tak samo jak dziekanat — bez konta, dane lokalnie w przeglądarce." />
+    <meta property="og:locale" content="pl_PL" />
+    <meta name="robots" content="index, follow" />
+    <link rel="canonical" href="https://lukon-dev.github.io/ECTS-kalkulator/" />
+    <script type="application/ld+json">
+    {
+      "@context": "https://schema.org",
+      "@type": "WebApplication",
+      "name": "ECTScalc",
+      "description": "Kalkulator średniej ważonej ECTS dla studentów. Liczy tak samo jak dziekanat — bez konta, dane lokalnie w przeglądarce.",
+      "url": "https://lukon-dev.github.io/ECTS-kalkulator/",
+      "applicationCategory": "EducationalApplication",
+      "operatingSystem": "All",
+      "offers": { "@type": "Offer", "price": "0", "priceCurrency": "PLN" },
+      "inLanguage": "pl"
+    }
+    </script>
+    <meta name="apple-mobile-web-app-capable" content="yes" />
+    <meta
+      name="apple-mobile-web-app-status-bar-style"
+      content="black-translucent"
+    />
+    <meta name="apple-mobile-web-app-title" content="ECTScalc" />
+    <link rel="manifest" href="manifest.json" />
+    <link rel="apple-touch-icon" href="apple-touch-icon.png" />
+    <link rel="icon" type="image/x-icon" href="favicon.ico" />
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link
+      href="https://fonts.googleapis.com/css2?family=Outfit:wght@400;500;600;700&family=JetBrains+Mono:wght@700&display=swap"
+      rel="stylesheet"
+    />
+    <link rel="stylesheet" href="style.css" />
+  </head>
+  <body>
+    <div class="tlo-bloby">
+      <div class="tlo-blob"></div>
+      <div class="tlo-blob"></div>
+      <div class="tlo-blob"></div>
+    </div>
+
+    <header>
+      <div class="naglowek-wewnatrz">
+        <h1>ECTS<span class="akcent">calc</span></h1>
+        <div class="naglowek-przyciski">
+          <button
+            id="btn-motyw"
+            class="btn-naglowek"
+            title="Przełącz na tryb jasny"
+            aria-label="Przełącz na tryb jasny"
+          >
+            <svg class="motyw-ikona-noc" viewBox="0 0 20 20" fill="none" stroke="currentColor" stroke-width="1.8" width="16" height="16">
+              <path d="M17.5 12A7.5 7.5 0 0 1 8 2.5a7.5 7.5 0 1 0 9.5 9.5z" stroke-linecap="round" stroke-linejoin="round"/>
+            </svg>
+            <svg class="motyw-ikona-dzien" viewBox="0 0 20 20" fill="none" stroke="currentColor" stroke-width="1.8" width="16" height="16" style="display:none">
+              <circle cx="10" cy="10" r="4"/>
+              <path d="M10 2v2M10 16v2M2 10h2M16 10h2M4.22 4.22l1.42 1.42M14.36 14.36l1.42 1.42M4.22 15.78l1.42-1.42M14.36 5.64l1.42-1.42" stroke-linecap="round"/>
+            </svg>
+            <span class="btn-pokaz-info-tekst">Motyw</span>
+          </button>
+          <button
+            id="btn-udostepnij"
+            class="btn-naglowek"
+            title="Udostępnij listę"
+          >
+            <svg viewBox="0 0 20 20" fill="none" stroke="currentColor" stroke-width="1.8" width="16" height="16">
+              <path d="M13 4l4 4-4 4M17 8H7a4 4 0 0 0-4 4v1" stroke-linecap="round" stroke-linejoin="round"/>
+            </svg>
+            <span class="btn-pokaz-info-tekst">Udostępnij</span>
+          </button>
+          <button
+            id="btn-pokaz-info"
+            class="btn-naglowek"
+            title="Jak to działa?"
+          >
+            <svg
+              viewBox="0 0 20 20"
+              fill="none"
+              stroke="currentColor"
+              stroke-width="1.8"
+              width="16"
+              height="16"
+            >
+              <circle cx="10" cy="10" r="8" />
+              <circle
+                cx="10"
+                cy="6.5"
+                r="0.75"
+                fill="currentColor"
+                stroke="none"
+              />
+              <path
+                d="M10 9.5v5"
+                stroke-linecap="round"
+                stroke-linejoin="round"
+              />
+            </svg>
+            <span class="btn-pokaz-info-tekst">Jak to działa?</span>
+          </button>
+        </div>
+      </div>
+    </header>
+
+    <div id="hero">
+      <div class="hero-wewnatrz">
+        <div class="hero-siatka">
+          <div class="hero-lewo">
+            <h2>Kalkulator średniej ważonej ECTS dla studentów</h2>
+            <p>
+              Liczy tak jak dziekanat — dane przechowywane wyłącznie w Twojej przeglądarce, bez konta i bez serwera.
+            </p>
+            <div class="hero-notatka">
+              <span class="notatka-znaczek">Ważne</span>
+              <strong>Przed pierwszym użyciem sprawdź, czy Twoja uczelnia stosuje średnią arytmetyczną, czy ważoną — różnice mogą wpływać na Twoje miejsce w rankingu.</strong>
+              Uwzględniaj wyłącznie przedmioty z oceną wliczaną do średniej. Zaliczenia „ZAL" oraz wpisy bez oceny pomijaj.
+            </div>
+          </div>
+          <div class="hero-prawo">
+            <div class="wzor-ramka">
+              <span class="wzor-etykieta">WZÓR</span>
+              <div class="wzor-ulamek">
+                <span id="wzor-licznik" class="wzor-licznik">&#x2211; (ocena<sub>i</sub> &times; ECTS<sub>i</sub>)</span>
+                <span class="wzor-linia"></span>
+                <span id="wzor-mianownik" class="wzor-mianownik">&#x2211; ECTS<sub>i</sub></span>
+              </div>
+            </div>
+            <ol class="kroki">
+              <li>
+                <span class="krok-numer">1</span> Opcjonalnie wybierz semestr w formularzu.
+              </li>
+              <li>
+                <span class="krok-numer">2</span> Dodaj przedmiot — wyniki aktualizują się na bieżąco.
+              </li>
+              <li>
+                <span class="krok-numer">3</span> Filtruj semestry, aby porównać średnie.
+              </li>
+            </ol>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <div class="uklad">
+      <aside class="pasek-boczny">
+        <div class="karta" id="karta-formularz">
+          <h3 class="karta-tytul">Dodaj przedmiot</h3>
+          <form id="formularz">
+            <div class="pole">
+              <label for="f-nazwa">Nazwa</label>
+              <input
+                id="f-nazwa"
+                type="text"
+                placeholder="np. Analiza Matematyczna"
+                autocomplete="off"
+                required
+              />
+            </div>
+            <div class="pole-rzad">
+              <div class="pole">
+                <label for="f-ocena">Ocena</label>
+                <select id="f-ocena" required>
+                  <option value="" disabled selected>wybierz</option>
+                  <option value="2">2.0 ndst</option>
+                  <option value="3">3.0 dst</option>
+                  <option value="3.5">3.5 dst+</option>
+                  <option value="4">4.0 db</option>
+                  <option value="4.5">4.5 db+</option>
+                  <option value="5">5.0 bdb</option>
+                </select>
+              </div>
+              <div class="pole">
+                <label for="f-ects">ECTS</label>
+                <input
+                  id="f-ects"
+                  type="number"
+                  min="0.5"
+                  max="30"
+                  step="0.5"
+                  inputmode="decimal"
+                  placeholder="5"
+                  required
+                />
+              </div>
+              <div class="pole pole-sem">
+                <label for="f-sem">Semestr</label>
+                <input
+                  id="f-sem"
+                  type="number"
+                  min="1"
+                  max="14"
+                  step="1"
+                  inputmode="numeric"
+                  placeholder="nr"
+                />
+              </div>
+            </div>
+            <div
+              id="podglad-formularza"
+              class="podglad-formularza ukryty"
+            ></div>
+            <button type="submit" class="btn-glowny">Dodaj przedmiot</button>
+          </form>
+
+          <div class="segmented-control" id="toggle-tryb">
+            <div id="seg-thumb" class="seg-thumb"></div>
+            <button type="button" id="seg-wazona" class="seg-opcja seg-aktywny">Ważona ECTS</button>
+            <button type="button" id="seg-arytmetyczna" class="seg-opcja">Arytmetyczna</button>
+          </div>
+          <div class="dokladna-wartosc-toggle" id="toggle-dokladna">
+            <label class="toggle-etykieta">
+              <input type="checkbox" id="checkbox-dokladna" />
+              <span class="toggle-suwak"></span>
+              <span class="toggle-tekst">Pokaż dokładną wartość</span>
+            </label>
+          </div>
+        </div>
+
+        <div class="karta" id="karta-lista">
+          <div class="lista-gora">
+            <h3 class="karta-tytul">
+              Przedmioty
+              <span id="znaczek-liczby" class="znaczek ukryty"></span>
+            </h3>
+            <div class="lista-akcje">
+              <label id="btn-import-csv" class="btn-niebezpieczny btn-csv" title="Importuj z pliku CSV">
+                <svg viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="1.7" width="13" height="13"><path d="M8 2v8M5 7l3 3 3-3M2 12h12" stroke-linecap="round" stroke-linejoin="round"/></svg>
+                <span>Importuj CSV</span>
+                <input type="file" id="input-csv" accept=".csv,text/csv" style="display:none">
+              </label>
+              <button id="btn-eksport-csv" class="btn-niebezpieczny btn-csv ukryty" title="Eksportuj do pliku CSV">
+                <svg viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="1.7" width="13" height="13"><path d="M8 10V2M5 5l3-3 3 3M2 12h12" stroke-linecap="round" stroke-linejoin="round"/></svg>
+                <span>CSV</span>
+              </button>
+              <button id="btn-wyczysc" class="btn-niebezpieczny ukryty">Wyczyść listę</button>
+            </div>
+          </div>
+
+          <div id="filtry-owijka" class="filtry-owijka ukryty">
+            <p class="filtry-etykieta">Filtruj semestry</p>
+            <div id="filtry" class="filtry"></div>
+          </div>
+
+          <div id="pusty" class="pusty">
+            <span>&#127891;</span>
+            <p>Brak przedmiotów</p>
+            <small>Dodaj przedmiot za pomocą formularza lub przeciągnij plik CSV na tę kartę.</small>
+          </div>
+
+          <ul id="lista-przedmiotow" class="lista-przedmiotow"></ul>
+        </div>
+      </aside>
+
+      <main class="zawartosc">
+        <div class="karta karta-statystyki" id="karta-statystyki">
+          <div class="statystyki-lewo">
+            <div class="statystyka">
+              <span class="statystyka-etykieta">Średnia ważona</span>
+              <strong id="stat-srednia" class="statystyka-glowna">-</strong>
+              <span
+                id="stat-dokladna"
+                class="statystyka-dokladna ukryty"
+              ></span>
+            </div>
+            <div class="statystyki-rzad">
+              <div class="statystyka">
+                <span class="statystyka-etykieta">Suma ECTS</span>
+                <strong id="stat-ects" class="statystyka-wartosc">0</strong>
+              </div>
+              <div class="statystyka">
+                <span class="statystyka-etykieta">Przedmiotów</span>
+                <strong id="stat-liczba" class="statystyka-wartosc">0</strong>
+              </div>
+            </div>
+
+            <div class="cel-sekcja" id="cel-sekcja">
+              <div class="cel-rzad">
+                <label for="cel-wejscie" class="cel-label">
+                  <svg
+                    viewBox="0 0 20 20"
+                    fill="none"
+                    stroke="currentColor"
+                    stroke-width="1.7"
+                    width="13"
+                    height="13"
+                    style="vertical-align: -1px"
+                  >
+                    <circle cx="10" cy="10" r="8" />
+                    <circle cx="10" cy="10" r="4" />
+                    <circle
+                      cx="10"
+                      cy="10"
+                      r="1.2"
+                      fill="currentColor"
+                      stroke="none"
+                    />
+                  </svg>
+                  Cel średniej
+                </label>
+                <input
+                  id="cel-wejscie"
+                  type="number"
+                  min="2"
+                  max="5"
+                  step="0.01"
+                  inputmode="decimal"
+                  placeholder="np. 4.50"
+                />
+              </div>
+              <div id="cel-info" class="cel-info ukryty"></div>
+              <div id="cel-pasek" class="cel-pasek ukryty">
+                <div id="cel-wypelnienie" class="cel-wypelnienie"></div>
+              </div>
+              <div id="cel-etykiety" class="cel-etykiety ukryty">
+                <span>teraz</span><span id="cel-etykieta-prawa">cel</span>
+              </div>
+            </div>
+          </div>
+          <div class="statystyki-prawo">
+            <span class="wykres-etykieta">Rozkład ocen</span>
+            <div id="wykres" class="wykres"></div>
+          </div>
+        </div>
+
+        <div id="chipy-semestrow" class="chipy-semestrow"></div>
+        <div id="wykres-linii" class="wykres-linii" style="display:none"></div>
+
+        <div class="karta karta-narzedzie karta-co-jesli" id="karta-co-jesli">
+          <div class="narzedzie-naglowek">
+            <div class="narzedzie-ikona-owijka">
+              <span class="narzedzie-ikona">
+                <svg
+                  viewBox="0 0 24 24"
+                  fill="none"
+                  stroke="currentColor"
+                  stroke-width="1.8"
+                  width="22"
+                  height="22"
+                >
+                  <path d="M12 2a10 10 0 1 1 0 20A10 10 0 0 1 12 2z" />
+                  <path
+                    d="M9.09 9a3 3 0 0 1 5.83 1c0 2-3 3-3 3"
+                    stroke-linecap="round"
+                    stroke-linejoin="round"
+                  />
+                  <circle
+                    cx="12"
+                    cy="17"
+                    r="0.8"
+                    fill="currentColor"
+                    stroke="none"
+                  />
+                </svg>
+              </span>
+            </div>
+            <div>
+              <h3 class="karta-tytul karta-tytul-narzedzie">Co jeśli?</h3>
+              <p class="narzedzie-opis">
+                Sprawdź, jak przyszłe oceny wpłyną na Twoją średnią — symulacja bez zapisywania danych.
+              </p>
+            </div>
+          </div>
+          <div id="co-jesli-wejscia" class="co-jesli-wejscia"></div>
+          <button id="co-jesli-dodaj" type="button" class="btn-duch">
+            + dodaj kolejny przedmiot
+          </button>
+
+          <div id="co-jesli-wynik" class="co-jesli-wynik ukryty">
+            <div class="co-jesli-statystyka">
+              <span class="co-jesli-etykieta">Teraz</span>
+              <strong id="co-jesli-teraz">-</strong>
+            </div>
+            <div class="co-jesli-strzalka-owijka">
+              <svg
+                viewBox="0 0 40 16"
+                fill="none"
+                class="co-jesli-strzalka-svg"
+              >
+                <path
+                  d="M2 8h32M28 3l6 5-6 5"
+                  stroke="currentColor"
+                  stroke-width="1.8"
+                  stroke-linecap="round"
+                  stroke-linejoin="round"
+                />
+              </svg>
+            </div>
+            <div class="co-jesli-statystyka co-jesli-statystyka-duza">
+              <span class="co-jesli-etykieta">Po zmianach</span>
+              <strong id="co-jesli-potem">-</strong>
+            </div>
+            <span id="co-jesli-roznica" class="co-jesli-roznica"></span>
+          </div>
+          <p id="co-jesli-pusty" class="narzedzie-podpowiedz">
+            Najpierw dodaj jakiś przedmiot do listy.
+          </p>
+        </div>
+
+        <div
+          class="karta karta-narzedzie karta-stypendium"
+          id="karta-stypendium"
+        >
+          <div class="narzedzie-naglowek">
+            <div class="narzedzie-ikona-owijka narzedzie-ikona-owijka-gold">
+              <span class="narzedzie-ikona">
+                <svg
+                  viewBox="0 0 24 24"
+                  fill="none"
+                  stroke="currentColor"
+                  stroke-width="1.8"
+                  width="22"
+                  height="22"
+                >
+                  <path
+                    d="M12 2l2.9 6 6.6.9-4.8 4.6 1.1 6.5L12 17l-5.8 3 1.1-6.5L2.5 9l6.6-.9L12 2z"
+                    stroke-linecap="round"
+                    stroke-linejoin="round"
+                  />
+                </svg>
+              </span>
+            </div>
+            <div>
+              <h3 class="karta-tytul karta-tytul-narzedzie">
+                Kalkulator stypendialny
+              </h3>
+              <p class="narzedzie-opis">
+                Wyniki są szacunkowe — rzeczywisty ranking zależy od rozkładu ocen w całym roczniku.
+              </p>
+            </div>
+          </div>
+          <div class="stypendium-wejscia">
+            <div class="pole">
+              <label for="stypendium-prog">Próg stypendialny</label>
+              <input
+                id="stypendium-prog"
+                type="number"
+                min="2"
+                max="5"
+                step="0.01"
+                  inputmode="decimal"
+                placeholder="np. 4.25"
+              />
+            </div>
+            <div class="pole">
+              <label for="stypendium-osoby">Liczba studentów na roku</label>
+              <input
+                id="stypendium-osoby"
+                type="number"
+                min="1"
+                max="2000"
+                step="1"
+                  inputmode="numeric"
+                placeholder="np. 120"
+              />
+            </div>
+            <div class="pole">
+              <label for="stypendium-proc">Odsetek stypendystów (%)</label>
+              <input
+                id="stypendium-proc"
+                type="number"
+                min="1"
+                max="100"
+                step="1"
+                  inputmode="numeric"
+                placeholder="np. 10"
+              />
+            </div>
+          </div>
+          <div id="stypendium-wynik" class="stypendium-wynik ukryty">
+            <div class="stypendium-pasek-owijka">
+              <div class="stypendium-pasek" id="stypendium-pasek">
+                <div
+                  id="stypendium-wypelnienie"
+                  class="stypendium-wypelnienie"
+                ></div>
+                <div id="stypendium-marker" class="stypendium-marker"></div>
+                <span id="stypendium-ty" class="stypendium-ty">Ty</span>
+              </div>
+            </div>
+            <div class="stypendium-statystyki">
+              <div class="stypendium-statystyka">
+                <span class="stypendium-etykieta">Twoja śr.</span>
+                <strong id="stypendium-twoja">-</strong>
+              </div>
+              <div class="stypendium-statystyka">
+                <span class="stypendium-etykieta">Próg</span>
+                <strong id="stypendium-prog-wartosc">-</strong>
+              </div>
+              <div class="stypendium-statystyka">
+                <span class="stypendium-etykieta">Różnica</span>
+                <strong id="stypendium-roznica">-</strong>
+              </div>
+              <div class="stypendium-statystyka">
+                <span class="stypendium-etykieta">Miejsce ~</span>
+                <strong id="stypendium-miejsce">-</strong>
+              </div>
+              <div class="stypendium-statystyka">
+                <span class="stypendium-etykieta">Osób przed Tobą</span>
+                <strong id="stypendium-przed">-</strong>
+              </div>
+              <div class="stypendium-statystyka">
+                <span class="stypendium-etykieta">Podobnych wyników</span>
+                <strong id="stypendium-podobni">-</strong>
+              </div>
+            </div>
+            <div class="stypendium-szansa-rzad">
+              <span class="stypendium-etykieta">Szansa na stypendium</span>
+              <span id="stypendium-szansa-badge" class="szansa-badge">-</span>
+            </div>
+            <div id="stypendium-komunikat" class="stypendium-komunikat"></div>
+          </div>
+          <p id="stypendium-pusty" class="narzedzie-podpowiedz">Wprowadź próg stypendialny, liczbę studentów na roku oraz odsetek stypendystów.</p>
+        </div>
+      </main>
+    </div>
+
+    <footer class="stopka">
+      <div class="stopka-wewnatrz">
+        <code class="stopka-wzor">średnia = &Sigma;(ocena &times; ECTS) / &Sigma;ECTS</code>
+        <a
+          href="https://github.com/lukon-dev"
+          target="_blank"
+          rel="noopener noreferrer"
+          class="stopka-gh"
+        >
+          <svg
+            viewBox="0 0 16 16"
+            fill="currentColor"
+            width="14"
+            height="14"
+            aria-hidden="true"
+          >
+            <path
+              d="M8 0C3.58 0 0 3.58 0 8c0 3.54 2.29 6.53 5.47 7.59.4.07.55-.17.55-.38 0-.19-.01-.82-.01-1.49-2.01.37-2.53-.49-2.69-.94-.09-.23-.48-.94-.82-1.13-.28-.15-.68-.52-.01-.53.63-.01 1.08.58 1.23.82.72 1.21 1.87.87 2.33.66.07-.52.28-.87.51-1.07-1.78-.2-3.64-.89-3.64-3.95 0-.87.31-1.59.82-2.15-.08-.2-.36-1.02.08-2.12 0 0 .67-.21 2.2.82.64-.18 1.32-.27 2-.27.68 0 1.36.09 2 .27 1.53-1.04 2.2-.82 2.2-.82.44 1.1.16 1.92.08 2.12.51.56.82 1.27.82 2.15 0 3.07-1.87 3.75-3.65 3.95.29.25.54.73.54 1.48 0 1.07-.01 1.93-.01 2.2 0 .21.15.46.55.38A8.013 8.013 0 0016 8c0-4.42-3.58-8-8-8z"
+            />
+          </svg>
+          lukon-dev
+        </a>
+      </div>
+    </footer>
+
+    <div id="modal-import" class="modal-tlo ukryty">
+      <div class="modal-karta modal-import-karta">
+        <div class="modal-import-ikona">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" width="28" height="28">
+            <path d="M13 4l4 4-4 4M17 8H7a4 4 0 0 0-4 4v1" stroke-linecap="round" stroke-linejoin="round"/>
+          </svg>
+        </div>
+        <h3 class="modal-tytul">Wczytaj dane</h3>
+        <p class="modal-import-opis">Znaleziono listę przedmiotów do zaimportowania. Wczytać dane? Twoje obecne dane zostaną zastąpione.</p>
+        <div class="modal-przyciski">
+          <button id="modal-import-anuluj" type="button" class="btn-niebezpieczny">Anuluj</button>
+          <button id="modal-import-zaladuj" type="button" class="btn-glowny">Wczytaj dane</button>
+        </div>
+      </div>
+    </div>
+
+    <div id="modal-edycji" class="modal-tlo ukryty">
+      <div class="modal-karta">
+        <h3 class="modal-tytul">Edytuj przedmiot</h3>
+        <div class="pole">
+          <label for="e-nazwa">Nazwa</label>
+          <input
+            id="e-nazwa"
+            type="text"
+            placeholder="np. Analiza Matematyczna"
+            autocomplete="off"
+          />
+        </div>
+        <div class="pole-rzad">
+          <div class="pole">
+            <label for="e-ocena">Ocena</label>
+            <select id="e-ocena">
+              <option value="2">2.0 ndst</option>
+              <option value="3">3.0 dst</option>
+              <option value="3.5">3.5 dst+</option>
+              <option value="4">4.0 db</option>
+              <option value="4.5">4.5 db+</option>
+              <option value="5">5.0 bdb</option>
+            </select>
+          </div>
+          <div class="pole">
+            <label for="e-ects">ECTS</label>
+            <input id="e-ects" type="number" min="0.5" max="30" step="0.5"
+                  inputmode="decimal" />
+          </div>
+          <div class="pole pole-sem">
+            <label for="e-sem">Sem.</label>
+            <input
+              id="e-sem"
+              type="number"
+              min="1"
+              max="14"
+              step="1"
+                  inputmode="numeric"
+              placeholder="nr"
+            />
+          </div>
+        </div>
+        <div class="modal-przyciski">
+          <button id="modal-anuluj" type="button" class="btn-niebezpieczny">
+            Anuluj
+          </button>
+          <button id="modal-zapisz" type="button" class="btn-glowny">
+            Zapisz
+          </button>
+        </div>
+      </div>
+    </div>
+
+    <canvas
+      id="konfetti-canvas"
+      style="
+        position: fixed;
+        inset: 0;
+        z-index: 999;
+        pointer-events: none;
+        display: none;
+      "
+    ></canvas>
+    <div id="kontener-powiadomien"></div>
+    <script src="app.js"></script>
+  </body>
+</html>
